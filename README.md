@@ -13,18 +13,20 @@ For usage details, run
 ## Why node.io?
 
 - Create modular and extensible jobs for scraping and processing data
-- Seamlessly distribute work between child processes and servers (soon)
+- Seamlessly distribute work among child processes and other servers (soon)
+- Written in Node.JS = FAST
 - Handles a variety of input / output situations
     * Reading / writing lines to and from files
     * Reading all files in a directory (and recursing if specified)    
     * To / from a database
     * STDIN / STDOUT
     * Piping between node.io jobs
-    * Custom IO / any combination of the above
-- Includes a robust framework for scraping and selecting HTML data
+    * Custom IO / any combination of the above    
+- Includes a robust framework for scraping and selecting web data
 - Support for a variety of proxies when making requests
 - Includes a data validation and sanitization framework
 - Provides support for retries, timeouts, dynamically adding input, etc.
+- Create a MapReduce cluster
 
 ## Examples
 
