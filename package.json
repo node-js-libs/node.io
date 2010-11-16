@@ -1,0 +1,30 @@
+{ "name"          : "node.io",
+  "description"   : "A distributed data scraping and processing engine for node.js",
+  "version"       : "0.1.0a",
+  "homepage"      : "http://github.com/chriso/node.io",
+  "keywords"      : ["data","mapreduce","map","reduce","scraping","html","parsing","parse","scrape","process","processing","data"],
+  "author"        : "Chris O'Hara <cohara87@gmail.com>",
+  "main"          : "./lib/node.io",
+  "directories"   : { "lib" : "./lib/node.io" },
+  "bugs" :
+    { "mail" : "",
+      "web" : "http://github.com/chriso/node.io/issues"
+    },
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/chriso/node.io.git"
+  },
+  "engines" : { "node" : ">=0.2.4" },
+  "dependencies": { 
+    "soupselect": ">= 0.2.0",
+    "validator": ">= 0.1.0",  
+    "expresso": ">= 0.6.2"
+  },
+  "scripts": { "test": "expresso test" },
+  "bin": { "node.io": "./bin/node.io" },
+  "licenses" :
+    [ { "type" : "MIT" 
+      , "url" : "http://github.com/chriso/node.io/raw/master/LICENSE"
+      }
+    ]
+}
