@@ -1,4 +1,4 @@
-## [node.io](http://node.io/)
+# [node.io](http://node.io/)
 
 A distributed data scraping and processing engine for [Node.JS](http://nodejs.org/), inspired by [Google's MapReduce](http://labs.google.com/papers/mapreduce.html).
 
