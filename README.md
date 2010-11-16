@@ -36,6 +36,15 @@ See ./examples
 
 Coming soon. See [http://node.io/](http://node.io/) for updates
 
+## Roadmap
+
+- Automatically handle HTTP codes, e.g. redirect on 3** or call fail() on 4**/5**
+- Nested requests inherit referrer / cookies if to the same domain
+- Add more DOM selector / traversal methods
+- Test proxy callbacks
+- Add distributed processing
+- Refactor
+
 ## Credits
 
 node.io uses the following awesome libraries:
