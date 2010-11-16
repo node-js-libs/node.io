@@ -18,6 +18,7 @@
 var Job = require('../').Job;
 
 var methods = {
+
     run: function(input) {
         if (typeof this.options.args === 'undefined') {
             this.exit('Please enter a filter, e.g. `node.io validate url`');
@@ -53,4 +54,5 @@ var methods = {
     }
 }
 
+//Export the job
 exports.job = new Job({}, methods);

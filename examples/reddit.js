@@ -1,46 +1,55 @@
 //This module pulls the front page stories and scores from reddit.com
 //There are API's for doing this - this is just as a quick demonstration of 
-//parsing HTML using htmlparser and an augmented soupselect
+//scraping and selecting web data -> `$ node.io reddit`
 
-var Job = require('../').Job;
+var Job = require('node.io').Job;
 
-function reddit() {
-    var self = this;
+//Timeout after 10s, and only run the job once
+var options = {timeout:10, once:true};
+
+var methods = {
+
+    input: false,
     
-    this.getHtml('http://www.reddit.com/', function(err, $) {
-        //Handle any http / parsing errors
-        if (err) self.exit(err);
+    run: function() {
+        var self = this;
         
-        var titles = [], scores = [], output = [];
-        
-        //Select all titles on the page
-        $('a.title').each(function(a) {
-            titles.push(a.text);
-        });
-        
-        //Select all scores on the page
-        $('div.score.unvoted').each(function(div) {
-            scores.push(div.text);
-        });
-        
-        //Mismatch? page probably didn't load properly
-        if (scores.length != titles.length) {
-            self.exit('Title / score mismatch');
-        }
-        
-        //Output = [score] title
-        for (var i = 0, len = scores.length; i < len; i++) {
-            //Ignore upcoming stories
-            if (scores[i] == '&bull;') continue;
+        this.getHtml('http://www.reddit.com/', function(err, $) {
+            //Handle any http / parsing errors
+            if (err) self.exit(err);
             
-            //Check the data is ok
-            this.assert(scores[i]).isInt();
+            var titles = [], scores = [], output = [];
             
-            output.push('['+scores[i]+'] '+titles[i]);
-        }
-        
-        self.emit(output);
-    });
+            //Select all titles on the page
+            $('a.title').each(function(a) {
+                titles.push(a.text);
+            });
+            
+            //Select all scores on the page
+            $('div.score.unvoted').each(function(div) {
+                scores.push(div.text);
+            });
+            
+            //Mismatch? page probably didn't load properly
+            if (scores.length != titles.length) {
+                self.exit('Title / score mismatch');
+            }
+            
+            //Output = [score] title
+            for (var i = 0, len = scores.length; i < len; i++) {
+                //Ignore upcoming stories
+                if (scores[i] == '&bull;') continue;
+                
+                //Check the data is ok
+                self.assert(scores[i]).isInt();
+                
+                output.push('['+scores[i]+'] '+titles[i]);
+            }
+            
+            self.emit(output);
+        });
+    }
 }
 
-exports.job = new Job({timeout:10, once:true}, {input:false, run:reddit});
+//Export the job
+exports.job = new Job(options, methods);

@@ -4,21 +4,26 @@
 //       $ echo "mastercard.com" | node.io -s google_pagerank    
 //          => mastercard.com,7
 
-var Job = require('../').Job;
+var Job = require('node.io').Job;
 
-exports.job = new Job({timeout:10, retries:3}, {
+ //Timeout after 10s, maximum of 3 retries
+var options = {timeout:10, retries:3};
+
+var methods = {
 
     run: function google(input) {
         var self = this;
         
+        //Add http://
         var url = input;
         if (!~url.indexOf('http://')) url = 'http://'+url;
         
+        //Generate the checksum for getting pageranks
         var ch = '6'+GoogleCH(strord('info:'+url));
         
         this.get('http://www.google.com/search?client=navclient-auto&ch='+ch+'&features=Rank&q=info:'+encodeURIComponent(url), function(err, data) {
             if (err) self.retry();
-                       
+            
             if (!~data.indexOf('Rank_1:1:')) {
                 self.emit(input+',');
             } else {
@@ -31,7 +36,15 @@ exports.job = new Job({timeout:10, retries:3}, {
         this.emit(input+',');
     }
 
-});
+};
+
+//Export the job
+exports.job = new Job(options, methods);
+
+
+//---------------------------------------------
+//CODE FOR GENERATING GOOGLE PAGERANK CHECKSUMS
+//---------------------------------------------
 
 function zF(a,b) {
     var z = parseInt(80000000,16);

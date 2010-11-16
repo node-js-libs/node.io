@@ -4,9 +4,12 @@
 //       $ echo "mastercard.com,Credit Cards" | node.io -s google_rank    
 //          => mastercard.com,Credit Cards,9
 
-var Job = require('../').Job;
+var Job = require('node.io').Job;
 
-exports.job = new Job({timeout:10, retries:3}, {
+ //Timeout after 10s, maximum of 3 retries
+var options = {timeout:10, retries:3};
+
+var methods = {
 
     run: function google(input) {
         var links, self = this;
@@ -40,4 +43,7 @@ exports.job = new Job({timeout:10, retries:3}, {
         this.emit(input+',');
     }
 
-});
+}
+
+//Export the job
+exports.job = new Job(options, methods);

@@ -4,9 +4,12 @@
 //       $ echo "definately" | node.io -s google_spell    
 //          => definitely
 
-var Job = require('../').Job;
+var Job = require('node.io').Job;
 
-exports.job = new Job({timeout:10, retries:3}, {
+ //Timeout after 10s, maximum of 3 retries
+var options = {timeout:10, retries:3};
+
+var methods = {
 
     run: function google(input) {
         var spell, self = this;
@@ -20,8 +23,11 @@ exports.job = new Job({timeout:10, retries:3}, {
         });
     }, 
     
+    //Output the original word if no suggestion was found
     fail: function(input) {
         this.emit(input);
     }
+};
 
-});
+//Export the job
+exports.job = new Job(options, methods);

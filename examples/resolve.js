@@ -14,12 +14,12 @@
 //       $ cat domains.txt | node.io -s resolve > result.txt
 //       $ node.io -i domains.txt -o result.txt resolve
 
-var Job = require('../').Job, dns = require('dns');
+var Job = require('node.io').Job, dns = require('dns');
 
 var options = {
-    max: 100,
-    timeout: 10,
-    retries: 3
+    max: 100,       //Run a maximum of 100 DNS requests concurrently
+    timeout: 10,    //Timeout after 10s
+    retries: 3      //Maximum of 3 retries
 }
 
 var methods = {
@@ -60,19 +60,19 @@ var methods = {
     },
     
     fail: function(status, domain) {
+        var type = this.options.args;
     
         //The domain either timed out or exceeded the max number of retries
         if (type === 'notfound') {
-            self.emit(domain);
+            this.emit(domain);
         } else if (type === 'found') {
-            self.skip();
+            this.skip();
         } else {
-            self.emit(domain + ',');
+            this.emit(domain + ',');
         }
         this.emit(domain+',');
-        
-    }
-    
+    }   
 }
 
+//Export the job
 exports.job = new Job(options, methods);

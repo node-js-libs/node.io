@@ -10,36 +10,41 @@
 //       $ cat list.txt | node.io -s duplicates > unique.txt
 //       $ node.io -i list.txt -o unique.txt duplicates
 
-var Job = require('../lib/node.io/job').Job;
+var Job = require('node.io').Job;
 
 var seen_lines = [], emitted_lines = [];
 
-function reduce(lines) {
-    var args = this.options.args, emit = [];
-    
-    lines.forEach(function(line) {
-        if (args === 'find') {
-        
-            //Output duplicate lines
-            if (seen_lines.indexOf(line) >= 0 && !~emitted_lines.indexOf(line)) {
-                emit.push(line);
-                emitted_lines.push(line); //Only output once
-            } else {
-                seen_lines.push(line);
-            }
-            
-        } else {
-        
-            //Remove duplicate lines (default)
-            if (!~seen_lines.indexOf(line)) {
-                emit.push(line);
-                seen_lines.push(line);
-            }
-            
-        }
-    });
-    
-    this.emit(emit);
-}
+var methods = {
 
-exports.job = new Job({max:20},{reduce:reduce});
+    reduce: function(lines) {
+
+        var args = this.options.args, emit = [];
+        
+        lines.forEach(function(line) {
+            if (args === 'find') {
+            
+                //Output duplicate lines
+                if (seen_lines.indexOf(line) >= 0 && !~emitted_lines.indexOf(line)) {
+                    emit.push(line);
+                    emitted_lines.push(line); //Only output once
+                } else {
+                    seen_lines.push(line);
+                }
+                
+            } else {
+            
+                //Remove duplicate lines (default)
+                if (!~seen_lines.indexOf(line)) {
+                    emit.push(line);
+                    seen_lines.push(line);
+                }
+                
+            }
+        });
+        
+        this.emit(emit);
+    }
+};
+
+//Export the job
+exports.job = new Job({}, methods);
