@@ -45,7 +45,7 @@ module.exports = {
         var job = createJob({
             input: [0,1,2]
         });
-               
+        
         startJob(job, function(err, out) {
             assert.equal('[0,1,2]', JSON.stringify(out));
         }, true);

@@ -38,7 +38,7 @@ Coming soon. See [http://node.io/](http://node.io/) for updates
 
 ## Roadmap
 
-- Automatically handle HTTP codes, e.g. redirect on 3** or call fail() on 4**/5**
+- Automatically handle HTTP codes, e.g. redirect on 3xx or call fail() on 4xx/5xx
 - Nested requests inherit referrer / cookies if to the same domain
 - Add more DOM selector / traversal methods
 - Test proxy callbacks
