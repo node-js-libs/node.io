@@ -190,7 +190,7 @@ module.exports = {
     
     'test where job.input is a string (dir)': function(assert) {
         //Test specialised case where input is a path to a dir
-        var job = createJob({input:test_dir});
+        var job = createJob({recurse:true},{input:test_dir});
         assert.equal('function', typeof job.input);
         var files = job.input(0, 100); //['dir','file.a','file.b','file.c']
         assert.equal(4, files.length);
@@ -201,20 +201,25 @@ module.exports = {
         assert.ok(files.indexOf(__dirname+'/resources/test_dir_input/file.c') >= 0);
         
         job.output_hook = function(){}
-        job.addInput = function(dir_files) {
+        
+        job.add = function(dir_files) {
             dir_files.forEach(function(file) {
                 files.push(file);
             });
         }   
+                
+        job.emit = function() {}
+                
+        job.skip = function() {
+            //'file.d' was added
+            assert.equal(5, files.length);
+            assert.ok(files.indexOf(__dirname+'/resources/test_dir_input/dir/file.d') >= 0);
+        }
         
         //Test recursing directories
         files.forEach(function(file) {
-            job.recurseIfDirectory(file);
+            job.run(file);
         });
-        
-        //'file.d' was added
-        assert.equal(5, files.length);
-        assert.ok(files.indexOf(__dirname+'/resources/test_dir_input/dir/file.d') >= 0);
     },
     
     'test where job.input is an unknown string': function(assert) {

@@ -441,4 +441,18 @@ module.exports = {
             assert.equal('[0,3,3,3,1,2]', JSON.stringify(out));
         });
     },
+    
+    'test the recurse op': function(assert) {
+        //Test specialised case where input is a path to a dir
+        var job = createJob({recurse:true},{input:__dirname+'/resources/test_dir_input'});
+        
+        startJob(job, function(err, files) {
+            assert.equal(4, files.length);
+            assert.ok(files.indexOf(__dirname+'/resources/test_dir_input/file.a') >= 0);
+            assert.ok(files.indexOf(__dirname+'/resources/test_dir_input/file.b') >= 0);
+            assert.ok(files.indexOf(__dirname+'/resources/test_dir_input/file.c') >= 0);
+            assert.ok(files.indexOf(__dirname+'/resources/test_dir_input/dir/file.d') >= 0);
+        }, true);
+    },
+    
 }
