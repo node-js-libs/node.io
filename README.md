@@ -1,18 +1,8 @@
-To install node.io, use [npm](http://github.com/isaacs/npm):
-
-    $ npm install node.io
-
-For usage details, run
-
-    $ node.io --help    
-
-To get started, see the [documentation](https://github.com/chriso/node.io/blob/master/docs/README.md), [examples](https://github.com/chriso/node.io/tree/master/examples/), or [API](https://github.com/chriso/node.io/blob/master/docs/api.md).
-
 ## What is [node.io](http://node.io/)?
 
 node.io is a data scraping and processing framework for [node.js](http://nodejs.org/).
 
-A node.io job typically consists of a) taking some input, b) using or transforming it, and c) outputting something. 
+A node.io job typically consists of 1) taking some input, 2) using or transforming it, and 3) outputting something. 
 
 node.io can simplify the process of:
 
@@ -41,9 +31,19 @@ node.io can simplify the process of:
 - Includes a data validation and sanitization framework
 - Provides support for retries, timeouts, dynamically adding input, etc.
 
+## Installation
+
+To install node.io, use [npm](http://github.com/isaacs/npm):
+
+    $ npm install node.io
+
+For usage details, run
+
+    $ node.io --help
+
 ## Documentation
 
-Initial documentation is [available here](https://github.com/chriso/node.io/tree/master/docs/). 
+To get started, see the [documentation](https://github.com/chriso/node.io/blob/master/docs/README.md), [examples](https://github.com/chriso/node.io/tree/master/examples/), or [API](https://github.com/chriso/node.io/blob/master/docs/api.md).
 
 Better documentation will be available once I have time to write it.
 
