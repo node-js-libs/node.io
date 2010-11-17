@@ -6,7 +6,7 @@ For usage details, run
 
     $ node.io --help    
 
-To get started, see the [documentation](https://github.com/chriso/node.io/tree/master/docs/), [examples](https://github.com/chriso/node.io/tree/master/examples/), or [API](https://github.com/chriso/node.io/blob/master/docs/api.md).
+To get started, see the [documentation](https://github.com/chriso/node.io/blob/master/docs/README.md), [examples](https://github.com/chriso/node.io/tree/master/examples/), or [API](https://github.com/chriso/node.io/blob/master/docs/api.md).
 
 ## What is [node.io](http://node.io/)?
 
@@ -54,6 +54,7 @@ Better documentation will be available once I have time to write it.
 - Add distributed processing
 - Installation without NPM (install.sh)
 - Refactoring
+- More test coverage
 
 ## Credits
 
