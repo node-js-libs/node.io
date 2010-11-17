@@ -54,7 +54,7 @@ Better documentation will be available once I have time to write it.
 - Add distributed processing
 - Installation without NPM (install.sh)
 - Refactoring
-- More test coverage
+- More tests / better test coverage
 
 ## Credits
 
