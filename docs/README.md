@@ -8,11 +8,13 @@ To run this job (e.g. saved as _myjob.js_) from the command line, run the follow
 
     $ node.io myjob
 
-A full list of methods and options is [available here](#), however jobs typically contain an input, run, and output method. If omitted, input and output default to STDIN and STDOUT.
+Jobs typically contain an input, run, and output method. If omitted, input and output default to *STDIN* and *STDOUT*.
+
+The full API is [available here](https://github.com/chriso/node.io/blob/master/docs/api.md).
 
 ## Getting started
 
-The following examples highlight how to create and run a simple job.
+The following example highlights how to create and run a simple job.
 
 _times2.js_
     
@@ -25,19 +27,19 @@ _times2.js_
     
     exports.job = new Job({}, methods);
     
-To run _times2.js_, run the following command in the same directory:
+To run _times2.js_, run the following command in the same directory
 
     $ node.io times2
         => 0\n2\n4\n
     
-_times2.js_ can also be run inside another script:
+_times2.js_ can also be run inside another script
 
     var times2 = require('./times2'), nodeio = require('node.io');
     nodeio.start(times2, function(err) {
         //Called on completion. STDOUT => 0\n2\n4\n
     });
     
-To capture the output, set the third parameter to true:
+To capture the output, set the third parameter of `start` to true
 
     nodeio.start(times2, function(err, result) {
         //result = [0,2,4]
@@ -45,7 +47,7 @@ To capture the output, set the third parameter to true:
     
 ## Extending a job
 
-A job's options and methods can be inherited and overridden.
+A job's options and methods can be inherited and overridden using `job.extend(new_options, new_methods);`
 
 _times4.js_
 
@@ -59,9 +61,9 @@ _times4.js_
         
     // $ node.io times4   =>  0\n4\n8\n
     
-## An example
+## A more advanced example
 
-The following job takes a domain or list of domains and resolves them.
+The following job resolves a domain or list of domains.
 
 _resolve.js_
 
@@ -88,7 +90,7 @@ _resolve.js_
             });
         },
         
-        //fail() is called if the thread times out, or exceeds the maximum number of retries
+        //fail() is called if the thread times out or exceeds the maximum number of retries
         fail: function(status, domain) {
             this.emit(domain + ',failed');
         }   
@@ -107,9 +109,9 @@ Try it out
         
 ## Linking jobs together
 
-Since node.io uses STDIN and STDOUT by default, jobs can be linked together. Be sure to add the -s option to intermediate node.io calls to prevent status/warning messages from being added to the output.
+Since node.io uses *STDIN* and *STDOUT* by default, jobs can be linked together. Be sure to add the `-s` option to intermediate `node.io` calls to prevent status/warning messages from being added to the output.
 
-The following example uses resolve.js from above and uses another job to filter out invalid domains before resolving
+The following example uses _resolve.js_ from above and uses another job to filter out invalid domains before resolving.
 
 _domains.txt_
 
@@ -130,7 +132,7 @@ _valid_url.js_
     
     exports.job = new Job({}, methods);
     
-To link the jobs:
+To link the jobs
 
     $ cat domains.txt | node.io -s valid_url | node.io resolve 
 
@@ -138,17 +140,17 @@ To link the jobs:
 
 Node.io can currently partition the work among child processes to speed up execution, and will soon support distributing the work across multiple servers to create a work cluster.
 
-To enable this feature, either set the fork option to the number of workers you want to spawn, or use the -f command line option.
+To enable this feature, either set the fork option to the number of workers you want to spawn, or use the `-f` command line option.
 
 Enabling it in a job
     
     var options = {fork:4};
     
-At the command line
+Or at the command line
 
     $ node.io -f 4 job
     
-## Input / Output
+## Input / output
 
 Node.io can handle a variety of input / output situations.
 
@@ -170,10 +172,11 @@ To read all files in a directory
     
     //To recurse subdirectories, set the 'recurse' option to true
 
-    
 To add your own input (e.g. from a database), use the following format
 
     input: function(start, num, callback) {
+        //E.g. start=0, num=10 => first 10 rows 
+        //     start=10, num=10 => second 10 rows
         //callback takes (err, input)
     }
     
@@ -195,11 +198,11 @@ Input / output can be optionally overridden at the command line
 
     $ node.io -i /tmp/input.txt -o /tmp/output.txt job
     
-Node.io uses STDIN and STDOUT by default, so this is the same as calling
+Node.io uses *STDIN* and *STDOUT* by default, so this is the same as calling
 
     $ cat /tmp/input.txt | node.io -s job > /tmp/output.txt
     
-Note: the -s option at the command line omits any status messages or warnings being output
+Note: the `-s` option at the command line omits any status or warnings messages being output
 
 ## Passing arguments to jobs
 
@@ -213,7 +216,7 @@ Any arguments after the job name on the command line are available in the job as
     
 ## More examples
 
-See ./examples. Included examples are:
+See [./examples](https://github.com/chriso/node.io/tree/master/examples/). Included examples are:
 
 - `duplicates.js` - remove all duplicates in a list, or only output duplicate lines
 - `validate.js` - filters a list with a variety of validation methods
