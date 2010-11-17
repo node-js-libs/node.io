@@ -407,7 +407,7 @@ module.exports = {
         var i = 0;
         
         var job = createJob({input:10},{
-            input: false,
+            input: true,
             run: function() {
                 i++;
                 this.skip();

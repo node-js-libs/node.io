@@ -91,9 +91,13 @@ To add your own input (e.g. from a database), use the following format
         //callback takes (err, input)
     }
     
-To run the job indefinitely
+To run a job once (with no input)
 
     input: false
+
+To run the job indefinitely
+
+    input: true
    
 To output to a file
 

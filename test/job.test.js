@@ -33,10 +33,10 @@ module.exports = {
     },
     
     'test job running once': function(assert) {
-        var job = createJob({once:true},{input:function(){return true;}});
+        var job = createJob({input:false});
         
         //input() should return false on the second call
-        assert.ok(job.input());
+        assert.ok(job.input().length);
         assert.ok(job.input() === false);
     },
     

@@ -4,17 +4,19 @@
 
 var Job = require('node.io').Job;
 
-//Timeout after 10s, and only run the job once
-var options = {timeout:10, once:true};
+//Timeout after 10s
+var options = {timeout:10};
 
 var methods = {
 
+    //Run the job once with no input
     input: false,
     
     run: function() {
         var self = this;
         
         this.getHtml('http://www.reddit.com/', function(err, $) {
+        
             //Handle any http / parsing errors
             if (err) self.exit(err);
             

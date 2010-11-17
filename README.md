@@ -1,4 +1,4 @@
-## What is [node.io](http://node.io/)?
+# What is [node.io](http://node.io/)?
 
 node.io is a data scraping and processing framework for [node.js](http://nodejs.org/).
 

@@ -133,7 +133,7 @@ module.exports = {
     },
     
     'test where job.input == false': function(assert) {
-        var job = createJob({input:false});
+        var job = createJob({input:true});
         assert.equal('function', typeof job.input);
         //input() will return as many lines requested (job will run forever)
         assert.equal(10, job.input(0, 10).length);
