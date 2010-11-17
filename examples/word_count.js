@@ -29,13 +29,17 @@ var methods = {
                 word_count[word]++;
             }
         });
+        //finish() rather than emit() so that output isn't called
         this.finish();
     },
     
-    output: false,
-    
     complete: function() {
-        console.log(word_count);
+        var out = [];
+        for (var word in word_count) {
+            out.push(word + ',' + word_count[word]);
+        }
+        //Now that we have the full list of words, output
+        this.output(out);
     }
     
 };
