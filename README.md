@@ -14,10 +14,10 @@ node.io can simplify the process of:
 
 - Filtering / sanitizing a list
 - MapReduce
-- Loading a list of URLs and scraping and saving some data from each
+- Loading a list of URLs and scraping some data from each
 - Parsing log files
 - Transforming data from one format to another, e.g. from CSV to a database
-- Recursively load all files in a directory and it's subdirectories and execute a command on each file
+- Recursively load all files in a directory and execute a command on each
              
 ## Why node.io?
 
@@ -30,7 +30,7 @@ node.io can simplify the process of:
     * Reading / writing rows to and from a database
     * STDIN / STDOUT
     * Piping between other node.io jobs
-    * Any combination of the above, or completely custom IO     
+    * Any combination of the above, or your own IO     
 - Includes a robust framework for scraping and selecting web data
 - Support for a variety of proxies when making requests
 - Includes a data validation and sanitization framework

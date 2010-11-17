@@ -4,38 +4,37 @@ A node.io job takes the following format
     var options = {}, methods = {};
     exports.job = new Job(options, methods);
 
-To run this job (e.g. saved as myjob.js) from the command line, run the following command in the same directory
+To run this job (e.g. saved as _myjob.js_) from the command line, run the following command in the same directory
 
     $ node.io myjob
 
-A full list of available job methods and options is [available here](#), however jobs typically contain an input, run, and output method. If omitted, input and output default to STDIN and STDOUT.
+A full list of methods and options is [available here](#), however jobs typically contain an input, run, and output method. If omitted, input and output default to STDIN and STDOUT.
 
 ## Getting started
 
 The following examples highlight how to create and run a simple job.
 
-times2.js
+_times2.js_
     
-    var options = {};
     var methods = {
         input: [0,1,2],
         run: function(num) {
-            this.emit(num*2);
+            this.emit(num * 2);
         }
     };
     
-    exports.job = new Job(options, methods);
+    exports.job = new Job({}, methods);
     
-To run times2.js, run the following command in the same directory:
+To run _times2.js_, run the following command in the same directory:
 
     $ node.io times2
         => 0\n2\n4\n
     
-times2.js can also be run inside another script:
+_times2.js_ can also be run inside another script:
 
     var times2 = require('./times2'), nodeio = require('node.io');
     nodeio.start(times2, function(err) {
-        //STDOUT => 0\n2\n4\n
+        //Called on completion. STDOUT => 0\n2\n4\n
     });
     
 To capture the output, set the third parameter to true:
@@ -48,13 +47,13 @@ To capture the output, set the third parameter to true:
 
 A job's options and methods can be inherited and overridden.
 
-times4.js
+_times4.js_
 
     var times2 = require('./times2');
     
     exports.job = times2.extend({}, {
         run: function(num) {
-            this.emit(num*4);
+            this.emit(num * 4);
         }
     }
         
@@ -64,7 +63,7 @@ times4.js
 
 The following job takes a domain or list of domains and resolves them.
 
-resolve.js
+_resolve.js_
 
     var Job = require('node.io').Job, dns = require('dns');
     
@@ -89,20 +88,20 @@ resolve.js
             });
         },
         
+        //fail() is called if the thread times out, or exceeds the maximum number of retries
         fail: function(status, domain) {
-            //The domain either timed out or exceeded the max number of retries
             this.emit(domain + ',failed');
         }   
     }
     
     exports.job = new Job(options, methods);
     
-Try it out:
+Try it out
     
     $ echo "google.com" | node.io resolve
         => google.com,66.102.11.104
     
-..or with a list of domains:
+..or with a list of domains
 
     $ cat domains.txt | node.io resolve
         
@@ -112,13 +111,13 @@ Since node.io uses STDIN and STDOUT by default, jobs can be linked together. Be 
 
 The following example uses resolve.js from above and uses another job to filter out invalid domains before resolving
 
-domains.txt
+_domains.txt_
 
     google.com
     youtube.com
     this*is^invalid.com
 
-valid_url.js
+_valid_url.js_
 
     var Job = require('node.io').Job;
         
@@ -216,13 +215,13 @@ Any arguments after the job name on the command line are available in the job as
 
 See ./examples. Included examples are:
 
-- duplicates.js - remove all duplicates in a list, or only output duplicate lines
-- validate.js - filters a list with a variety of validation methods
-- resolve.js - similiar to the example above, but can also output domains that do not resolve (as a quick availability check), or only domains that resolve
-- word_count.js - uses map reduce to count the occurrences of each word in a file
-- reddit.js - web scraping example - pulls the front page stories and scores from [reddit](http://reddit.com/]
-- google_rank.js - returns a domain's rank for a given keyword
-- google_pagerank.js - find the pagerank of a URL
-- google_spell.js - outputs the result of google suggest
+- `duplicates.js` - remove all duplicates in a list, or only output duplicate lines
+- `validate.js` - filters a list with a variety of validation methods
+- `resolve.js` - similiar to the example above, but can also output domains that do not resolve (as a quick availability check), or only domains that resolve
+- `word_count.js` - uses map reduce to count the occurrences of each word in a file
+- `reddit.js` - web scraping example - pulls the front page stories and scores from [reddit](http://reddit.com/]
+- `google_rank.js` - returns a domain's rank for a given keyword
+- `google_pagerank.js` - find the pagerank of a URL
+- `google_spell.js` - outputs the result of google suggest
 
-See each file for full usage details.
+See each file for usage details.
