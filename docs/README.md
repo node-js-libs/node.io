@@ -1,8 +1,4 @@
-# The basics
-
-The typical node.io job consists of taking some input, using or transforming it in some way, and then outputting something.
-
-Jobs are created in the following way.
+node.io executes jobs in the following format.
 
 job.js
 
@@ -16,11 +12,13 @@ To run job.js from the command line, run the following command in the same direc
 
     $ node.io myjob
 
-A full list of available job methods and options is [available here](#), however the typical job has three methods; input, run, and output. If omitted, input and output default to STDIN and STDOUT.
+A typical node.io job typically consists of a) taking some input, b) using or transforming it, and c) outputting something.
+
+A full list of available job methods and options is [available here](#). however jobs typically contain an input, run, and output method. If omitted, input and output default to STDIN and STDOUT.
 
 ## Getting started
 
-The following examples highlight how to create and run a simple job. 
+The following examples highlight how to create and run a simple job.
 
 times2.js
     
@@ -68,9 +66,9 @@ times4.js
         
     // $ node.io times4   =>  0\n4\n8\n
     
-## A more advanced example
+## An example
 
-See the ./examples directory for a full list of examples, however the following job takes a list of domains and resolves them
+The following job takes a domain or list of domains and resolves them.
 
 resolve.js
 
@@ -88,7 +86,7 @@ resolve.js
             
             dns.lookup(domain, 4, function(err, ip) {
                 if (err) {
-                    //The domain didn't resolve, retry.
+                    //The domain didn't resolve, retry
                     self.retry();
                 } else {
                     //The domain resolved successfully
@@ -132,7 +130,7 @@ valid_url.js
         
     var methods = {
         run: function(url) {
-            this.assert(url).isUrl()
+            this.assert(url).isUrl(); //If this fails, the url is not emitted
             this.emit(url);
         }
     }
@@ -142,16 +140,20 @@ valid_url.js
 To link the jobs:
 
     $ cat domains.txt | node.io -s valid_url | node.io resolve 
-    
-## Passing arguments to jobs
 
-Any arguments after the job name on the command line are available in the job as a string
+## Distributing work
 
-    $ node.io job arg1 arg2 arg3
+Node.io can currently partition the work among child processes to speed up execution, and will soon support distributing the work across multiple servers to create a work cluster.
+
+To enable this feature, either set the fork option to the number of workers you want to spawn, or use the -f command line option.
+
+Enabling it in a job
     
-    run: function() {
-        console.log(this.options.args); //arg1 arg2 arg3
-    }
+    var options = {fork:4};
+    
+At the command line
+
+    $ node.io -f 4 job
     
 ## Input / Output
 
@@ -206,11 +208,21 @@ Node.io uses STDIN and STDOUT by default, so this is the same as calling
     
 Note: the -s option at the command line omits any status messages or warnings being output
 
+## Passing arguments to jobs
+
+Any arguments after the job name on the command line are available in the job as a string
+
+    $ node.io job arg1 arg2 arg3
+    
+    run: function() {
+        console.log(this.options.args); //arg1 arg2 arg3
+    }
+    
 ## More examples
 
 See ./examples. Included examples are:
 
-- duplicates.js - remove all duplicates in a list, or remove non-duplicates
+- duplicates.js - remove all duplicates in a list, or only output duplicate lines
 - validate.js - filters a list with a variety of validation methods
 - resolve.js - similiar to the example above, but can also output domains that do not resolve (as a quick availability check), or only domains that resolve
 - word_count.js - uses map reduce to count the occurrences of each word in a file
@@ -218,3 +230,5 @@ See ./examples. Included examples are:
 - google_rank.js - returns a domain's rank for a given keyword
 - google_pagerank.js - find the pagerank of a URL
 - google_spell.js - outputs the result of google suggest
+
+See each file for full usage details.
