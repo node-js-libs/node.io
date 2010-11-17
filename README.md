@@ -43,7 +43,8 @@ Coming soon. See [http://node.io/](http://node.io/) for updates
 - Add more DOM selector / traversal methods
 - Test proxy callbacks
 - Add distributed processing
-- Refactor
+- Installation without NPM (install.sh)
+- Refactoring
 
 ## Credits
 
