@@ -61,7 +61,7 @@ Better documentation will be available once I have time to write it.
 
 ## Credits
 
-node.io uses:
+node.io wouldn't be possible without
 
 - [ry's](https://github.com/ry) [node.js](http://nodejs.org/)
 - [tautologistics'](https://github.com/tautologistics) [node-htmlparser](https://github.com/tautologistics/node-htmlparser)
