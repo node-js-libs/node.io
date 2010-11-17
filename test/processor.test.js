@@ -9,8 +9,8 @@ function createJob(options, methods) {
     return new nodeio.Job(options, methods);
 }
 
-function startJob(job, callback) {
-    nodeio.start(job, {silent:true}, callback);
+function startJob(job, callback, capture_output) {
+    nodeio.start(job, {silent:true}, callback, capture_output);
 }
 
 module.exports = {
@@ -41,6 +41,16 @@ module.exports = {
         });
     },
      
+    'test capturing output': function(assert) {
+        var job = createJob({
+            input: [0,1,2]
+        });
+               
+        startJob(job, function(err, out) {
+            assert.equal('[0,1,2]', JSON.stringify(out));
+        }, true);
+    },
+    
     'test emit() async': function(assert) {
         var out = [];
         
