@@ -15,7 +15,7 @@
 // domains and then resolve them:
 //       $ cat domains.txt | node.io -s validate url | node.io resolve
 
-var Job = require('../').Job;
+var Job = require('node.io').Job;
 
 var methods = {
 
