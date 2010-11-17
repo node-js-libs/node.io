@@ -228,5 +228,6 @@ See [./examples](https://github.com/chriso/node.io/tree/master/examples/). Inclu
 - `google_rank.js` - returns a domain's rank for a given keyword
 - `google_pagerank.js` - find the pagerank of a URL
 - `google_spell.js` - outputs the result of google suggest
+- `coffee.js` - rescursively compile all .coffee files in a directory
 
 See each file for usage details.

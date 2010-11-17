@@ -23,7 +23,7 @@ module.exports = {
             assert.isUndefined(err);
         });
     },
-      
+    
     'test running a basic job': function(assert) {
         var out = [];
         
