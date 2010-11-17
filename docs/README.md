@@ -14,7 +14,7 @@ The full API is [available here](https://github.com/chriso/node.io/blob/master/d
 
 ## Getting started
 
-The following example highlights how to create and run a simple job.
+The following very basic example highlights how to create and run a job.
 
 _times2.js_
     
@@ -60,98 +60,7 @@ _times4.js_
     }
         
     // $ node.io times4   =>  0\n4\n8\n
-    
-## A more advanced example
 
-The following job resolves a domain or list of domains.
-
-_resolve.js_
-
-    var Job = require('node.io').Job, dns = require('dns');
-    
-    var options = {
-        max: 100,      //Run a maximum of 100 DNS requests concurrently
-        timeout: 5,    //Timeout each request after 5s
-        retries: 3     //Maximum of 3 retries before failing
-    }
-    
-    var methods = {
-        run: function(domain) {
-            var self = this;
-            
-            dns.lookup(domain, 4, function(err, ip) {
-                if (err) {
-                    //The domain didn't resolve, retry
-                    self.retry();
-                } else {
-                    //The domain resolved successfully
-                    self.emit(domain + ',' + ip);
-                }
-            });
-        },
-        
-        //fail() is called if the thread times out or exceeds the maximum number of retries
-        fail: function(status, domain) {
-            this.emit(domain + ',failed');
-        }   
-    }
-    
-    exports.job = new Job(options, methods);
-    
-Try it out
-    
-    $ echo "google.com" | node.io resolve
-        => google.com,66.102.11.104
-    
-..or with a list of domains
-
-    $ cat domains.txt | node.io resolve
-        
-## Linking jobs together
-
-Since node.io uses *STDIN* and *STDOUT* by default, jobs can be linked together. Be sure to add the `-s` option to intermediate `node.io` calls to prevent status/warning messages from being added to the output.
-
-The following example uses _resolve.js_ from above and uses another job to filter out invalid domains before resolving.
-
-_domains.txt_
-
-    google.com
-    youtube.com
-    this*is^invalid.com
-
-_valid_url.js_
-
-    var Job = require('node.io').Job;
-        
-    var methods = {
-        run: function(url) {
-            this.assert(url).isUrl(); //If this fails, the url is not emitted
-            this.emit(url);
-        }
-    }
-    
-    exports.job = new Job({}, methods);
-    
-To link the jobs
-
-    $ cat domains.txt | node.io -s valid_url | node.io resolve 
-
-## Distributing work
-
-Node.io can currently partition the work among child processes to speed up execution, and will soon support distributing the work across multiple servers to create a work cluster.
-
-**Note: Input and output is handled by the master process, while `job.run` is performed in parallel by each of the workers. Be careful of persistence outside of the [API](https://github.com/chriso/node.io/blob/master/docs/api.md).**
-
-To enable this feature, either set the fork option to the number of workers you want to spawn, or use the `-f` command line option.
-
-Enabling it in a job
-    
-    var options = {fork:4};
-    
-Or at the command line
-
-    $ node.io -f 4 job
-    
 ## Input / output
 
 Node.io can handle a variety of input / output situations.
@@ -205,7 +114,194 @@ Node.io uses *STDIN* and *STDOUT* by default, so this is the same as calling
     $ cat /tmp/input.txt | node.io -s job > /tmp/output.txt
     
 Note: the `-s` option at the command line omits any status or warnings messages being output
+    
+## Example 1 - resolve.js
 
+The following job resolves a domain or list of domains.
+
+_resolve.js_
+
+    var Job = require('node.io').Job, dns = require('dns');
+    
+    var options = {
+        max: 100,      //Run a maximum of 100 DNS requests concurrently
+        timeout: 5,    //Timeout each request after 5s
+        retries: 3     //Maximum of 3 retries before failing
+    }
+    
+    var methods = {
+        run: function(domain) {
+            var self = this;
+            
+            dns.lookup(domain, 4, function(err, ip) {
+                if (err) {
+                    //The domain didn't resolve, retry
+                    self.retry();
+                } else {
+                    //The domain resolved successfully
+                    self.emit(domain + ',' + ip);
+                }
+            });
+        },
+        
+        //fail() is called if the request times out or exceeds the maximum number of retries
+        fail: function(status, domain) {
+            this.emit(domain + ',failed');
+        }   
+    }
+    
+    exports.job = new Job(options, methods);
+    
+Try it out
+    
+    $ echo "google.com" | node.io resolve
+        => google.com,66.102.11.104
+    
+..or with a list of domains
+
+    $ cat domains.txt | node.io resolve
+        
+## Example 2 - coffee.js
+
+The following job compiles all [CoffeeScript](http://jashkenas.github.com/coffee-script/) files in a directory and any subdirectories.
+
+_coffee.js_
+
+    var Job = require('node.io').Job, dns = require('dns');
+    
+    var options = {
+        max: 10,         //Compile a max of 10 files concurrently
+        recurse: true    //Compile .coffee scripts in subdirectories
+    }
+    
+    var methods = {
+        run: function(file) {
+            var self = this, len = file.length;
+            
+            //Only compile .coffee files
+            if (file.substr(len-7, len-1) === '.coffee') {
+                this.exec('coffee -c "' + file + '"', function(err) {
+                    if (err) {
+                        self.exit(err);
+                    } else {
+                        self.finish();
+                    }
+                });
+            } else {
+                this.skip();
+            }
+        } 
+    }
+    
+    exports.job = new Job(options, methods);
+    
+Try it out
+    
+    $ node.io -i /coffee/dir coffee
+    
+## Example 3 - reddit.js
+
+The following job pulls the front page stories and scores from [reddit](http://reddit.com/) - just as a proof of concept, there are API's for this..
+
+_reddit.js_
+
+    var Job = require('node.io').Job;
+
+    //Timeout after 10s, and only run the job once
+    var options = {timeout:10, once:true};
+    
+    var methods = {
+    
+        input: false,
+        
+        run: function() {
+            var self = this;
+            
+            this.getHtml('http://www.reddit.com/', function(err, $) {
+                //Handle any http / parsing errors
+                if (err) self.exit(err);
+                
+                var titles = [], scores = [], output = [];
+                
+                //Select all titles on the page
+                $('a.title').each(function(a) {
+                    titles.push(a.text);
+                });
+                
+                //Select all scores on the page
+                $('div.score.unvoted').each(function(div) {
+                    scores.push(div.text);
+                });
+                
+                //Mismatch? page probably didn't load properly
+                if (scores.length != titles.length) {
+                    self.exit('Title / score mismatch');
+                }
+                
+                //Output = [score] title
+                for (var i = 0, len = scores.length; i < len; i++) {
+                    //Ignore upcoming stories
+                    if (scores[i] == '&bull;') continue;
+                    
+                    //Check the data is ok
+                    self.assert(scores[i]).isInt();
+                    
+                    output.push('['+scores[i]+'] '+titles[i]);
+                }
+                
+                self.emit(output);
+            });
+        }
+    }
+    
+    //Export the job
+    exports.job = new Job(options, methods);
+    
+## Linking jobs together
+
+Since node.io uses *STDIN* and *STDOUT* by default, jobs can be linked together. Be sure to add the `-s` option to intermediate `node.io` calls to prevent status/warning messages from being added to the output.
+
+The following example uses _resolve.js_ from Example 1 and uses another job to filter out invalid domains before resolving.
+
+_domains.txt_
+
+    google.com
+    youtube.com
+    this*is^invalid.com
+
+_valid_url.js_
+
+    var Job = require('node.io').Job;
+        
+    var methods = {
+        run: function(url) {
+            this.assert(url).isUrl(); //If this fails, the url is not emitted
+            this.emit(url);
+        }
+    }
+    
+    exports.job = new Job({}, methods);
+    
+To link the jobs
+
+    $ cat domains.txt | node.io -s valid_url | node.io resolve 
+
+## Distributing work
+
+Node.io can currently partition the work among child processes to speed up execution, and will soon support distributing the work across multiple servers to create a work cluster.
+
+**Note: Input and output is handled by the master process, while `job.run` is performed in parallel by each of the workers. Be careful of persistence outside of the [API](https://github.com/chriso/node.io/blob/master/docs/api.md).**
+
+To enable this feature, either set the fork option to the number of workers you want to spawn, or use the `-f` command line option.
+
+Enabling it in a job
+    
+    var options = {fork:4};
+    
+Or at the command line
+
+    $ node.io -f 4 job
+    
 ## Passing arguments to jobs
 
 Any arguments after the job name on the command line are available in the job as a string
