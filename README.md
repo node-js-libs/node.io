@@ -1,6 +1,6 @@
 # [node.io](http://node.io/)
 
-A distributed data scraping and processing engine for [Node.JS](http://nodejs.org/)
+A distributed data scraping and processing engine for [Node.js](http://nodejs.org/)
 
 To install node.io, use [npm](http://github.com/isaacs/npm):
 
@@ -14,27 +14,28 @@ For usage details, run
 
 - Create modular and extensible jobs for scraping and processing data
 - Seamlessly distribute work among child processes and other servers (soon)
-- Written in Node.JS = FAST
-- Handles a variety of input / output situations
+- Written in Node.js == FAST
+- Handles a variety of input / output
     * Reading / writing lines to and from files
     * Reading all files in a directory (and recursing if specified)    
     * To / from a database
     * STDIN / STDOUT
-    * Piping between node.io jobs
+    * Piping between other node.io jobs
     * Custom IO / any combination of the above    
 - Includes a robust framework for scraping and selecting web data
 - Support for a variety of proxies when making requests
 - Includes a data validation and sanitization framework
 - Provides support for retries, timeouts, dynamically adding input, etc.
-- Create a MapReduce cluster
-
-## Examples
-
-See ./examples
 
 ## Documentation
 
-Coming soon. See [http://node.io/](http://node.io/) for updates
+Initial documentation is [available here](https://github.com/chriso/node.io/tree/master/docs/). 
+
+Better documentation will be available once I have time to write it. See [http://node.io/](http://node.io/) for updates.
+
+## Examples
+
+See [./examples](https://github.com/chriso/node.io/tree/master/examples/)
 
 ## Roadmap
 
