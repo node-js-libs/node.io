@@ -140,6 +140,8 @@ To link the jobs
 
 Node.io can currently partition the work among child processes to speed up execution, and will soon support distributing the work across multiple servers to create a work cluster.
 
+**Note: Input and output is handled by the master process, while `job.run` is performed in parallel by each of the workers. Be careful of persistence outside of the [API](https://github.com/chriso/node.io/blob/master/docs/api.md).**
+
 To enable this feature, either set the fork option to the number of workers you want to spawn, or use the `-f` command line option.
 
 Enabling it in a job
