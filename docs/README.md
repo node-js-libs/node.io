@@ -1,20 +1,14 @@
-node.io executes jobs in the following format.
-
-job.js
+A node.io job takes the following format
 
     var Job = require('node.io').Job;
-    
     var options = {}, methods = {};
-    
     exports.job = new Job(options, methods);
 
-To run job.js from the command line, run the following command in the same directory:
+To run this job (e.g. saved as myjob.js) from the command line, run the following command in the same directory
 
     $ node.io myjob
 
-A typical node.io job typically consists of a) taking some input, b) using or transforming it, and c) outputting something.
-
-A full list of available job methods and options is [available here](#). however jobs typically contain an input, run, and output method. If omitted, input and output default to STDIN and STDOUT.
+A full list of available job methods and options is [available here](#), however jobs typically contain an input, run, and output method. If omitted, input and output default to STDIN and STDOUT.
 
 ## Getting started
 

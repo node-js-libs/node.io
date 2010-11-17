@@ -1,7 +1,3 @@
-# [node.io](http://node.io/)
-
-A distributed data scraping and processing engine for [Node.js](http://nodejs.org/)
-
 To install node.io, use [npm](http://github.com/isaacs/npm):
 
     $ npm install node.io
@@ -9,19 +5,32 @@ To install node.io, use [npm](http://github.com/isaacs/npm):
 For usage details, run
 
     $ node.io --help    
-        
+
+## What is [node.io](http://node.io/)?
+
+node.io is a framework for scraping and processing data. A node.io job typically consists of a) taking some input, b) using or transforming it, and c) outputting something. 
+
+node.io can simplify the process of:
+
+- Filtering / sanitizing a list
+- MapReduce
+- Loading a list of URLs and scraping and saving some data from each
+- Parsing log files
+- Transforming data from one format to another, e.g. from CSV to a database
+- Recursively load all files in a directory and it's subdirectories and execute a command on each file
+             
 ## Why node.io?
 
 - Create modular and extensible jobs for scraping and processing data
-- Seamlessly distribute work among child processes and other servers (soon)
-- Written in Node.js == FAST
-- Handles a variety of input / output
+- Written in Node.js and Javascript - jobs are concise, asynchronous and FAST
+- Speed up execution by distributing work among child processes and other servers (soon) 
+- Easily handle a variety of input / output situations
     * Reading / writing lines to and from files
-    * Reading all files in a directory (and recursing if specified)    
-    * To / from a database
+    * Reading all files in a directory (and optionally recursing)    
+    * Reading / writing rows to and from a database
     * STDIN / STDOUT
     * Piping between other node.io jobs
-    * Custom IO / any combination of the above    
+    * Any combination of the above, or completely custom IO     
 - Includes a robust framework for scraping and selecting web data
 - Support for a variety of proxies when making requests
 - Includes a data validation and sanitization framework
@@ -31,7 +40,7 @@ For usage details, run
 
 Initial documentation is [available here](https://github.com/chriso/node.io/tree/master/docs/). 
 
-Better documentation will be available once I have time to write it. See [http://node.io/](http://node.io/) for updates.
+Better documentation will be available once I have time to write it.. See [http://node.io/](http://node.io/) for updates.
 
 ## Examples
 
