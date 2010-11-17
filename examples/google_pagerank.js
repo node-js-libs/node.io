@@ -1,6 +1,6 @@
-// This module checks a domain's Google pagerank (rate limits obviously apply)
+// This module checks a URL's Google pagerank (rate limits obviously apply)
 //
-//   1. To find the rank of a domain for a given keyword:
+//   1. To find the pagerank of a URL:
 //       $ echo "mastercard.com" | node.io -s google_pagerank    
 //          => mastercard.com,7
 
@@ -11,14 +11,14 @@ var options = {timeout:10, retries:3};
 
 var methods = {
 
-    run: function google(input) {
+    run: function (input) {
         var self = this;
         
         //Add http://
         var url = input;
         if (!~url.indexOf('http://')) url = 'http://'+url;
         
-        //Generate the checksum for getting pageranks
+        //Generate the pagerank checksum
         var ch = '6'+GoogleCH(strord('info:'+url));
         
         this.get('http://www.google.com/search?client=navclient-auto&ch='+ch+'&features=Rank&q=info:'+encodeURIComponent(url), function(err, data) {
@@ -41,10 +41,9 @@ var methods = {
 //Export the job
 exports.job = new Job(options, methods);
 
-
-//---------------------------------------------
-//CODE FOR GENERATING GOOGLE PAGERANK CHECKSUMS
-//---------------------------------------------
+//-----------------------------------------------
+// CODE FOR GENERATING GOOGLE PAGERANK CHECKSUMS
+//-----------------------------------------------
 
 function zF(a,b) {
     var z = parseInt(80000000,16);
