@@ -58,8 +58,9 @@ Better documentation will be available once I have time to write it.
 
 ## Credits
 
-node.io uses the following awesome libraries:
+node.io uses the following libraries
 
+- [ry's](https://github.com/ry) [node.js](http://nodejs.org/)
 - [tautologistics'](https://github.com/tautologistics) [node-htmlparser](https://github.com/tautologistics/node-htmlparser)
 - [harryf's](https://github.com/harryf) [soupselect](https://github.com/harryf/node-soupselect)
 - [kriszyp's](https://github.com/kriszyp) [multi-node](https://github.com/kriszyp/multi-node)

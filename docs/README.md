@@ -222,7 +222,7 @@ See [./examples](https://github.com/chriso/node.io/tree/master/examples/). Inclu
 
 - `duplicates.js` - remove all duplicates in a list, or only output duplicate lines
 - `validate.js` - filters a list with a variety of validation methods
-- `resolve.js` - similiar to the example above, but can also output domains that do not resolve (as a quick availability check), or only domains that resolve
+- `resolve.js` - more robust version of the example above
 - `word_count.js` - uses map reduce to count the occurrences of each word in a file
 - `reddit.js` - web scraping example - pulls the front page stories and scores from [reddit](http://reddit.com/]
 - `google_rank.js` - returns a domain's rank for a given keyword
