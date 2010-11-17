@@ -6,6 +6,8 @@ For usage details, run
 
     $ node.io --help    
 
+To get started, see the [documentation](https://github.com/chriso/node.io/tree/master/docs/), [examples](https://github.com/chriso/node.io/tree/master/examples/), or [API](https://github.com/chriso/node.io/blob/master/docs/api.md).
+
 ## What is [node.io](http://node.io/)?
 
 node.io is a framework for scraping and processing data. A node.io job typically consists of a) taking some input, b) using or transforming it, and c) outputting something. 
@@ -18,7 +20,7 @@ node.io can simplify the process of:
 - Parsing log files
 - Transforming data from one format to another, e.g. from CSV to a database
 - Recursively load all files in a directory and execute a command on each
-             
+
 ## Why node.io?
 
 - Create modular and extensible jobs for scraping and processing data
@@ -40,14 +42,11 @@ node.io can simplify the process of:
 
 Initial documentation is [available here](https://github.com/chriso/node.io/tree/master/docs/). 
 
-Better documentation will be available once I have time to write it.. See [http://node.io/](http://node.io/) for updates.
-
-## Examples
-
-See [./examples](https://github.com/chriso/node.io/tree/master/examples/)
+Better documentation will be available once I have time to write it.
 
 ## Roadmap
 
+- Fix up the [http://node.io/](http://node.io/) site
 - Automatically handle HTTP codes, e.g. redirect on 3xx or call fail() on 4xx/5xx
 - Nested requests inherit referrer / cookies if to the same domain
 - Add more DOM selector / traversal methods
