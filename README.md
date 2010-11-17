@@ -10,7 +10,9 @@ To get started, see the [documentation](https://github.com/chriso/node.io/blob/m
 
 ## What is [node.io](http://node.io/)?
 
-node.io is a framework for scraping and processing data. A node.io job typically consists of a) taking some input, b) using or transforming it, and c) outputting something. 
+node.io is a data scraping and processing framework for [node.js](http://nodejs.org/).
+
+A node.io job typically consists of a) taking some input, b) using or transforming it, and c) outputting something. 
 
 node.io can simplify the process of:
 
@@ -20,6 +22,7 @@ node.io can simplify the process of:
 - Parsing log files
 - Transforming data from one format to another, e.g. from CSV to a database
 - Recursively load all files in a directory and execute a command on each
+- etc. etc.
 
 ## Why node.io?
 
