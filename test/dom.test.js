@@ -30,12 +30,13 @@ var dom = __dirname + '/resources/dom.html';
 module.exports = {
     
     'test #parseHtml()': function(assert) {
+        
         fs.readFile(dom, 'utf8', function(err, data) {
             if (err) throw err;
             
-            job.parseHtml(data, function(err, $) {
+            job.parseHtml(data, function(err, $, data) {
                 if (err) throw err;
-                
+                                
                 //Test a class selector
                 assert.equal(4, $('p.a').length);
                 
@@ -43,7 +44,7 @@ module.exports = {
                 $('p.a').each(function(elem) {
                     assert.ok(typeof elem.attribs === 'object');
                 });
-                
+                                
                 //Optionally iterate over a certain attribute
                 $('p.a').each('class', function(cls) {
                     assert.ok(typeof cls === 'string');
@@ -92,6 +93,7 @@ module.exports = {
                 assert.isUndefined($('p.a').filter('.xyz'));
             });
         });
+        
     }
     
 }

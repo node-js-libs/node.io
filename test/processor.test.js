@@ -424,30 +424,7 @@ module.exports = {
             assert.equal('[0,3,3,3,1,2]', JSON.stringify(out));
         });
     },
-    
-    'test job extend': function(assert) {
-    
-        var job = createJob({foo:'bar'}, {testmethod:function(){return 'a';}});
-        assert.equal('bar', job.options.foo);
-        assert.equal('function', typeof job.testmethod);
-        assert.equal('a', job.testmethod());
-             
-        //Create a new job that extends the old one
-        var new_job = job.extend({foo:'foo'}, {testmethod:false,testmethodb:function(){return 'b';}});
-        assert.equal('foo', new_job.options.foo);
-        assert.equal(false, new_job.testmethod);
-        assert.equal('function', typeof new_job.testmethodb);
-        assert.equal('b', new_job.testmethodb());
         
-        //Ensure extend doesn't modify the original job
-        assert.equal('bar', job.options.foo);
-        assert.equal('function', typeof job.testmethod);
-        job = job.extend({foo:'foo'}, {testmethod:false});
-        assert.equal('foo', job.options.foo);
-        assert.equal(false, new_job.testmethod);
-        
-    },
-    
     'test global timeout': function(assert) {
         var out = [];
                 

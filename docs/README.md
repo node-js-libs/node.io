@@ -1,21 +1,27 @@
 A node.io job takes the following format
 
+_myjob.js_
+
     var Job = require('node.io').Job;
     var options = {}, methods = {};
     exports.job = new Job(options, methods);
 
-..or in [CoffeeScript](http://jashkenas.github.com/coffee-script/)
+To run this job from the command line, run the following command in the same directory
 
-    nodeio require 'node.io'
+    $ node.io myjob
+
+node.io also has support for jobs written in [CoffeeScript](http://jashkenas.github.com/coffee-script/)
+
+_myjob.coffee_
+
+nodeio require 'node.io'
     class MyJob extends nodeio.JobClass
         //methods
     @job = new MyJob(options)
 
-To run this job from the command line (e.g. saved as _myjob.js_ or _myjob.coffee_ - node.io will automatically compile the job if it's a .coffee file), run the following command in the same directory.
+To compile then run
 
-    $ node.io myjob
-
-To run the job from inside a script, use `nodeio.start(job, callback, capture_output)`. If capture output is true, the callback is passed two parameters (err, output) rather than just (err)
+    $ node.io myjob.coffee
 
 Jobs typically contain an input, run, and output method. If omitted, input and output default to *STDIN* and *STDOUT*.
 
@@ -41,6 +47,20 @@ To run _times2.js_, run the following command in the same directory
     $ node.io times2
         => 0\n2\n4\n
     
+To run the job from inside a script, use `nodeio.start(job, callback, capture_output)`. If capture output is true, the callback is passed two parameters (err, output) rather than just (err)
+    
+    var callback = function(err, output) {
+        console.log(output);   
+    }
+    
+    nodeio.start('times2', callback, true);
+    //  => [0,2,4]
+    
+You can also do the following
+
+    nodeio.start(require('./times2'));
+    nodeio.start('times2.coffee');    
+
 ## Extending a job
 
 A job's options and methods can be inherited and overridden using `job.extend(new_options, new_methods);`
@@ -76,7 +96,7 @@ _times4.coffee_
 
 ## Input / output
 
-Node.io can handle a variety of input / output situations
+Node.io can handle a variety of input / output cases
 
 To input an array
     
@@ -202,45 +222,7 @@ _resolve.coffee_
         
     @job = new Resolve(options)
 
-## Example 2 - coffee.js
-
-As an example of running a command on all files in a directory, the following job compiles all CoffeeScript files in a directory and any subdirectories.
-
-_coffee.js_
-
-    var Job = require('node.io').Job, dns = require('dns');
-    
-    var options = {
-        max: 10,         //Compile a max of 10 files concurrently
-        recurse: true    //Compile scripts in subdirectories
-    }
-    
-    var methods = {
-        run: function(file) {
-            var self = this, len = file.length;
-            
-            //Only compile .coffee files
-            if (file.substr(len-7, len-1) === '.coffee') {
-                this.exec('coffee -c "' + file + '"', function(err) {
-                    if (err) {
-                        self.exit(err);
-                    } else {
-                        self.finish();
-                    }
-                });
-            } else {
-                this.skip();
-            }
-        } 
-    }
-    
-    exports.job = new Job(options, methods);
-    
-Try it out
-    
-    $ node.io -i /coffee/dir coffee
-    
-## Example 3 - reddit.js
+## Example 2 - reddit.js
 
 The following job pulls the front page stories and scores from [reddit](http://reddit.com/) - just as a proof of concept, there are API's for this..
 
@@ -298,6 +280,44 @@ _reddit.js_
     //Export the job
     exports.job = new Job(options, methods);
     
+## Example 3 - coffee.js
+
+As an example of running a command on all files in a directory, the following job compiles all CoffeeScript files in a directory and any subdirectories.
+
+_coffee.js_
+
+    var Job = require('node.io').Job, dns = require('dns');
+    
+    var options = {
+        max: 10,         //Compile a max of 10 files concurrently
+        recurse: true    //Compile scripts in subdirectories
+    }
+    
+    var methods = {
+        run: function(file) {
+            var self = this, len = file.length;
+            
+            //Only compile .coffee files
+            if (file.substr(len-7, len-1) === '.coffee') {
+                this.exec('coffee -c "' + file + '"', function(err) {
+                    if (err) {
+                        self.exit(err);
+                    } else {
+                        self.finish();
+                    }
+                });
+            } else {
+                this.skip();
+            }
+        } 
+    }
+    
+    exports.job = new Job(options, methods);
+    
+Try it out
+    
+    $ node.io -i /coffee/dir coffee
+    
 ## Linking jobs together
 
 Since node.io uses *STDIN* and *STDOUT* by default, jobs can be linked together. Be sure to add the `-s` option to intermediate `node.io` calls to prevent status/warning messages from being added to the output.
@@ -333,7 +353,7 @@ Node.io can currently partition the work among child processes to speed up execu
 
 **Note: Input and output is handled by the master process only. Each worker runs `job.run` in parallel, so be careful of using any persistence outside of the [API](https://github.com/chriso/node.io/blob/master/docs/api.md).**
 
-To enable this feature, either set the fork option to the number of workers you want to spawn, or use the `-f` command line option.
+To enable this feature, either set the `fork` option to the number of workers you want to spawn, or use the `-f` command line option.
 
 Enabling it in a job
     
