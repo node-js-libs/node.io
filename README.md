@@ -70,7 +70,9 @@ node.io wouldn't be possible without
 
 ## Contributing
 
-[Fork / pull](https://github.com/chriso/node.io/fork).
+If you find a bug, please report the issue [here](https://github.com/chriso/node.io/issues). 
+
+If you want to contribute / help with the Roadmap / add more tests, please [fork/pull](https://github.com/chriso/node.io/fork).
 
 ## License
 
