@@ -25,11 +25,9 @@ To compile then run
 
 The full API is [available here](https://github.com/chriso/node.io/blob/master/docs/api.md).
 
-Jobs typically contain an input, run, and output method. If omitted, input and output default to *STDIN* and *STDOUT*.
-
 ## Getting started
 
-The following very basic example highlights how to create and run a job.
+The following very basic example highlights how to create and run a job. Note: input / output defaults to STDIN / STDOUT
 
 _times2.js_
     
@@ -41,13 +39,30 @@ _times2.js_
     };
     
     exports.job = new Job(options, methods);
-        
+    
+The same job in Coffeescript, _times2.coffee_
+
+    nodeio = require 'node.io'
+    
+    class Times2 extends nodeio.JobClass
+        input: [0,1,2]
+        run: (num) -> @emit num * 2
+
 To run _times2.js_, run the following command in the same directory
 
     $ node.io times2
-        => 0\n2\n4\n
+
+This outputs
+
+    INFO: Running 1 worker..
+    0
+    2
+    4
+    OK: Job complete.
     
-To run the job from inside a script, use `nodeio.start(job, callback, capture_output)`. If capture output is true, the callback is passed two parameters `err, output` rather than just `err`
+To omit status / warning messages, use the `-s` command line option
+    
+To run the job from inside a script, use `nodeio.start(job, callback, capture_output)` where callback takes one parameter `err`. If capture output is true, the callback is passed two parameters `err, output`
     
     var callback = function(err, output) {
         console.log(output);   
@@ -57,10 +72,10 @@ To run the job from inside a script, use `nodeio.start(job, callback, capture_ou
     
     //Outputs => [0,2,4]
     
-You can also pass in the job directly, or the name of a CoffeeScript in current working directory
+You can also pass in the job directly, or the name of a CoffeeScript in the current working directory
 
     nodeio.start(require('./times2'), callback);
-    nodeio.start('times2.coffee', callback);    
+    nodeio.start('times2.coffee', callback);
 
 ## Extending a job
 
@@ -68,32 +83,28 @@ A job's options and methods can be inherited and overridden using `job.extend(ne
 
 _times4.js_
 
-    var times2 = require('./times2'), options = {};
+    var times2 = require('./times2');
     
     exports.job = times2.extend(options, {
         run: function(num) {
             this.__super__.run(num * 2);
+            //Same as this.emit(num * 4)
         }
     }
-        
-    // $ node.io times4   =>  0\n4\n8\n
 
-node.io plays nice with CoffeeScript's class inheritance
+node.io also plays nice with CoffeeScript's class inheritance
 
 _times4.coffee_
 
     nodeio = require 'node.io'
+    times2 = require './times2'
 
-    class Times2 extends nodeio.JobClass
-        input: [0,1,2]
-        run: (num) -> @emit num * 2
-       
     class Times4 extends Times2
         run: (num) -> super num * 2
        
     @job = new Times4();
 
-    // $ node.io times4   =>  0\n4\n8\n
+Running _times4.js_ or _times4.coffee_ outputs `0 \n 4 \n 8 \n`
 
 ## Example 1 - resolve.js
 
