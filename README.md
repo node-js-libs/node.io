@@ -39,6 +39,8 @@ For usage details, run
 
 ## Documentation
 
+node.io is currently an _ALPHA_ release.
+
 To get started, see the [documentation](https://github.com/chriso/node.io/blob/master/docs/README.md), [API](https://github.com/chriso/node.io/blob/master/docs/api.md), and [examples](https://github.com/chriso/node.io/tree/master/examples/).
 
 Better documentation will be available once I have time to write it.
