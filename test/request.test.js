@@ -1,21 +1,14 @@
 var nodeio = require('../'),
     processor = new nodeio.Processor(),
-    http = require('http');
+    http = require('http'),
+    JobClass = nodeio.JobClass;
     
-function createJob(options, methods) {
-    if (typeof methods === 'undefined') {
-        methods = options;
-        options = {};
-    }
-    return new nodeio.Job(options, methods);
-}
-
-var job = createJob();
+var job = new JobClass();
 
 var i = 24510;
 
 module.exports = {
-
+    
     'test GET request': function(assert) {
     
         var server = http.createServer(function (req, res) {
@@ -139,4 +132,5 @@ module.exports = {
             server.close();
         });
     }   
+    
 }

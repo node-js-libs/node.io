@@ -1,7 +1,7 @@
 var fs = require('fs'),
     nodeio = require('../'),
     processor = new nodeio.Processor(),
-    job = new nodeio.Job();
+    JobClass = nodeio.JobClass;
     
 var lorem = __dirname+'/resources/lorem.txt',
     lorem_crlf = __dirname+'/resources/lorem_crlf.txt',
@@ -15,12 +15,14 @@ function createJob(options, methods) {
         methods = options;
         options = {};
     }
-    return new nodeio.Job(options, methods);
+    return nodeio.Job(options, methods);
 }
-    
+        
 module.exports = {
     
     'test #read()': function(assert) {
+        var job = new JobClass();
+        
         //Test sync read
         assert.equal(4042, job.read(lorem).length);
         
@@ -116,6 +118,8 @@ module.exports = {
     
     'test #write()': function(assert) {
         var i = 0;
+        
+        var job = new JobClass();
         
         job.write(output, 'test', function() {
             assert.equal(0, i++);
@@ -222,6 +226,7 @@ module.exports = {
         });
     },
     
+    
     'test where job.input is an unknown string': function(assert) {
         try {
             createJob({input:'xyz897asd'});
@@ -261,4 +266,5 @@ module.exports = {
         }, 100);
         
     },
+    
 }

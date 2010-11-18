@@ -10,13 +10,14 @@ function createJob(options, methods) {
 }
     
 module.exports = {
+    
     'test job extend': function(assert) {
     
         var job = createJob({foo:'bar'}, {testmethod:function(){return 'a';}});
         assert.equal('bar', job.options.foo);
         assert.equal('function', typeof job.testmethod);
         assert.equal('a', job.testmethod());
-        
+             
         //Create a new job that extends the old one
         var new_job = job.extend({foo:'foo'}, {testmethod:false,testmethodb:function(){return 'b';}});
         assert.equal('foo', new_job.options.foo);
@@ -30,6 +31,7 @@ module.exports = {
         job = job.extend({foo:'foo'}, {testmethod:false});
         assert.equal('foo', job.options.foo);
         assert.equal(false, new_job.testmethod);
+        
     },
     
     'test job running once': function(assert) {

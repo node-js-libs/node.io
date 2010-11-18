@@ -1,6 +1,7 @@
 var fs = require('fs'),
     nodeio = require('../'),
-    job = new nodeio.Job();
+    JobClass = nodeio.JobClass,
+    job = new JobClass();
     
 var dom = __dirname + '/resources/dom.html';
 
@@ -27,6 +28,7 @@ var dom = __dirname + '/resources/dom.html';
 */
 
 module.exports = {
+    
     'test #parseHtml()': function(assert) {
         fs.readFile(dom, 'utf8', function(err, data) {
             if (err) throw err;
@@ -91,4 +93,5 @@ module.exports = {
             });
         });
     }
+    
 }

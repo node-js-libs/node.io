@@ -386,23 +386,6 @@ module.exports = {
         });
     },
     
-    'test global timeout': function(assert) {
-        var out = [];
-                
-        var job = createJob({global_timeout:0.2}, {
-            input: [0,1,2],
-            run: function(num) {
-                setTimeout(function() {
-                    job.emit(num);
-                }, 500);
-            }
-        });
-        
-        startJob(job, function(err) {
-            assert.ok(err);
-        });
-    },
-    
     'test input op': function(assert) {
         var i = 0;
         
@@ -442,9 +425,49 @@ module.exports = {
         });
     },
     
+    'test job extend': function(assert) {
+    
+        var job = createJob({foo:'bar'}, {testmethod:function(){return 'a';}});
+        assert.equal('bar', job.options.foo);
+        assert.equal('function', typeof job.testmethod);
+        assert.equal('a', job.testmethod());
+             
+        //Create a new job that extends the old one
+        var new_job = job.extend({foo:'foo'}, {testmethod:false,testmethodb:function(){return 'b';}});
+        assert.equal('foo', new_job.options.foo);
+        assert.equal(false, new_job.testmethod);
+        assert.equal('function', typeof new_job.testmethodb);
+        assert.equal('b', new_job.testmethodb());
+        
+        //Ensure extend doesn't modify the original job
+        assert.equal('bar', job.options.foo);
+        assert.equal('function', typeof job.testmethod);
+        job = job.extend({foo:'foo'}, {testmethod:false});
+        assert.equal('foo', job.options.foo);
+        assert.equal(false, new_job.testmethod);
+        
+    },
+    
+    'test global timeout': function(assert) {
+        var out = [];
+                
+        var job = createJob({global_timeout:0.2}, {
+            input: [0,1,2],
+            run: function(num) {
+                setTimeout(function() {
+                    job.emit(num);
+                }, 500);
+            }
+        });
+        
+        startJob(job, function(err) {
+            assert.ok(err);
+        });
+    },
+    
     'test the recurse op': function(assert) {
         //Test specialised case where input is a path to a dir
-        var job = createJob({recurse:true},{input:__dirname+'/resources/test_dir_input'});
+        var job = createJob({recurse:true}, {input:__dirname+'/resources/test_dir_input'});
         
         startJob(job, function(err, files) {
             assert.equal(4, files.length);
