@@ -25,13 +25,16 @@ module.exports = {
         assert.equal('function', typeof new_job.testmethodb);
         assert.equal('b', new_job.testmethodb());
         
+        //Test calling a parent method
+        assert.equal('function', typeof new_job.__super__.testmethod);
+        assert.equal('a', new_job.__super__.testmethod());
+        
         //Ensure extend doesn't modify the original job
         assert.equal('bar', job.options.foo);
         assert.equal('function', typeof job.testmethod);
         job = job.extend({foo:'foo'}, {testmethod:false});
         assert.equal('foo', job.options.foo);
         assert.equal(false, new_job.testmethod);
-        
     },
     
     'test job running once': function(assert) {
