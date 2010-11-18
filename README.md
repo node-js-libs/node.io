@@ -60,6 +60,12 @@ node.io is an _ALPHA_ release. There will no doubt be some bugs and oddities.
 - Refactoring
 - More tests / better test coverage
 
+## Contributing
+
+If you find a bug, please report the issue [here](https://github.com/chriso/node.io/issues). 
+
+If you want to contribute / help with the Roadmap / add more tests, please [fork/pull](https://github.com/chriso/node.io/fork).
+
 ## Credits
 
 node.io wouldn't be possible without
@@ -68,12 +74,6 @@ node.io wouldn't be possible without
 - [tautologistics'](https://github.com/tautologistics) [node-htmlparser](https://github.com/tautologistics/node-htmlparser)
 - [harryf's](https://github.com/harryf) [soupselect](https://github.com/harryf/node-soupselect)
 - [kriszyp's](https://github.com/kriszyp) [multi-node](https://github.com/kriszyp/multi-node)
-
-## Contributing
-
-If you find a bug, please report the issue [here](https://github.com/chriso/node.io/issues). 
-
-If you want to contribute / help with the Roadmap / add more tests, please [fork/pull](https://github.com/chriso/node.io/fork).
 
 ## License
 
