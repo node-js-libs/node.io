@@ -2,11 +2,11 @@ A node.io job takes the following format
 
 _myjob.js_
 
-    var Job = require('node.io').Job;
+    var nodeio = require('node.io');
     
     var options = {}, methods = {};
     
-    exports.job = new Job(options, methods);
+    exports.job = new nodeio.Job(options, methods);
 
 To run this job from the command line, run the following command in the same directory
 
@@ -69,7 +69,7 @@ To omit status / warning messages, use the `-s` command line option
  
 Use `nodeio.start(job, callback, capture_output)` where callback takes one parameter `err`. 
 
-If `capture_output` is true, the callback an extra parameter containing the output
+If `capture_output` is true, the callback gets an extra parameter containing the output
     
     var callback = function(err, output) {
         console.log(output);   
