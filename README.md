@@ -1,28 +1,29 @@
 # What is [node.io](http://node.io/)?
 
+node.io is a data scraping and processing framework for [Node.js](http://nodejs.org/) inspired by [Google's MapReduce](http://labs.google.com/papers/mapreduce.html).
+
 node.io can streamline the process of:
 
 - Parsing / filtering / sanitizing large amounts of data
-- MapReduce
 - Scraping data from the web using familiar CSS selectors and traversal methods
-- Scraping web data through a proxy
+- Map Reduce
 - Transforming data from one format to another, e.g. from CSV => a database
-- Recursively load all files in a directory and its subdirs and execute a command on each
-- + much more..
+- Distributing work across multiple processes, and multiple servers (soon)
+- 
 
 ## Why node.io?
 
 - Create modular and extensible jobs for scraping and processing data
 - Jobs are written in Javascript or Coffeescript and run in Node.js - jobs are concise, asynchronous and _FAST_
 - Seamlessly speed up execution by distributing work among child processes and other servers (soon) 
-- Easily handle a variety of input / output situations
+- Easily handle a variety of input / output situations, node.io does the heavy lifting
     * Reading / writing lines to and from files
     * Traversing files in a directory    
     * Reading / writing rows to and from a database
     * STDIN / STDOUT / Custom streams
-    * Piping between other node.io jobs    
+    * Piping data between multiple node.io jobs
     * Any combination of the above, or your own IO     
-- Includes a robust framework for scraping and selecting web data
+- Includes a robust framework for scraping, selecting and traversing web data
 - Support for a variety of proxies when scraping web data
 - Includes a data validation and sanitization framework
 - Provides support for retries, timeouts, dynamically adding input, etc.
@@ -39,18 +40,19 @@ For usage details, run
 
 ## Documentation
 
-node.io is currently an _ALPHA_ release.
-
 To get started, see the [documentation](https://github.com/chriso/node.io/blob/master/docs/README.md), [API](https://github.com/chriso/node.io/blob/master/docs/api.md), and [examples](https://github.com/chriso/node.io/tree/master/examples/).
 
 Better documentation will be available once I have time to write it.
 
+node.io is an _ALPHA_ release. There will no doubt be some bugs and oddities.
+
 ## Roadmap
 
 - Fix up the [http://node.io/](http://node.io/) site
-- Automatically handle HTTP codes, e.g. redirect on 3xx or call fail() on 4xx/5xx
+- Handle HTTP codes, e.g. automatically redirect on 3xx or call `fail()` on 4xx/5xx
 - Nested requests inherit referrer / cookies if to the same domain
-- Add more DOM selector / traversal methods
+- Add more DOM [selector](http://api.jquery.com/category/selectors/) / [traversal](http://api.jquery.com/category/traversing/) methods
+    - or attempt a full port of jQuery that's compatible with [htmlparser](https://github.com/tautologistics/node-htmlparser) (more forgiving than [JSDOM](https://github.com/tmpvar/jsdom))
 - Test proxy callbacks and write proxy documentation
 - Add distributed processing
 - Installation without NPM (install.sh)
@@ -65,6 +67,10 @@ node.io wouldn't be possible without
 - [tautologistics'](https://github.com/tautologistics) [node-htmlparser](https://github.com/tautologistics/node-htmlparser)
 - [harryf's](https://github.com/harryf) [soupselect](https://github.com/harryf/node-soupselect)
 - [kriszyp's](https://github.com/kriszyp) [multi-node](https://github.com/kriszyp/multi-node)
+
+## Contributing
+
+[Fork / pull](https://github.com/chriso/node.io/fork).
 
 ## License
 
