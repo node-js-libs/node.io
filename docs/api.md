@@ -15,11 +15,11 @@ Or in CoffeeScript
 
 **Global job methods**
 
-    this.emit(result)           //Emits a result to the next stage of processing
-    this.skip()                 //Cancels the thread and discards the input
-    this.finish()               //Same as skip()
-    this.exit(msg)              //Exits the job with an optional error message
-    this.retry()                //Retries the thread
+    this.emit(result)               //Emits a result to the next stage of processing
+    this.skip()  OR  this.finish()  //Cancels the thread and discards the input
+    this.exit(msg)                  //Exits the job with an optional error message
+    this.retry()                    //Retries the thread
+    this.add(input)                 //Dynamically add input to the queue
 
 **input()**  
 
@@ -27,11 +27,11 @@ _Default: read lines from STDIN - auto-detects newline_
 
 Examples
 
-    input: [0,1,2]              //Array input 
-    input: '/path/file.txt'     //Reads lines from a file - auto-detects newline
-    input: '/path/to/dir/'      //Reads all files in a directory
-    input: false                //Runs the job once
-    input: true                 //Runs the job indefinitely
+    input: [0,1,2]                  //Array input 
+    input: '/path/file.txt'         //Reads lines from a file - auto-detects newline
+    input: '/path/to/dir/'          //Reads all files in a directory
+    input: false                    //Runs the job once
+    input: true                     //Runs the job indefinitely
     
 To input from a stream
 
@@ -192,7 +192,27 @@ The encoding to use when reading / writing files
 
 ## Working with IO
 
-The following methods are available inside a job
+To read or write to a file inside a job, use the following methods. Both methods are synchronous if no callback is provided
 
-    this.read(file, [callback]);        //Wraps fs.readFile. If no callback is provided, the call is synchronous
-    this.write(file, data, [callback]
+    this.read(file, [callback]);
+    this.write(file, data, [callback]); 
+   
+## Making requests
+
+..
+
+## Making proxied requests
+
+..
+
+## DOM selection / traversal
+
+..
+ 
+## Executing commands
+
+To execute a command, use the following methods. Callback takes the format of (err, stdout, stderr)
+
+    this.exec(cmd, callback);
+    this.spawn(cmd, stdin, callback);       //Same as exec, but can write to the commands STDIN
+    
