@@ -1,23 +1,20 @@
 # What is [node.io](http://node.io/)?
 
-node.io is a data scraping and processing framework for [node.js](http://nodejs.org/).
+node.io can streamline the process of:
 
-node.io can simplify the process of:
-
-- Filtering / sanitizing a list
+- Parsing / filtering / sanitizing large amounts of data
 - MapReduce
-- Scraping data from the web using with familiar CSS selectors / traversal methods
+- Scraping data from the web using familiar CSS selectors and traversal methods
 - Scraping web data through a proxy
-- Parsing log files
-- Transforming data from one format to another, e.g. from CSV to a database
+- Transforming data from one format to another, e.g. from CSV => a database
 - Recursively load all files in a directory and its subdirs and execute a command on each
-- ETC
+- + much more..
 
 ## Why node.io?
 
 - Create modular and extensible jobs for scraping and processing data
-- Jobs are written in Javascript or Coffeescript and run in Node.js - jobs are concise, asynchronous and FAST
-- Speed up execution by distributing work among child processes and other servers (soon) 
+- Jobs are written in Javascript or Coffeescript and run in Node.js - jobs are concise, asynchronous and _FAST_
+- Seamlessly speed up execution by distributing work among child processes and other servers (soon) 
 - Easily handle a variety of input / output situations
     * Reading / writing lines to and from files
     * Traversing files in a directory    
