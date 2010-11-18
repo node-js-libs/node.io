@@ -111,7 +111,7 @@ module.exports = {
         
         job_crlf.input(14, 1, function(lines) {
             assert.equal(false, lines);
-            assert.equal(4046, job_crlf.getBytesRead());
+            assert.equal(4046, job_crlf.getBytesRead(), '4042 !== 4046.. test/resources/lorem_crlf.txt probably had \\r\\n converted to \\n');
         });
         
     },
