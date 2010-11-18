@@ -194,13 +194,12 @@ _resolve.coffee_
 
 ## Example 2 - reddit.js
 
-The following job pulls the front page stories and scores from [reddit](http://reddit.com/) - just as a proof of concept, there are API's for this..
+The following job pulls the front page stories and scores from [reddit](http://reddit.com/). Note: this is just a proof of concept, there are API's for this.
 
 _reddit.js_
 
     var Job = require('node.io').Job;
 
-    //Timeout after 10s, and only run the job once
     var options = {timeout:10};
     
     var methods = {
