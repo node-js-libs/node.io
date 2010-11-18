@@ -1,16 +1,3 @@
-A job takes the form of
-    
-    var Job = require('node.io').Job;
-    var options = {}, methods = {};
-    exports.job = new Job(option, methods);
-    
-Or in CoffeeScript
-
-    nodeio = require('node.io');
-    class Job extends nodeio.JobClass
-        //methods
-    @job = new Job(options);
-
 # Methods
 
 **input()**  
