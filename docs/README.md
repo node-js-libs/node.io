@@ -14,7 +14,7 @@ node.io also has support for jobs written in [CoffeeScript](http://jashkenas.git
 
 _myjob.coffee_
 
-nodeio require 'node.io'
+    nodeio require 'node.io'
     class MyJob extends nodeio.JobClass
         //methods
     @job = new MyJob(options)
@@ -23,9 +23,9 @@ To compile then run
 
     $ node.io myjob.coffee
 
-Jobs typically contain an input, run, and output method. If omitted, input and output default to *STDIN* and *STDOUT*.
-
 The full API is [available here](https://github.com/chriso/node.io/blob/master/docs/api.md).
+
+Jobs typically contain an input, run, and output method. If omitted, input and output default to *STDIN* and *STDOUT*.
 
 ## Getting started
 
@@ -47,23 +47,24 @@ To run _times2.js_, run the following command in the same directory
     $ node.io times2
         => 0\n2\n4\n
     
-To run the job from inside a script, use `nodeio.start(job, callback, capture_output)`. If capture output is true, the callback is passed two parameters (err, output) rather than just (err)
+To run the job from inside a script, use `nodeio.start(job, callback, capture_output)`. If capture output is true, the callback is passed two parameters `err, output` rather than just `err`
     
     var callback = function(err, output) {
         console.log(output);   
     }
     
     nodeio.start('times2', callback, true);
-    //  => [0,2,4]
     
-You can also do the following
+    //Outputs => [0,2,4]
+    
+You can also pass in the job directly, or the name of a CoffeeScript in current working directory
 
-    nodeio.start(require('./times2'));
-    nodeio.start('times2.coffee');    
+    nodeio.start(require('./times2'), callback);
+    nodeio.start('times2.coffee', callback);    
 
 ## Extending a job
 
-A job's options and methods can be inherited and overridden using `job.extend(new_options, new_methods);`
+A job's options and methods can be inherited and overridden using `job.extend(new_options, new_methods)`
 
 _times4.js_
 
@@ -94,66 +95,9 @@ _times4.coffee_
 
     // $ node.io times4   =>  0\n4\n8\n
 
-## Input / output
-
-Node.io can handle a variety of input / output cases
-
-To input an array
-    
-    input: [0,1,2,3,4]
-
-To input a file line by line (auto-detects \n or \r\n)
-
-    input: '/tmp/file.txt'
-
-To read all files in a directory 
-
-    input: '/tmp',
-    
-    run: function(path) {
-        console.log(path); //Outputs the full path of each file/dir in /tmp
-    }
-    
-    //To recurse subdirectories, set the 'recurse' option to true
-
-To add your own input (e.g. from a database), use the following format
-
-    input: function(start, num, callback) {
-        //callback takes (err, input)
-    }
-    
-To run a job once (with no input)
-
-    input: false
-
-To run the job indefinitely
-
-    input: true
-   
-To output to a file
-
-    output: '/tmp/output.txt'  //Defaults to \n for newline. Change by setting the 'newline' option
-    
-To add your own output, use the following format
-
-    output: function(out) {
-        //e.g to write to a stream => stream.write(out)
-        //Note: out will be an array
-    } 
-
-Input / output can be optionally overridden at the command line
-
-    $ node.io -i /tmp/input.txt -o /tmp/output.txt job
-    
-Node.io uses *STDIN* and *STDOUT* by default, so this is the same as calling
-
-    $ cat /tmp/input.txt | node.io -s job > /tmp/output.txt
-    
-Note: the `-s` option at the command line omits any status or warnings messages being output
-    
 ## Example 1 - resolve.js
 
-The following job resolves a domain or list of domains.
+The following job wraps the builtin `dns` module and resolves a domain or list of domains.
 
 _resolve.js_
 
@@ -231,7 +175,7 @@ _reddit.js_
     var Job = require('node.io').Job;
 
     //Timeout after 10s, and only run the job once
-    var options = {timeout:10, once:true};
+    var options = {timeout:10};
     
     var methods = {
     
@@ -286,7 +230,7 @@ As an example of running a command on all files in a directory, the following jo
 
 _coffee.js_
 
-    var Job = require('node.io').Job, dns = require('dns');
+    var Job = require('node.io').Job, path = require('path');
     
     var options = {
         max: 10,         //Compile a max of 10 files concurrently
@@ -295,10 +239,9 @@ _coffee.js_
     
     var methods = {
         run: function(file) {
-            var self = this, len = file.length;
+            var self = this;
             
-            //Only compile .coffee files
-            if (file.substr(len-7, len-1) === '.coffee') {
+            if (path.extname(file) === '.coffee') {
                 this.exec('coffee -c "' + file + '"', function(err) {
                     if (err) {
                         self.exit(err);
@@ -307,6 +250,7 @@ _coffee.js_
                     }
                 });
             } else {
+                //Skip non .coffee files
                 this.skip();
             }
         } 
@@ -316,13 +260,13 @@ _coffee.js_
     
 Try it out
     
-    $ node.io -i /coffee/dir coffee
+    $ node.io -i "/path/to/coffee_files/" coffee
     
 ## Linking jobs together
 
 Since node.io uses *STDIN* and *STDOUT* by default, jobs can be linked together. Be sure to add the `-s` option to intermediate `node.io` calls to prevent status/warning messages from being added to the output.
 
-The following example uses _resolve.js_ from Example 1 and uses another job to filter out invalid domains before resolving.
+The following example uses _resolve.js_ from Example 1 and uses another job _valid_url.js_ to filter out invalid domains before resolving.
 
 _domains.txt_
 
@@ -372,7 +316,7 @@ Any arguments after the job name on the command line are available in the job as
     $ node.io job arg1 arg2 arg3
     
     run: function() {
-        console.log(this.options.args); //arg1 arg2 arg3
+        console.log(this.options.args); //['arg1','arg2','arg3']
     }
     
 ## More examples
@@ -383,10 +327,10 @@ See [./examples](https://github.com/chriso/node.io/tree/master/examples/). Inclu
 - `validate.js` - filters a list with a variety of validation methods
 - `resolve.js` - more robust version of the example above
 - `word_count.js` - uses map reduce to count the occurrences of each word in a file
-- `reddit.js` - web scraping example - pulls the front page stories and scores from [reddit](http://reddit.com/]
+- `reddit.js` - web scraping example - pulls the front page stories and scores from [reddit](http://reddit.com/)
 - `google_rank.js` - returns a domain's rank for a given keyword
-- `google_pagerank.js` - find the pagerank of a URL
-- `google_spell.js` - outputs the result of google suggest
-- `coffee.js` - rescursively compile all .coffee files in a directory
+- `google_pagerank.js` - find the Google pagerank of a URL
+- `google_spell.js` - outputs the result of Google Suggest
+- `coffee.js` - compile all .coffee files in a directory and its subdirectories
 
 See each file for usage details.
