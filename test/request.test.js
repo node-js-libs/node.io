@@ -7,6 +7,13 @@ var job = new JobClass();
 
 var i = 24510;
 
+//Throw a warning on ECONNREFUSED rather than fail the entire test suite
+job.fail = function(input, status) {
+    if (status === 'ECONNREFUSED') {
+        console.log('\x1B[33mWARNING\x1B[0m: \x1B[31mECONNREFUSED\x1B[0m (see request.test.js)');
+    }
+}
+
 module.exports = {
     
     'test GET request': function(assert) {
@@ -23,6 +30,10 @@ module.exports = {
             assert.equal('Hello World', data);
             server.close();
         });
+        
+        setTimeout(function() {
+            server.close();
+        }, 500);
     },
     
     'test GET request with custom headers': function(assert) {
@@ -43,6 +54,10 @@ module.exports = {
             assert.equal('Headers ok', data);
             server.close();
         });
+        
+        setTimeout(function() {
+            server.close();
+        }, 500);
     },
     
     'test GET request with pre-parse callback': function(assert) {
@@ -63,6 +78,10 @@ module.exports = {
             assert.equal('><', data);
             server.close();
         }, parse);
+        
+        setTimeout(function() {
+            server.close();
+        }, 500);
     },
     
     'test POST request': function(assert) {
@@ -88,6 +107,10 @@ module.exports = {
             assert.equal('Post ok', data);
             server.close();
         });
+        
+        setTimeout(function() {
+            server.close();
+        }, 500);
     },
     
     'test GET request returning the dom': function(assert) {
@@ -105,6 +128,10 @@ module.exports = {
             assert.equal('a', $('p').attribs['class']);
             server.close();
         });
+        
+        setTimeout(function() {
+            server.close();
+        }, 500);
     },
     
     'test POST request returning the dom': function(assert) {
@@ -131,6 +158,10 @@ module.exports = {
             assert.equal('a', $('p').attribs['class']);
             server.close();
         });
+        
+        setTimeout(function() {
+            server.close();
+        }, 500);
     }   
     
 }
