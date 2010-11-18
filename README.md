@@ -9,14 +9,14 @@ node.io can streamline the process of:
 - Map Reduce
 - Transforming data from one format to another, e.g. from CSV => a database
 - Distributing work across multiple processes, and multiple servers (soon)
-- 
+- Recursively traversing a directory and using each file as input 
 
 ## Why node.io?
 
 - Create modular and extensible jobs for scraping and processing data
 - Jobs are written in Javascript or Coffeescript and run in Node.js - jobs are concise, asynchronous and _FAST_
 - Seamlessly speed up execution by distributing work among child processes and other servers (soon) 
-- Easily handle a variety of input / output situations, node.io does the heavy lifting
+- Easily handle a variety of input / output situations - node.io does the heavy lifting
     * Reading / writing lines to and from files
     * Traversing files in a directory    
     * Reading / writing rows to and from a database
@@ -52,7 +52,7 @@ node.io is an _ALPHA_ release. There will no doubt be some bugs and oddities.
 - Handle HTTP codes, e.g. automatically redirect on 3xx or call `fail()` on 4xx/5xx
 - Nested requests inherit referrer / cookies if to the same domain
 - Add more DOM [selector](http://api.jquery.com/category/selectors/) / [traversal](http://api.jquery.com/category/traversing/) methods
-    - or attempt a full port of jQuery that's compatible with [htmlparser](https://github.com/tautologistics/node-htmlparser) (more forgiving than [JSDOM](https://github.com/tmpvar/jsdom))
+    - ..or attempt a full port of jQuery that's compatible with [htmlparser](https://github.com/tautologistics/node-htmlparser) (I know a port already exists, but it uses the far less forgiving [JSDOM](https://github.com/tmpvar/jsdom))
 - Test proxy callbacks and write proxy documentation
 - Add distributed processing
 - Installation without NPM (install.sh)
