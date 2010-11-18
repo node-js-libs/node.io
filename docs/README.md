@@ -4,9 +4,18 @@ A node.io job takes the following format
     var options = {}, methods = {};
     exports.job = new Job(options, methods);
 
-To run this job (e.g. saved as _myjob.js_) from the command line, run the following command in the same directory
+..or in [CoffeeScript](http://jashkenas.github.com/coffee-script/)
+
+    nodeio require 'node.io'
+    class MyJob extends nodeio.JobClass
+        //methods
+    @job = new MyJob(options)
+
+To run this job from the command line (e.g. saved as _myjob.js_ or _myjob.coffee_ - node.io will automatically compile the job if it's a .coffee file), run the following command in the same directory.
 
     $ node.io myjob
+
+To run the job from inside a script, use `nodeio.start(job, callback, capture_output)`. If capture output is true, the callback is passed two parameters (err, output) rather than just (err)
 
 Jobs typically contain an input, run, and output method. If omitted, input and output default to *STDIN* and *STDOUT*.
 
@@ -18,32 +27,19 @@ The following very basic example highlights how to create and run a job.
 
 _times2.js_
     
-    var methods = {
+    var options = {}, methods = {
         input: [0,1,2],
         run: function(num) {
             this.emit(num * 2);
         }
     };
     
-    exports.job = new Job({}, methods);
-    
+    exports.job = new Job(options, methods);
+        
 To run _times2.js_, run the following command in the same directory
 
     $ node.io times2
         => 0\n2\n4\n
-    
-_times2.js_ can also be run inside another script
-
-    var times2 = require('./times2'), nodeio = require('node.io');
-    nodeio.start(times2, function(err) {
-        //Called on completion. STDOUT => 0\n2\n4\n
-    });
-    
-To capture the output, set the third parameter of `start` to true
-
-    nodeio.start(times2, function(err, result) {
-        //result = [0,2,4]
-    }, true);
     
 ## Extending a job
 
@@ -51,19 +47,36 @@ A job's options and methods can be inherited and overridden using `job.extend(ne
 
 _times4.js_
 
-    var times2 = require('./times2');
+    var times2 = require('./times2'), options = {};
     
-    exports.job = times2.extend({}, {
+    exports.job = times2.extend(options, {
         run: function(num) {
-            this.emit(num * 4);
+            this.__super__.run(num * 2);
         }
     }
         
     // $ node.io times4   =>  0\n4\n8\n
 
+node.io plays nice with CoffeeScript's class inheritance
+
+_times4.coffee_
+
+    nodeio = require 'node.io'
+
+    class Times2 extends nodeio.JobClass
+        input: [0,1,2]
+        run: (num) -> @emit num * 2
+       
+    class Times4 extends Times2
+        run: (num) -> super num * 2
+       
+    @job = new Times4();
+
+    // $ node.io times4   =>  0\n4\n8\n
+
 ## Input / output
 
-Node.io can handle a variety of input / output situations.
+Node.io can handle a variety of input / output situations
 
 To input an array
     
@@ -86,8 +99,6 @@ To read all files in a directory
 To add your own input (e.g. from a database), use the following format
 
     input: function(start, num, callback) {
-        //E.g. start=0, num=10 => first 10 rows 
-        //     start=10, num=10 => second 10 rows
         //callback takes (err, input)
     }
     
@@ -106,6 +117,7 @@ To output to a file
 To add your own output, use the following format
 
     output: function(out) {
+        //e.g to write to a stream => stream.write(out)
         //Note: out will be an array
     } 
 
@@ -149,7 +161,7 @@ _resolve.js_
         },
         
         //fail() is called if the request times out or exceeds the maximum number of retries
-        fail: function(status, domain) {
+        fail: function(domain, status) {
             this.emit(domain + ',failed');
         }   
     }
@@ -164,10 +176,35 @@ Try it out
 ..or with a list of domains
 
     $ cat domains.txt | node.io resolve
+
+The same job can be written in CoffeeScript
+
+_resolve.coffee_
         
+    nodeio = require './node.io'
+    dns = require 'dns'
+    
+    options = {
+        max: 100
+        timeout: 5
+        retries: 3
+    }
+    
+    class Resolve extends nodeio.JobClass
+        run: (domain) -> 
+            dns.lookup domain, 4, (err, ip) =>
+                if err? 
+                    @retry()
+                else 
+                    @emit domain + ',' + ip
+        
+        fail: (domain) -> @emit domain + ',failed'
+        
+    @job = new Resolve(options)
+
 ## Example 2 - coffee.js
 
-The following job compiles all [CoffeeScript](http://jashkenas.github.com/coffee-script/) files in a directory and any subdirectories.
+As an example of running a command on all files in a directory, the following job compiles all CoffeeScript files in a directory and any subdirectories.
 
 _coffee.js_
 
@@ -175,7 +212,7 @@ _coffee.js_
     
     var options = {
         max: 10,         //Compile a max of 10 files concurrently
-        recurse: true    //Compile .coffee scripts in subdirectories
+        recurse: true    //Compile scripts in subdirectories
     }
     
     var methods = {
@@ -294,7 +331,7 @@ To link the jobs
 
 Node.io can currently partition the work among child processes to speed up execution, and will soon support distributing the work across multiple servers to create a work cluster.
 
-**Note: Input and output is handled by the master process, while `job.run` is performed in parallel by each of the workers. Be careful of persistence outside of the [API](https://github.com/chriso/node.io/blob/master/docs/api.md).**
+**Note: Input and output is handled by the master process only. Each worker runs `job.run` in parallel, so be careful of using any persistence outside of the [API](https://github.com/chriso/node.io/blob/master/docs/api.md).**
 
 To enable this feature, either set the fork option to the number of workers you want to spawn, or use the `-f` command line option.
 
@@ -305,6 +342,8 @@ Enabling it in a job
 Or at the command line
 
     $ node.io -f 4 job
+    
+_Note: Fork is currently unsupported on Windows / Cygwin due to a lack of support for passing FD's_
     
 ## Passing arguments to jobs
 

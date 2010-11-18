@@ -59,7 +59,7 @@ var methods = {
         });
     },
     
-    fail: function(status, domain) {
+    fail: function(domain, status) {
         var type = this.options.args;
     
         //The domain either timed out or exceeded the max number of retries
