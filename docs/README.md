@@ -3,7 +3,9 @@ A node.io job takes the following format
 _myjob.js_
 
     var Job = require('node.io').Job;
+    
     var options = {}, methods = {};
+    
     exports.job = new Job(options, methods);
 
 To run this job from the command line, run the following command in the same directory
@@ -15,15 +17,17 @@ node.io also has support for jobs written in [CoffeeScript](http://jashkenas.git
 _myjob.coffee_
 
     nodeio require 'node.io'
+    
     class MyJob extends nodeio.JobClass
         //methods
+        
     @job = new MyJob(options)
 
 To compile then run
 
     $ node.io myjob.coffee
 
-The full API is [available here](https://github.com/chriso/node.io/blob/master/docs/api.md).
+**The full API of methods and options is [available here](https://github.com/chriso/node.io/blob/master/docs/api.md).**
 
 ## Getting started
 
@@ -40,14 +44,6 @@ _times2.js_
     
     exports.job = new Job(options, methods);
     
-The same job in Coffeescript, _times2.coffee_
-
-    nodeio = require 'node.io'
-    
-    class Times2 extends nodeio.JobClass
-        input: [0,1,2]
-        run: (num) -> @emit num * 2
-
 To run _times2.js_, run the following command in the same directory
 
     $ node.io times2
@@ -61,8 +57,15 @@ This outputs
     OK: Job complete.
     
 To omit status / warning messages, use the `-s` command line option
-    
-To run the job from inside a script, use `nodeio.start(job, callback, capture_output)` where callback takes one parameter `err`. If capture output is true, the callback is passed two parameters `err, output`
+
+    $ node.io -s times2
+    0
+    2
+    4
+ 
+## Running a job inside a script
+ 
+Use `nodeio.start(job, callback, capture_output)` where callback takes one parameter `err`. If capture output is true, the callback is passed two parameters `err, output`
     
     var callback = function(err, output) {
         console.log(output);   
@@ -97,18 +100,26 @@ node.io also plays nice with CoffeeScript's class inheritance
 _times4.coffee_
 
     nodeio = require 'node.io'
-    times2 = require './times2'
+
+    class Times2 extends nodeio.JobClass
+        input: [0,1,2]
+        run: (num) -> @emit num * 2
 
     class Times4 extends Times2
         run: (num) -> super num * 2
        
     @job = new Times4();
 
-Running _times4.js_ or _times4.coffee_ outputs `0 \n 4 \n 8 \n`
+Running _times4.js_
+
+    $ node.io -s times4
+    0
+    4
+    8
 
 ## Example 1 - resolve.js
 
-The following job wraps the builtin `dns` module and resolves a domain or list of domains.
+The following job wraps the built-in `dns` module and resolves a domain or list of domains.
 
 _resolve.js_
 
