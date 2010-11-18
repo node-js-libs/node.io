@@ -1,7 +1,7 @@
 //This module is a basic example of using map/reduce to count how many times each word occurs
 //To count the words from a file, `$ cat file.txt | node.io word_count`
 
-var Job = require('../').Job;
+var Job = require('node.io').Job;
 
 //Take 30 lines at a time
 var options = {max:30, take:30};
