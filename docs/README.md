@@ -121,7 +121,7 @@ _times4.coffee_
     class Times4 extends Times2
         run: (num) -> super num * 2
        
-    @job = new Times4();
+    @job = new Times4()
 
 ## Example 1 - resolve.js
 
