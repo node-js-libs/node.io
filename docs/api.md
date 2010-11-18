@@ -15,7 +15,7 @@ Or in CoffeeScript
 
 Note: none of these methods are compulsory.
 
-**input** _(default: read lines from STDIN - auto-detects newline)_ 
+**input()**  _default: read lines from STDIN - auto-detects newline_ 
 
 Examples
 
@@ -31,7 +31,9 @@ To write your own input function (e.g. to read rows from a database)
         //callback takes (err, input)
     }
 
-**output** _(default: write lines to STDOUT)_
+**output()**  _default: write lines to STDOUT_
+    
+Note: `output` is called periodically rather than at the completion of a job so that very large or continuous IO can be handled
     
     output: '/path/file.txt'    //Outputs lines to a file
     output: false               //Ignores output
@@ -45,7 +47,7 @@ To write your own output function
         });
     }
 
-**run** _(default: passes through input)_
+**run()**  _default: passes through input_
 
 Takes one line / row of input to use or transform. To emit a result, call this.emit(result)
 
@@ -53,7 +55,7 @@ Takes one line / row of input to use or transform. To emit a result, call this.e
         this.emit(line.length);
     }
 
-**reduce**
+**reduce()**
 
 Called before job.output()
 
@@ -67,7 +69,16 @@ Called before job.output()
         this.emit(emit);
     }
 
-**complete**
+**fail()**
+
+Called if a thread fails. A thread can fail if it times out, exceeds the maximum number of retries, makes a bad request, spawns a bad command, etc.
+
+    fail: function(input, status) {
+        console.log(input+' failed with status: '+status);
+        this.emit('failed');
+    }
+
+**complete()**
 
 Called once the job is complete
 
@@ -78,5 +89,65 @@ Called once the job is complete
 ## Job options
     
 **max** _(default: 1)_
+The maximum number of `run` methods allowed to run concurrently, per process
 
+**take** _(default: 1)_
+How many lines / elements of input to send to each `run` method
 
+Example when take = 2
+
+    input: [0,1,2,3,4],
+    run: function(input) {
+        console.log(input);  //Outputs [0,1] \n [2,3] \n [4] \n
+    } 
+
+**retries** _(default: 2)_
+The maximum number of times some input can be retried before `fail` is called
+
+**timeout** _(default: false)_
+The maximum amount of time (in seconds) each thread has before `fail` is called 
+
+**global_timeout** _(default: false)_
+The maximum amount of time (in seconds) the entire job has to complete before exiting with an error
+
+**flatten** _(default: true)_
+If `run` emits an array, this option determines whether each emitted array is flattened before being output
+
+Example (when max = 3)
+
+    run: function() {
+        this.emit([1,2,3]);
+    }
+    output: function(output) {
+        console.log(output);
+        //With flattening, outputs [1,2,3,1,2,3,1,2,3] 
+        //Without, outputs [[1,2,3],[1,2,3],[1,2,3]]
+    }
+    
+**benchmark** _(default: false)_
+If this is true, node.io outputs benchmark information on a job's completion: 1) completion time, 2) bytes read + speed, 3) bytes written + speed
+
+**fork** _(default: false)_
+Whether to use child processes to distribute processing. Set this to the number of desired workers
+
+**input** _(default: false)_
+This option is used to set a limit on how many lines/rows/elements are input before forcing job complete
+
+Example when input = 2
+
+    input: [0,1,2]
+    run: function(num) {
+        console.log(num); //Outputs 0 \n 1 \n
+    }
+    
+**recurse** _(default: false)_
+If `input` is a directory, this option is used to recurse through each subdirectory
+
+**read_buffer** _(default: 8096)_
+The read buffer to use when reading files
+
+**newline** _(default: \n)_
+The char to use as newline when outputting data. Input newlines are automatically detected
+
+**encoding** _(default: 'utf8')_
+The encoding to use when reading / writing files
