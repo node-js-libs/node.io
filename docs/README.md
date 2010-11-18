@@ -90,15 +90,22 @@ A job's options and methods can be inherited and overridden using `job.extend(ne
 
 _times4.js_
 
-    var times2 = require('./times2');
+    var times2 = require('./times2').job;
     
     exports.job = times2.extend(options, {
         run: function(num) {
             this.__super__.run(num * 2);
-            //Same as this.emit(num * 4)
+            //Same as => this.emit(num * 4)
         }
     }
 
+Running _times4.js_
+
+    $ node.io -s times4
+    0
+    4
+    8
+    
 node.io also plays nice with CoffeeScript's class inheritance
 
 _times4.coffee_
@@ -113,13 +120,6 @@ _times4.coffee_
         run: (num) -> super num * 2
        
     @job = new Times4();
-
-Running _times4.js_
-
-    $ node.io -s times4
-    0
-    4
-    8
 
 ## Example 1 - resolve.js
 
