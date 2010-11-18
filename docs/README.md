@@ -31,7 +31,7 @@ To compile then run
 
 ## Getting started
 
-The following very basic example highlights how to create and run a job. Note: input / output defaults to STDIN / STDOUT
+The following very basic example highlights how to create and run a job.
 
 _times2.js_
     
@@ -43,6 +43,8 @@ _times2.js_
     };
     
     exports.job = new Job(options, methods);
+    
+Note: Input / output defaults to STDIN / STDOUT. Since we haven't specified an output method, STDOUT is used
     
 To run _times2.js_, run the following command in the same directory
 
@@ -65,7 +67,9 @@ To omit status / warning messages, use the `-s` command line option
  
 ## Running a job inside a script
  
-Use `nodeio.start(job, callback, capture_output)` where callback takes one parameter `err`. If capture output is true, the callback is passed two parameters `err, output`
+Use `nodeio.start(job, callback, capture_output)` where callback takes one parameter `err`. 
+
+If `capture_output` is true, the callback an extra parameter containing the output
     
     var callback = function(err, output) {
         console.log(output);   
