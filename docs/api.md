@@ -13,14 +13,6 @@ Or in CoffeeScript
 
 # Methods
 
-**Global job methods**
-
-    this.emit(result)               //Emits a result to the next stage of processing
-    this.skip()  OR  this.finish()  //Cancels the thread and discards the input
-    this.exit(msg)                  //Exits the job with an optional error message
-    this.retry()                    //Retries the thread
-    this.add(input)                 //Dynamically add input to the queue
-
 **input()**  
 
 _Default: read lines from STDIN (auto-detects newline)_ 
@@ -47,8 +39,8 @@ To write your own input function, use
 
 - `start` = the offset. Starts at zero
 - `num` = the number of rows / lines to return
-- `callback` = in the format callback(err, input)
-- When there's no input left, call callback(null, false)
+- `callback` = in the format `callback(err, input)`
+- When there's no input left, call `callback(null, false)`
 
 **output()**  
 
@@ -77,7 +69,7 @@ To write your own output function
 
 **run()**  
 
-_Default: passes through input_
+_Default: passes through input to the next stage of processing_
 
 Takes some input to use or transform.
 
@@ -85,9 +77,19 @@ Takes some input to use or transform.
         this.emit(line.length);
     }
 
+The following methods are available in `run` to control flow
+
+    this.emit(result)               //Emits a result to the next stage of processing
+    this.skip()  OR  this.finish()  //Cancels the thread and discards the input
+    this.exit(msg)                  //Exits the job with an optional error message
+    this.retry()                    //Retries the thread
+    this.add(input)                 //Dynamically add input to the queue
+
 **reduce()**
 
-Called before job.output()
+_Default: passes through input to the next stage of processing_
+
+Called before `output`. Use `emit` as normal
 
     reduce: function(lines) {
         //Note: this method always receives an array
@@ -195,6 +197,15 @@ The char to use as newline when outputting data. Input newlines are automaticall
 
 The encoding to use when reading / writing files
 
+**args** _(default: [])_
+
+Any extra arguments when calling node.io from the command line are stored here.
+
+Example
+
+    $ node.io myjob arg1 arg2
+        => options.args = ['arg1','arg2']
+
 ## Working with IO
 
 To read or write to a file inside a job, use the following methods. Both methods are synchronous if no callback is provided
@@ -204,15 +215,74 @@ To read or write to a file inside a job, use the following methods. Both methods
    
 ## Making requests
 
-..
+To make a request, use the following methods.
+
+**this.get(url, [headers], callback, [parse])** _headers and parse are optional_
+
+Makes a GET request to the URL and returns the result - callback takes `err, data, headers`
+
+`parse` is an optional callback used to decode / pre-parse the returned data
+
+Example
+
+    this.get('http://www.google.com/', function(err, data, headers) {
+        console.log(data);
+    });     
+
+**this.getHtml(url, [headers], callback, [parse])
+
+The same as above, except callback takes `err, $, data, headers` where `$` is the dom selector / traversal object (see DOM selection / traversal below)
+    
+**this.post(url, body, [headers], callback, [parse])**
+
+***this.postHtml(url, body, [headers], callback, [parse])**
+
+Makes a POST request. If body is an object, it is encoded using the builtin querystring module. postHtml returns the `$` object.
+
+**this.doRequest(method, url, body, [headers], callback, [parse])**
+
+Makes general a request with the specified options. 
 
 ## Making proxied requests
 
-..
+_Documentation coming soon. For now, see [./lib/node.io/request.js](https://github.com/chriso/node.io/blob/master/lib/node.io/request.js)_
 
 ## DOM selection / traversal
 
-..
+`getHtml` and `postHtml` return a special object `$` that wraps [node-soupselect](https://github.com/harryf/node-soupselect) and provides methods to aid in traversing the DOM.
+
+`$(selector)` returns an element or collection of elements.
+
+Some example selectors (see [node-soupselect](https://github.com/harryf/node-soupselect) for more)
+
+     $('a')                         //Select all A tags
+     $('a.foo')                     //Select all A tags of the class 'foo'
+     $('a.foo.bar')                 //Select all A tags of the class 'foo' and the class 'bar'
+     $('#container')                //Select the element with id = 'container'
+     $('p a')                       //Select all A tags that have a parent P tag
+     $('input[type=text]')          //Select all text inputs
+    
+Working with a collection of elements
+
+    $('a').first()                  //Returns the first A tag
+    $('a').last()                   //Returns the last A tag
+    $('a').each(callback)           //Calls `callback` with each A tag
+    $('a').each(attrib, callback)   //Calls `callback` with an attribute of each A tag, e.g. $('a).each('href', function(href){});
+    
+Working with an element
+
+    <a href="#">Hello <b>World!</b></a>
+
+    $('a').text                     //Outputs the text inside the tag
+        // => outputs 'Hello'
+        
+    $('a').fulltext                 //Outputs the text inside the tag including the text inside of each nested tag
+        // => outputs 'Hello World!'
+
+    $('a').attrib.href
+        // => #
+    
+**Note: more select / traversal methods are coming soon**
  
 ## Executing commands
 
@@ -221,3 +291,14 @@ To execute a command, use the following methods. Callback takes the format of (e
     this.exec(cmd, callback);
     this.spawn(cmd, stdin, callback);       //Same as exec, but can write to the commands STDIN
     
+## Data validation and sanitization
+
+node.io uses [node-validator](https://github.com/chriso/node-validator) to provide data validation and sanitization methods. Validation methods are available through `this.assert` while sanitization / filtering methods are available through `this.filter`.
+
+    this.assert('abc').isInt();                         //Fails - job.fail() is called
+    this.assert('foo@bar.com').len(3,64).isEmail();     //Ok
+    this.assert('abcdef').is(/^[a-z]+$/);               //Ok
+    var num = this.filter('00000001').ltrim(0).toInt(); //num = 1
+    var str = this.filter('&lt;a&gt;').entityDecode();  //str = '<a>'
+    
+The full list of validation / sanitization methods is [available here](https://github.com/chriso/node-validator).
