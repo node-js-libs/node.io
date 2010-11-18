@@ -13,7 +13,13 @@ Or in CoffeeScript
 
 # Methods
 
-Note: none of these methods are compulsory.
+**Global job methods**
+
+    this.emit(result)           //Emits a result to the next stage of processing
+    this.skip()                 //Cancels the thread and discards the input
+    this.finish()               //Same as skip()
+    this.exit(msg)              //Exits the job with an optional error message
+    this.retry()                //Retries the thread
 
 **input()**  
 
@@ -26,6 +32,12 @@ Examples
     input: '/path/to/dir/'      //Reads all files in a directory
     input: false                //Runs the job once
     input: true                 //Runs the job indefinitely
+    
+To input from a stream
+
+    input: function() {
+        this.inputStream(stream);
+    }
     
 To write your own input function (e.g. to read rows from a database)
 
@@ -42,6 +54,13 @@ Note: `output` is called periodically rather than at the completion of a job so 
     output: '/path/file.txt'    //Outputs lines to a file
     output: false               //Ignores output
 
+To output to a stream
+
+    output: function() {
+        this.outputStream(stream);
+        this.output.apply(this, arguments);
+    }
+
 To write your own output function
 
     output: function(output) {
@@ -55,7 +74,7 @@ To write your own output function
 
 _Default: passes through input_
 
-Takes one line / row of input to use or transform. To emit a result, call this.emit(result)
+Takes some input to use or transform.
 
     run: function(line) {
         this.emit(line.length);
@@ -170,3 +189,10 @@ The char to use as newline when outputting data. Input newlines are automaticall
 **encoding** _(default: 'utf8')_
 
 The encoding to use when reading / writing files
+
+## Working with IO
+
+The following methods are available inside a job
+
+    this.read(file, [callback]);        //Wraps fs.readFile. If no callback is provided, the call is synchronous
+    this.write(file, data, [callback]
