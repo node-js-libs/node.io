@@ -40,15 +40,15 @@ Note: `output` is called periodically rather than at the completion of a job so 
 
 To output to a stream
 
-    output: function() {
+    output: function(out) {
         this.outputStream(stream);
-        this.output.apply(this, arguments);
+        this.output(out);
     }
 
 To write your own output function
 
     output: function(output) {
-        //Note: this method always receives an array
+        //Note: this method always receives an array of output
         output.forEach(function(line) {
             console.log(line);
         });
@@ -58,7 +58,7 @@ To write your own output function
 
 _Default: passes through input to the next stage of processing_
 
-Takes some input to use or transform.
+Takes some input to use or transform
 
     run: function(line) {
         this.emit(line.length);
