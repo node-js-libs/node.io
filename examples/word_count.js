@@ -17,7 +17,7 @@ var methods = {
                 words.push(word);
             });
         });
-        return words;
+        this.emit(words);
     },
     
     reduce: function(words) {
