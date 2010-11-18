@@ -14,7 +14,7 @@
 //       $ cat domains.txt | node.io -s resolve > result.txt
 //       $ node.io -i domains.txt -o result.txt resolve
 
-var Job = require('node.io').Job, dns = require('dns');
+var Job = require('../').Job, dns = require('dns');
 
 var options = {
     max: 100,       //Run a maximum of 100 DNS requests concurrently
@@ -25,7 +25,7 @@ var options = {
 var methods = {
     
     run: function(domain) {
-        var self = this, type = this.options.args;
+        var self = this, type = this.options.args.length ? this.options.args[0] : 'default';
         
         dns.lookup(domain, 4, function(err, ip) {
             if (err) {

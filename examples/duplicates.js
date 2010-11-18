@@ -18,10 +18,10 @@ var methods = {
 
     reduce: function(lines) {
 
-        var args = this.options.args, emit = [];
+        var arg = this.options.args[0], emit = [];
         
         lines.forEach(function(line) {
-            if (args === 'find') {
+            if (arg === 'find') {
             
                 //Output duplicate lines
                 if (seen_lines.indexOf(line) >= 0 && !~emitted_lines.indexOf(line)) {

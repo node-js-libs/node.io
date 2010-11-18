@@ -25,7 +25,7 @@ var methods = {
             return;
         }
         
-        var args = this.options.args.split(' '),
+        var args = this.options.args,
             arg = args[0] === 'not' ? args[1] : args[0];
         
         switch(arg) {
@@ -46,7 +46,7 @@ var methods = {
     },
     
     fail: function(status, input) {
-        if (this.options.args.split(' ')[0] === 'not') {
+        if (this.options.args[0] === 'not') {
             this.emit(input);
         } else {
             this.skip();
