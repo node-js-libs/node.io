@@ -338,7 +338,7 @@ _Note: Fork is currently unsupported on Windows / Cygwin due to a lack of suppor
     
 ## Passing arguments to jobs
 
-Any arguments after the job name on the command line are available in the job as a string
+Any arguments after the job name on the command line are available in the job as an array
 
     $ node.io job arg1 arg2 arg3
     
