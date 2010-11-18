@@ -45,7 +45,7 @@ var methods = {
         }
     },
     
-    fail: function(status, input) {
+    fail: function(input, status) {
         if (this.options.args[0] === 'not') {
             this.emit(input);
         } else {

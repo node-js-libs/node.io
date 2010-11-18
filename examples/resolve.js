@@ -38,7 +38,7 @@ var methods = {
                         } else if (type === 'found') {
                             self.skip();
                         } else {
-                            self.emit(domain + ',');
+                            self.emit(domain + ',failed');
                         }
                         break;
                     default: self.retry();
@@ -68,9 +68,9 @@ var methods = {
         } else if (type === 'found') {
             this.skip();
         } else {
-            this.emit(domain + ',');
+            this.emit(domain + ',failed');
         }
-        this.emit(domain+',');
+        this.emit(domain+',failed');
     }   
 }
 
