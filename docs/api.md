@@ -23,12 +23,12 @@ Or in CoffeeScript
 
 **input()**  
 
-_Default: read lines from STDIN - auto-detects newline_ 
+_Default: read lines from STDIN (auto-detects newline)_ 
 
 Examples
 
     input: [0,1,2]                  //Array input 
-    input: '/path/file.txt'         //Reads lines from a file - auto-detects newline
+    input: '/path/file.txt'         //Reads lines from a file (auto-detects newline)
     input: '/path/to/dir/'          //Reads all files in a directory
     input: false                    //Runs the job once
     input: true                     //Runs the job indefinitely
@@ -39,11 +39,16 @@ To input from a stream
         this.inputStream(stream);
     }
     
-To write your own input function (e.g. to read rows from a database)
+To write your own input function, use
 
     input: function(start, num, callback) {
-        //callback takes (err, input)
+        //
     }
+
+- `start` = the offset. Starts at zero
+- `num` = the number of rows / lines to return
+- `callback` = in the format callback(err, input)
+- When there's no input left, call callback(null, false)
 
 **output()**  
 
