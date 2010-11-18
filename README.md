@@ -2,32 +2,31 @@
 
 node.io is a data scraping and processing framework for [node.js](http://nodejs.org/).
 
-A node.io job typically consists of 1) taking some input, 2) using or transforming it, and 3) outputting something. 
-
 node.io can simplify the process of:
 
 - Filtering / sanitizing a list
 - MapReduce
-- Loading a list of URLs and scraping some data from each
+- Scraping data from the web using with familiar CSS selectors / traversal methods
+- Scraping web data through a proxy
 - Parsing log files
 - Transforming data from one format to another, e.g. from CSV to a database
-- Recursively load all files in a directory and execute a command on each
-- etc. etc.
+- Recursively load all files in a directory and its subdirs and execute a command on each
+- ETC
 
 ## Why node.io?
 
 - Create modular and extensible jobs for scraping and processing data
-- Written in Node.js and Javascript - jobs are concise, asynchronous and FAST
+- Jobs are written in Javascript or Coffeescript and run in Node.js - jobs are concise, asynchronous and FAST
 - Speed up execution by distributing work among child processes and other servers (soon) 
 - Easily handle a variety of input / output situations
     * Reading / writing lines to and from files
-    * Reading all files in a directory (and optionally recursing)    
+    * Traversing files in a directory    
     * Reading / writing rows to and from a database
-    * STDIN / STDOUT
-    * Piping between other node.io jobs
+    * STDIN / STDOUT / Custom streams
+    * Piping between other node.io jobs    
     * Any combination of the above, or your own IO     
 - Includes a robust framework for scraping and selecting web data
-- Support for a variety of proxies when making requests
+- Support for a variety of proxies when scraping web data
 - Includes a data validation and sanitization framework
 - Provides support for retries, timeouts, dynamically adding input, etc.
 
@@ -43,7 +42,7 @@ For usage details, run
 
 ## Documentation
 
-To get started, see the [documentation](https://github.com/chriso/node.io/blob/master/docs/README.md), [examples](https://github.com/chriso/node.io/tree/master/examples/), or [API](https://github.com/chriso/node.io/blob/master/docs/api.md).
+To get started, see the [documentation](https://github.com/chriso/node.io/blob/master/docs/README.md), [API](https://github.com/chriso/node.io/blob/master/docs/api.md), and [examples](https://github.com/chriso/node.io/tree/master/examples/).
 
 Better documentation will be available once I have time to write it.
 
@@ -53,7 +52,7 @@ Better documentation will be available once I have time to write it.
 - Automatically handle HTTP codes, e.g. redirect on 3xx or call fail() on 4xx/5xx
 - Nested requests inherit referrer / cookies if to the same domain
 - Add more DOM selector / traversal methods
-- Test proxy callbacks
+- Test proxy callbacks and write proxy documentation
 - Add distributed processing
 - Installation without NPM (install.sh)
 - Refactoring

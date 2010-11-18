@@ -217,7 +217,7 @@ To read or write to a file inside a job, use the following methods. Both methods
 
 To make a request, use the following methods.
 
-**this.get(url, [headers], callback, [parse])** _headers and parse are optional_
+**this.get(url, _[headers]_, callback, _[parse]_)**  _headers and parse are optional_
 
 Makes a GET request to the URL and returns the result - callback takes `err, data, headers`
 
@@ -229,17 +229,17 @@ Example
         console.log(data);
     });     
 
-**this.getHtml(url, [headers], callback, [parse])
+**this.getHtml(url, _[headers]_, callback, _[parse]_)**
 
 The same as above, except callback takes `err, $, data, headers` where `$` is the dom selector / traversal object (see DOM selection / traversal below)
     
-**this.post(url, body, [headers], callback, [parse])**
+**this.post(url, body, _[headers]_, callback, _[parse]_)**
 
-***this.postHtml(url, body, [headers], callback, [parse])**
+***this.postHtml(url, body, _[headers]_, callback, _[parse]_)**
 
 Makes a POST request. If body is an object, it is encoded using the builtin querystring module. postHtml returns the `$` object.
 
-**this.doRequest(method, url, body, [headers], callback, [parse])**
+**this.doRequest(method, url, body, _[headers]_, callback, _[parse]_)**
 
 Makes general a request with the specified options. 
 
@@ -249,7 +249,7 @@ _Documentation coming soon. For now, see [./lib/node.io/request.js](https://gith
 
 ## DOM selection / traversal
 
-`getHtml` and `postHtml` return a special object `$` that wraps [node-soupselect](https://github.com/harryf/node-soupselect) and provides methods to aid in traversing the DOM.
+`getHtml` and `postHtml` return a special object `$` that wraps [node-soupselect](https://github.com/harryf/node-soupselect) and provides methods to aid in traversing the returned DOM.
 
 `$(selector)` returns an element or collection of elements.
 
