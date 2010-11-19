@@ -363,5 +363,6 @@ See [./examples](https://github.com/chriso/node.io/tree/master/examples/). Inclu
 - `google_pagerank.js` - find the Google pagerank of a URL
 - `google_spell.js` - outputs the result of Google Suggest
 - `coffee.js` - compile all .coffee files in a directory and its subdirectories
+- `eval.js` - runs an expression on each line of input
 
 See each file for usage details.
