@@ -7,6 +7,8 @@ var job = new JobClass();
 
 var i = 24510;
 
+//Why do these tests fail on linux?! D:
+
 //Throw a warning on ECONNREFUSED rather than fail the entire test suite
 job.fail = function(input, status) {
     if (status === 'ECONNREFUSED') {
@@ -25,15 +27,18 @@ module.exports = {
         
         server.listen(++i);
         
+        var closed = false;
+        
         job.get('http://127.0.0.1:'+i+'/', function(err, data, headers) {
             assert.equal('text/plain', headers['content-type']);
             assert.equal('Hello World', data);
             server.close();
+            closed = true;
         });
         
         setTimeout(function() {
-            server.close();
-        }, 500);
+            if (!closed) server.close();
+        }, 1000);
     },
     
     'test GET request with custom headers': function(assert) {
@@ -49,15 +54,18 @@ module.exports = {
         
         server.listen(++i);
         
+        var closed = false;
+        
         job.get('http://127.0.0.1:'+i+'/', {foo:'bar'}, function(err, data, headers) {
             assert.equal('text/plain', headers['content-type']);
             assert.equal('Headers ok', data);
             server.close();
+            closed = true;
         });
         
         setTimeout(function() {
-            server.close();
-        }, 500);
+            if (!closed) server.close();
+        }, 1000);
     },
     
     'test GET request with pre-parse callback': function(assert) {
@@ -69,6 +77,8 @@ module.exports = {
         
         server.listen(++i);
         
+        var closed = false;
+        
         var parse = function(str) {
             return str.replace('&gt;','>').replace('&lt;','<');
         }
@@ -77,11 +87,12 @@ module.exports = {
             assert.equal('text/plain', headers['content-type']);
             assert.equal('><', data);
             server.close();
+            closed = true;
         }, parse);
         
         setTimeout(function() {
-            server.close();
-        }, 500);
+            if (!closed) server.close();
+        }, 1000);
     },
     
     'test POST request': function(assert) {
@@ -102,15 +113,18 @@ module.exports = {
         
         server.listen(++i);
         
+        var closed = false;
+        
         job.post('http://127.0.0.1:'+i+'/', {foo:'bar'}, function(err, data, headers) {
             assert.equal('text/plain', headers['content-type']);
             assert.equal('Post ok', data);
             server.close();
+            closed = true;
         });
         
         setTimeout(function() {
-            server.close();
-        }, 500);
+            if (!closed) server.close();
+        }, 1000);
     },
     
     'test GET request returning the dom': function(assert) {
@@ -122,16 +136,19 @@ module.exports = {
         
         server.listen(++i);
         
+        var closed = false;
+        
         job.getHtml('http://127.0.0.1:'+i+'/', function(err, $, data, headers) {
             assert.equal('text/plain', headers['content-type']);
             assert.equal('<p class="a"></p>', data);
             assert.equal('a', $('p').attribs['class']);
             server.close();
+            closed = true;
         });
         
         setTimeout(function() {
-            server.close();
-        }, 500);
+            if (!closed) server.close();
+        }, 1000);
     },
     
     'test POST request returning the dom': function(assert) {
@@ -152,16 +169,19 @@ module.exports = {
         
         server.listen(++i);
         
+        var closed = false;
+        
         job.postHtml('http://127.0.0.1:'+i+'/', {foo:'bar'}, function(err, $, data, headers) {
             assert.equal('text/plain', headers['content-type']);
             assert.equal('<p class="a"></p>', data);
             assert.equal('a', $('p').attribs['class']);
             server.close();
+            closed = true;
         });
         
         setTimeout(function() {
-            server.close();
-        }, 500);
+            if (!closed) server.close();
+        }, 1000);
     }   
     
 }
