@@ -38,13 +38,15 @@ For usage details, run
 
     $ node.io --help
 
-## Documentation
+## Getting started
 
 To get started, see the [documentation](https://github.com/chriso/node.io/blob/master/docs/README.md), [API](https://github.com/chriso/node.io/blob/master/docs/api.md), and [examples](https://github.com/chriso/node.io/tree/master/examples/).
 
 Better documentation will be available once I have time to write it.
 
-node.io is an _ALPHA_ release. There will no doubt be some bugs and oddities.
+*Note: node.io is an _ALPHA_ release. There will no doubt be some bugs and oddities.*
+
+Check [@nodeio](http://twitter.com/nodeio) or [http://node.io/](http://node.io/) for updates.
 
 ## Roadmap
 
