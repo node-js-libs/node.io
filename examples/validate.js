@@ -20,15 +20,14 @@ var Job = require('node.io').Job;
 var methods = {
 
     run: function(input) {
-        if (typeof this.options.args === 'undefined') {
+        var args = this.options.args;
+        
+        if (!args.length) {
             this.exit('Please enter a filter, e.g. `node.io validate url`');
             return;
         }
         
-        var args = this.options.args,
-            arg = args[0] === 'not' ? args[1] : args[0];
-        
-        switch(arg) {
+        switch(args[0] === 'not' ? args[1] : args[0]) {
             case 'int': this.assert(input).isInt(); break;
             case 'url': this.assert(input).isUrl(); break;
             case 'ip': this.assert(input).isIP(); break;
