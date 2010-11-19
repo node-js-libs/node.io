@@ -345,6 +345,10 @@ Any arguments after the job name on the command line are available in the job as
     run: function() {
         console.log(this.options.args); //['arg1','arg2','arg3']
     }
+
+## API
+
+The full API of methods and options is [available here](https://github.com/chriso/node.io/blob/master/docs/api.md).
     
 ## More examples
 
