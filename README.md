@@ -22,7 +22,8 @@ node.io can streamline the process of:
     * Reading / writing rows to and from a database
     * STDIN / STDOUT / Custom streams
     * Piping data between multiple node.io jobs
-    * Any combination of the above, or your own IO     
+    * Continuous input / output
+    * Any combination of the above, or your write your own IO methods     
 - Includes a robust framework for scraping, selecting and traversing web data
 - Support for a variety of proxies when scraping web data
 - Includes a data validation and sanitization framework
@@ -53,7 +54,7 @@ Check [@nodeio](http://twitter.com/nodeio) or [http://node.io/](http://node.io/)
 - Fix up the [http://node.io/](http://node.io/) site
 - `-d,--daemon` node.io switch
 - Handle HTTP codes, e.g. automatically redirect on 3xx or call `fail()` on 4xx/5xx
-- Nested requests inherit referrer / cookies if to the same domain
+- Nested requests inherit referrer / cookies / user-agent if to the same domain
 - Add more DOM [selector](http://api.jquery.com/category/selectors/) / [traversal](http://api.jquery.com/category/traversing/) methods
     - ..or attempt a full port of jQuery that's compatible with [htmlparser](https://github.com/tautologistics/node-htmlparser) (I know a port already exists, but it uses the far less forgiving [JSDOM](https://github.com/tmpvar/jsdom))
 - Test proxy callbacks and write proxy documentation
@@ -61,6 +62,7 @@ Check [@nodeio](http://twitter.com/nodeio) or [http://node.io/](http://node.io/)
 - Installation without NPM (install.sh)
 - Refactoring
 - More tests / better test coverage
+- Speed improvements
 
 ## Contributing
 
