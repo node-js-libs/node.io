@@ -253,7 +253,7 @@ module.exports = {
         
         setTimeout(function() {
             assert.equal('1\n2\n3\n', fs.readFileSync(output2, 'utf8'));
-        }, 200);
+        }, 500);
         
     },
     
@@ -264,7 +264,7 @@ module.exports = {
         
         setTimeout(function() {
             assert.equal('1\r\n2\r\n3\r\n', fs.readFileSync(output3, 'utf8'));
-        }, 100);
+        }, 500);
         
     },
     
