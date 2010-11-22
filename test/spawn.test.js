@@ -46,11 +46,9 @@ module.exports = {
             assert.ok(err);
         });
         
-        /* TODO: test job.exec() timeout
         job.options.timeout = 1;
         job.exec('sleep 2', function(err, stdout, stderr) {
             assert.ok(err);
         });
-        */
     },
 }
