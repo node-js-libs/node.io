@@ -21,7 +21,10 @@ _myjob.coffee_
     class MyJob extends nodeio.JobClass
         //methods
         
+    @class = MyJob
     @job = new MyJob(options)
+
+_Note: Remember to export both @class and @job when using CoffeeScript_
 
 To compile and run _myjob.coffee_
 
@@ -119,6 +122,7 @@ _times4.coffee_
     class Times4 extends Times2
         run: (num) -> super num * 2
        
+    @class = Times4
     @job = new Times4()
 
 ## Example 1 - resolve.js
@@ -189,7 +193,8 @@ _resolve.coffee_
                     @emit domain + ',' + ip
         
         fail: (domain) -> @emit domain + ',failed'
-        
+    
+    @class = Resolve    
     @job = new Resolve(options)
 
 ## Example 2 - reddit.js

@@ -1,6 +1,6 @@
 { "name"          : "node.io",
   "description"   : "A distributed data scraping and processing framework for node.js",
-  "version"       : "0.1.0e",
+  "version"       : "0.1.0g",
   "homepage"      : "http://github.com/chriso/node.io",
   "keywords"      : ["data","mapreduce","map","reduce","scraping","html","parsing","parse","scrape","process","processing","data"],
   "author"        : "Chris O'Hara <cohara87@gmail.com>",
@@ -19,7 +19,7 @@
     "soupselect": ">= 0.2.0",
     "validator": ">= 0.1.0",  
     "expresso": ">= 0.7.0",
-    "coffee-script": "= 0.9.4"
+    "coffee-script": ">= 0.9.5"
   },
   "scripts": { "test": "expresso test" },
   "bin": { "node.io": "./bin/node.io" },
