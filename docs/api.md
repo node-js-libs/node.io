@@ -184,6 +184,10 @@ The char to use as newline when outputting data. Input newlines are automaticall
 
 The encoding to use when reading / writing files
 
+**proxy** _(default: false)_
+
+All requests will be made through this proxy. Alternatively, you can specify a function that returns a proxy (e.g. to cycle proxies).
+
 **args** _(default: [])_
 
 Any extra arguments when calling node.io from the command line are stored here.
