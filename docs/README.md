@@ -27,8 +27,6 @@ To compile and run _myjob.coffee_
 
     $ node.io myjob.coffee
 
-Note: node.io (at this stage) has only basic support for Coffeescript compilation - no command line options or args can be used when running a .coffee job directly. Compile the script to get around this limitation.
-
 **The full API of methods and options is [available here](https://github.com/chriso/node.io/blob/master/docs/api.md).**
 
 ## Getting started
