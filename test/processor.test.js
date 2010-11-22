@@ -1,5 +1,6 @@
 var nodeio = require('../'),
-    processor = new nodeio.Processor();
+    processor = new nodeio.Processor(),
+    assert = require('assert');
     
 function createJob(options, methods) {
     if (typeof methods === 'undefined') {
@@ -15,7 +16,7 @@ function startJob(job, callback, capture_output) {
 
 module.exports = {
     
-    'test running an empty job': function(assert) {
+    'test running an empty job': function() {
         //Prevent the job from looking for STDIN input
         var job = createJob({once:true},{input:false});
         
@@ -24,7 +25,7 @@ module.exports = {
         });
     },
     
-    'test running a basic job': function(assert) {
+    'test running a basic job': function() {
         var out = [];
         
         var job = createJob({
@@ -41,7 +42,7 @@ module.exports = {
         });
     },
      
-    'test capturing output': function(assert) {
+    'test capturing output': function() {
         var job = createJob({
             input: [0,1,2]
         });
@@ -51,7 +52,7 @@ module.exports = {
         }, true);
     },
     
-    'test emit() async': function(assert) {
+    'test emit() async': function() {
         var out = [];
         
         var job = createJob({
@@ -73,7 +74,7 @@ module.exports = {
         });
     },
     
-    'test emitting via return': function(assert) {
+    'test emitting via return': function() {
         var out = [];
         
         var job = createJob({
@@ -93,7 +94,7 @@ module.exports = {
         });
     },
     
-    'test skipping on run': function(assert) {
+    'test skipping on run': function() {
         var out = [];
         
         var job = createJob({
@@ -113,7 +114,7 @@ module.exports = {
         });
     },
     
-    'test reduce()': function(assert) {
+    'test reduce()': function() {
         var total = 0;
         
         var job = createJob({
@@ -128,7 +129,7 @@ module.exports = {
         });
     },
     
-    'test reduce() emitting': function(assert) {
+    'test reduce() emitting': function() {
         var out = [];
         
         var job = createJob({
@@ -146,7 +147,7 @@ module.exports = {
         });
     },
     
-    'test reduce() emitting via return': function(assert) {
+    'test reduce() emitting via return': function() {
         var out = [];
         
         var job = createJob({
@@ -164,7 +165,7 @@ module.exports = {
         });
     },
     
-    'test job fail()': function(assert) {
+    'test job fail()': function() {
         var out = [];
         
         var job = createJob({
@@ -187,7 +188,7 @@ module.exports = {
         });
     },
     
-    'test job fail() emitting via return': function(assert) {
+    'test job fail() emitting via return': function() {
         var out = [];
         
         var job = createJob({
@@ -210,7 +211,7 @@ module.exports = {
         });
     },
     
-    'test fail() being called on validation error': function(assert) {
+    'test fail() being called on validation error': function() {
         var out = [];
         
         var job = createJob({
@@ -233,7 +234,7 @@ module.exports = {
         });
     },
     
-    'test fail() being called on dom select error': function(assert) {
+    'test fail() being called on dom select error': function() {
         var out = [];
         
         var job = createJob({
@@ -259,7 +260,7 @@ module.exports = {
         });
     },
     
-    'test timeout during run()': function(assert) {
+    'test timeout during run()': function() {
         var out = [];
         
         var job = createJob({timeout: 0.1},{
@@ -285,7 +286,7 @@ module.exports = {
         });
     },
     
-    'test take op': function(assert) {
+    'test take op': function() {
         var job = createJob({take:3},{
             input: [0,1,2],
             run: function(data) {
@@ -297,7 +298,7 @@ module.exports = {
         startJob(job, function(){});
     },
     
-    'test max op': function(assert) {
+    'test max op': function() {
         var out = [];
         
         var i = 0;
@@ -322,7 +323,7 @@ module.exports = {
         startJob(job, function(){});
     },
     
-    'test max op': function(assert) {
+    'test max op': function() {
         var out = [];
         
         var i = 0;
@@ -346,7 +347,7 @@ module.exports = {
         startJob(job, function(){});
     },
     
-    'test output with flattening': function(assert) {
+    'test output with flattening': function() {
         var out = [];
                 
         var job = createJob({
@@ -366,7 +367,7 @@ module.exports = {
         });
     },
     
-    'test output without flattening': function(assert) {
+    'test output without flattening': function() {
         var out = [];
                 
         var job = createJob({flatten:false}, {
@@ -386,7 +387,7 @@ module.exports = {
         });
     },
     
-    'test input op': function(assert) {
+    'test input op': function() {
         var i = 0;
         
         var job = createJob({input:10},{
@@ -402,7 +403,7 @@ module.exports = {
         });
     },
     
-    'test adding input outside of job.input()': function(assert) {
+    'test adding input outside of job.input()': function() {
         var i = 0, out = [];
         
         var job = createJob({input:10},{
@@ -425,7 +426,7 @@ module.exports = {
         });
     },
         
-    'test global timeout': function(assert) {
+    'test global timeout': function() {
         var out = [];
                 
         var job = createJob({global_timeout:0.2}, {
@@ -442,7 +443,7 @@ module.exports = {
         });
     },
     
-    'test the recurse op': function(assert) {
+    'test the recurse op': function() {
         //Test specialised case where input is a path to a dir
         var job = createJob({recurse:true}, {input:__dirname+'/resources/test_dir_input'});
         

@@ -1,5 +1,6 @@
 var nodeio = require('../'),
-    processor = new nodeio.Processor();
+    processor = new nodeio.Processor(),
+    assert = require('assert');
     
 function createJob(options, methods) {
     if (typeof methods === 'undefined') {
@@ -10,7 +11,7 @@ function createJob(options, methods) {
 }
     
 module.exports = {
-    'test job.spawn()': function(assert) {
+    'test job.spawn()': function() {
         var job = createJob();
         job.spawn('pwd', function(err, stdout, stderr) {
             assert.isNull(err);
@@ -29,7 +30,7 @@ module.exports = {
         });
     },
     
-    'test job.exec()': function(assert) {
+    'test job.exec()': function() {
         var job = createJob();
         job.exec('pwd', function(err, stdout, stderr) {
             assert.isNull(err);

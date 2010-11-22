@@ -1,7 +1,8 @@
 var fs = require('fs'),
     nodeio = require('../'),
     processor = new nodeio.Processor(),
-    JobClass = nodeio.JobClass;
+    JobClass = nodeio.JobClass,
+    assert = require('assert');
     
 var lorem = __dirname+'/resources/lorem.txt',
     lorem_crlf = __dirname+'/resources/lorem_crlf.txt',
@@ -20,7 +21,7 @@ function createJob(options, methods) {
         
 module.exports = {
     
-    'test #read()': function(assert) {
+    'test #read()': function() {
         var job = new JobClass();
         
         //Test sync read
@@ -36,7 +37,7 @@ module.exports = {
         });
     },
     
-    'test #readLines()': function(assert) {
+    'test #readLines()': function() {
         
         var job = createJob();
         
@@ -116,7 +117,7 @@ module.exports = {
         
     },
     
-    'test #write()': function(assert) {
+    'test #write()': function() {
         var i = 0;
         
         var job = new JobClass();
@@ -136,7 +137,7 @@ module.exports = {
         });
     },
     
-    'test where job.input == false': function(assert) {
+    'test where job.input == false': function() {
         var job = createJob({input:true});
         assert.equal('function', typeof job.input);
         //input() will return as many lines requested (job will run forever)
@@ -146,7 +147,7 @@ module.exports = {
         assert.equal(10, job.input(17, 10).length);
     },
     
-    'test where job.input is an array': function(assert) {
+    'test where job.input is an array': function() {
         var job = createJob({input:[0,1,2,3,4]});
         assert.equal('function', typeof job.input);
         assert.equal('[0,1]', JSON.stringify(job.input(0, 2)));
@@ -155,7 +156,7 @@ module.exports = {
         assert.equal(false, job.input(6, 2));
     },
     
-    'test where job.input is a string (file)': function(assert) {
+    'test where job.input is a string (file)': function() {
         var job = createJob({input:lorem});
         assert.equal('function', typeof job.input);
         
@@ -192,7 +193,7 @@ module.exports = {
         
     },
     
-    'test where job.input is a string (dir)': function(assert) {
+    'test where job.input is a string (dir)': function() {
         //Test specialised case where input is a path to a dir
         var job = createJob({recurse:true},{input:test_dir});
         assert.equal('function', typeof job.input);
@@ -227,7 +228,7 @@ module.exports = {
     },
     
     
-    'test where job.input is an unknown string': function(assert) {
+    'test where job.input is an unknown string': function() {
         try {
             createJob({input:'xyz897asd'});
             assert.ok(false, 'An exception was not thrown when input is an unknown string');
@@ -236,7 +237,7 @@ module.exports = {
         }
     },
     
-    'test where job.output is an unknown string': function(assert) {
+    'test where job.output is an unknown string': function() {
         try {
             createJob({output:'xyz897asd'});
             assert.ok(false, 'An exception was not thrown when output is an unknown string');
@@ -245,7 +246,7 @@ module.exports = {
         }
     },
     
-    'test where job.output is a string': function(assert) {
+    'test where job.output is a string': function() {
         var job = createJob({output:output2});
         
         job.output([1,2,3]);
@@ -256,7 +257,7 @@ module.exports = {
         
     },
     
-    'test newline': function(assert) {
+    'test newline': function() {
         var job = createJob({newline:'\r\n'},{output:output3});
         
         job.output([1,2,3]);

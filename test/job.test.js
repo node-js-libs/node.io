@@ -1,5 +1,6 @@
 var nodeio = require('../'),
-    processor = new nodeio.Processor();
+    processor = new nodeio.Processor(),
+    assert = require('assert');
     
 function createJob(options, methods) {
     if (typeof methods === 'undefined') {
@@ -11,9 +12,10 @@ function createJob(options, methods) {
     
 module.exports = {
     
-    'test job extend': function(assert) {
+    'test job extend': function() {
     
         var job = createJob({foo:'bar'}, {testmethod:function(){return 'a';}});
+                
         assert.equal('bar', job.options.foo);
         assert.equal('function', typeof job.testmethod);
         assert.equal('a', job.testmethod());
@@ -24,7 +26,7 @@ module.exports = {
         assert.equal(false, new_job.testmethod);
         assert.equal('function', typeof new_job.testmethodb);
         assert.equal('b', new_job.testmethodb());
-        
+                
         //Test calling a parent method
         assert.equal('function', typeof new_job.__super__.testmethod);
         assert.equal('a', new_job.__super__.testmethod());
@@ -37,7 +39,7 @@ module.exports = {
         assert.equal(false, new_job.testmethod);
     },
     
-    'test job running once': function(assert) {
+    'test job running once': function() {
         var job = createJob({input:false});
         
         //input() should return false on the second call
@@ -45,7 +47,7 @@ module.exports = {
         assert.ok(job.input() === false);
     },
     
-    'test job emit() as return': function(assert) {
+    'test job emit() as return': function() {
         var job = createJob();
         
         job.run = function() {
@@ -59,7 +61,7 @@ module.exports = {
         job.run();
     },
     
-    'test job emit() async': function(assert) {
+    'test job emit() async': function() {
         var job = createJob();
         
         job.run = function() {
@@ -75,7 +77,7 @@ module.exports = {
         job.run();
     },
     
-    'test job skip()': function(assert) {
+    'test job skip()': function() {
         var job = createJob();
         
         assert.deepEqual(job.skip, job.finish);
@@ -92,7 +94,7 @@ module.exports = {
         job.run();
     },
     
-    'test job validation': function(assert) {
+    'test job validation': function() {
         //Just test bindings, full test suite for validation methods can be found at:
         //https://github.com/chriso/node-validator/blob/master/test/validator.test.js
         
@@ -108,7 +110,7 @@ module.exports = {
         job.assert('abc').isInt();
     },
     
-    'test job filtering / sanitization': function(assert) {
+    'test job filtering / sanitization': function() {
         //Just test bindings, full test suite for filter methods can be found at:
         //https://github.com/chriso/node-validator/blob/master/test/filter.test.js
         

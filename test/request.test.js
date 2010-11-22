@@ -1,7 +1,8 @@
 var nodeio = require('../'),
     processor = new nodeio.Processor(),
     http = require('http'),
-    JobClass = nodeio.JobClass;
+    JobClass = nodeio.JobClass,
+    assert = require('assert');
     
 var job = new JobClass();
 
@@ -18,7 +19,7 @@ job.fail = function(input, status) {
 
 module.exports = {
     
-    'test GET request': function(assert) {
+    'test GET request': function() {
     
         var server = http.createServer(function (req, res) {
             res.writeHead(200,{'Content-Type': 'text/plain'});
@@ -41,7 +42,7 @@ module.exports = {
         }, 1000);
     },
     
-    'test GET request with custom headers': function(assert) {
+    'test GET request with custom headers': function() {
     
         var server = http.createServer(function (req, res) {
             if (req.headers.foo === 'bar') {
@@ -68,7 +69,7 @@ module.exports = {
         }, 1000);
     },
     
-    'test GET request with pre-parse callback': function(assert) {
+    'test GET request with pre-parse callback': function() {
     
         var server = http.createServer(function (req, res) {
             res.writeHead(200,{'Content-Type': 'text/plain'});
@@ -95,7 +96,7 @@ module.exports = {
         }, 1000);
     },
     
-    'test POST request': function(assert) {
+    'test POST request': function() {
     
         var server = http.createServer(function (req, res) {
             var data = '';
@@ -127,7 +128,7 @@ module.exports = {
         }, 1000);
     },
     
-    'test GET request returning the dom': function(assert) {
+    'test GET request returning the dom': function() {
     
         var server = http.createServer(function (req, res) {
             res.writeHead(200,{'Content-Type': 'text/plain'});
@@ -151,7 +152,7 @@ module.exports = {
         }, 1000);
     },
     
-    'test POST request returning the dom': function(assert) {
+    'test POST request returning the dom': function() {
     
         var server = http.createServer(function (req, res) {
             var data = '';
