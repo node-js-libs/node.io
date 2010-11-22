@@ -1,3 +1,6 @@
+### v0.1.1-3
+    * Minor bug fixes
+
 ### v0.1.1-1
     * Fixed an inheritance bug when not exclusively using CoffeeScript
     * Added an -e (--eval) switch
