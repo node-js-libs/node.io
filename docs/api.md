@@ -188,6 +188,12 @@ The encoding to use when reading / writing files
 
 All requests will be made through this proxy. Alternatively, you can specify a function that returns a proxy (e.g. to cycle proxies).
 
+**redirects** _(default: 3)_
+
+The maximum number of redirects to follow before calling `fail`
+
+
+
 **args** _(default: [])_
 
 Any extra arguments when calling node.io from the command line are stored here.
