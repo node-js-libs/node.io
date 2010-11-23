@@ -1,5 +1,6 @@
-### v0.1.1-3
+### v0.1.1-4
     * Minor bug fixes
+    * Added HTTP code handler - auto support for redirects, etc.    
 
 ### v0.1.1-1
     * Fixed an inheritance bug when not exclusively using CoffeeScript
