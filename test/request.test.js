@@ -10,8 +10,10 @@ var i = 24510;
 
 //Why do these tests fail on linux?! D:
 
+job.debug = function () {};
+
 //Throw a warning on ECONNREFUSED rather than fail the entire test suite
-job.fail = function(input, status) {
+job.fail = function (input, status) {
     if (status === 'ECONNREFUSED') {
         console.log('\x1B[33mWARNING\x1B[0m: \x1B[31mECONNREFUSED\x1B[0m (see request.test.js)');
     }
