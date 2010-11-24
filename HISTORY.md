@@ -1,4 +1,4 @@
-##  v0.1.1-14
+##  v0.1.1-15
     * Fixed incorrect handling of large streams
     * Better support for request timeouts
     * Bug fixes
