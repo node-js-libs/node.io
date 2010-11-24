@@ -1,7 +1,7 @@
-##  v0.1.1-16
+##  v0.1.1-17
     * Fixed incorrect handling of large streams
     * Better support for request timeouts
-    * Bug fixes
+    * Bug fixes    
 
 ### v0.1.1-6
     * Added a debug switch -g
