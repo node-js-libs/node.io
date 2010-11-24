@@ -1,7 +1,10 @@
+##  v0.1.1-14
+    * Fixed incorrect handling of large streams
+    * Better support for request timeouts
+    * Bug fixes
+
 ### v0.1.1-6
     * Added a debug switch -g
-
-### v0.1.1-5
     * Minor bug fixes
     * Added HTTP code handler - auto support for redirects, etc.    
 
