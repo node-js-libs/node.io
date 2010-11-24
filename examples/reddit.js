@@ -45,6 +45,9 @@ var methods = {
                 //Check the data is ok
                 self.assert(scores[i]).isInt();
                 
+                //Decode entities in the title
+                titles[i] = self.filter(titles[i]).entityDecode();
+                
                 output.push('['+scores[i]+'] '+titles[i]);
             }
             
