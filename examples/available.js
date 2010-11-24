@@ -14,7 +14,7 @@ var Job = require('node.io').Job;
 var options = {
     max: 20,       //Run a maximum of 20 WHOIS requests concurrently
     timeout: 5,    //Timeout after 10s
-    retries: 2     //Maximum of 1 retries
+    retries: 2     //Maximum of 2 retries
 }
 
 //A fairly exhaustive list of not found strings
