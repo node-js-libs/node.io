@@ -24,8 +24,7 @@ node.io can streamline the process of:
     * Piping data to other processes or node.io jobs
     * Continuous IO
     * Any combination of the above, or write your own IO methods     
-- Includes a robust framework for scraping, selecting and traversing data from the web
-- Support for a variety of proxies when scraping web data
+- Includes a robust framework for scraping, selecting and traversing data from the web + support for a variety of proxies
 - Includes a data validation and sanitization framework
 - Provides support for retries, timeouts, dynamically adding input, etc.
 
@@ -35,7 +34,11 @@ To install node.io, use [npm](http://github.com/isaacs/npm):
 
     $ npm install node.io
 
-For usage details, run
+To run tests
+
+    $ make test
+
+For usage details
 
     $ node.io --help
 
