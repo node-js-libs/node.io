@@ -1,4 +1,4 @@
-var nodeio = require('../'),
+var nodeio = require('node.io'),
     processor = new nodeio.Processor(),
     assert = require('assert');
     

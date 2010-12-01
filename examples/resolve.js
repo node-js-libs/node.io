@@ -10,6 +10,9 @@
 //   3. To return domains that do resolve:
 //       $ cat domains.txt | node.io resolve found
 //
+//   3. To return just the IPs:
+//       $ cat domains.txt | node.io -s resolve ips | sort | uniq
+//
 // To output the results to a file, use either:
 //       $ cat domains.txt | node.io -s resolve > result.txt
 //       $ node.io -i domains.txt -o result.txt resolve
@@ -23,25 +26,21 @@ var options = {
 }
 
 var methods = {
-    
     run: function(domain) {
-        var self = this, type = this.options.args.length ? this.options.args[0] : 'default';
+        var self = this, type = this.options.arg1;
         
         dns.lookup(domain, 4, function(err, ip) {
+        
+            //The domain didn't resolve
             if (err) {
             
-                //The domain didn't resolve
                 switch(err.errno) {
-                    case 4: case 8: // == notfound
-                        if (type === 'notfound') {
-                            self.emit(domain);
-                        } else if (type === 'found') {
-                            self.skip();
-                        } else {
-                            self.emit(domain + ',failed');
-                        }
-                        break;
-                    default: self.retry();
+                case 4: case 8: // == notfound
+                    self.fail(domain);
+                    break;
+                default: 
+                    self.retry();
+                    break;
                 }
                 
             } else {
@@ -51,6 +50,8 @@ var methods = {
                     self.skip();
                 } else if (type === 'found') {
                     self.emit(domain);
+                } else if (type === 'ips') {
+                    self.emit(ip);
                 } else {
                     self.emit(domain + ',' + ip);
                 }
@@ -60,18 +61,17 @@ var methods = {
     },
     
     fail: function(domain, status) {
-        var type = this.options.args;
-    
+        var type = this.options.arg1;
+        
         //The domain either timed out or exceeded the max number of retries
         if (type === 'notfound') {
             this.emit(domain);
-        } else if (type === 'found') {
+        } else if (type === 'found' || type === 'ips') {
             this.skip();
         } else {
             this.emit(domain + ',failed');
         }
-        this.emit(domain+',failed');
-    }   
+    }
 }
 
 //Export the job

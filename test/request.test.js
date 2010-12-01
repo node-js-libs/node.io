@@ -1,4 +1,4 @@
-var nodeio = require('../'),
+var nodeio = require('node.io'),
     processor = new nodeio.Processor(),
     http = require('http'),
     JobClass = nodeio.JobClass,
@@ -19,6 +19,12 @@ job.fail = function (input, status) {
     }
 }
 
+function close (server) {
+    try {
+        server.close();
+    } catch (e) {}
+}
+
 module.exports = {
     
     'test GET request': function() {
@@ -29,18 +35,15 @@ module.exports = {
         });
         
         server.listen(++i);
-        
-        var closed = false;
-        
+                
         job.get('http://127.0.0.1:'+i+'/', function(err, data, headers) {
             assert.equal('text/plain', headers['content-type']);
             assert.equal('Hello World', data);
-            server.close();
-            closed = true;
+            close(server);
         });
         
         setTimeout(function() {
-            if (!closed) server.close();
+            close(server);
         }, 1000);
     },
     
@@ -56,18 +59,15 @@ module.exports = {
         });
         
         server.listen(++i);
-        
-        var closed = false;
-        
+                
         job.get('http://127.0.0.1:'+i+'/', {foo:'bar'}, function(err, data, headers) {
             assert.equal('text/plain', headers['content-type']);
             assert.equal('Headers ok', data);
-            server.close();
-            closed = true;
+            close(server);
         });
         
         setTimeout(function() {
-            if (!closed) server.close();
+            close(server);
         }, 1000);
     },
     
@@ -80,8 +80,6 @@ module.exports = {
         
         server.listen(++i);
         
-        var closed = false;
-        
         var parse = function(str) {
             return str.replace('&gt;','>').replace('&lt;','<');
         }
@@ -89,12 +87,11 @@ module.exports = {
         job.get('http://127.0.0.1:'+i+'/', function(err, data, headers) {
             assert.equal('text/plain', headers['content-type']);
             assert.equal('><', data);
-            server.close();
-            closed = true;
+            close(server);
         }, parse);
         
         setTimeout(function() {
-            if (!closed) server.close();
+            close(server);
         }, 1000);
     },
     
@@ -115,18 +112,15 @@ module.exports = {
         });
         
         server.listen(++i);
-        
-        var closed = false;
-        
+                
         job.post('http://127.0.0.1:'+i+'/', {foo:'bar'}, function(err, data, headers) {
             assert.equal('text/plain', headers['content-type']);
             assert.equal('Post ok', data);
-            server.close();
-            closed = true;
+            close(server);
         });
         
         setTimeout(function() {
-            if (!closed) server.close();
+            close(server);
         }, 1000);
     },
     
@@ -138,19 +132,16 @@ module.exports = {
         });
         
         server.listen(++i);
-        
-        var closed = false;
-        
+                
         job.getHtml('http://127.0.0.1:'+i+'/', function(err, $, data, headers) {
             assert.equal('text/plain', headers['content-type']);
             assert.equal('<p class="a"></p>', data);
             assert.equal('a', $('p').attribs['class']);
-            server.close();
-            closed = true;
+            close(server);
         });
         
         setTimeout(function() {
-            if (!closed) server.close();
+            close(server);
         }, 1000);
     },
     
@@ -171,19 +162,16 @@ module.exports = {
         });
         
         server.listen(++i);
-        
-        var closed = false;
-        
+                
         job.postHtml('http://127.0.0.1:'+i+'/', {foo:'bar'}, function(err, $, data, headers) {
             assert.equal('text/plain', headers['content-type']);
             assert.equal('<p class="a"></p>', data);
             assert.equal('a', $('p').attribs['class']);
-            server.close();
-            closed = true;
+            close(server);
         });
         
         setTimeout(function() {
-            if (!closed) server.close();
+            close(server);
         }, 1000);
     }   
     

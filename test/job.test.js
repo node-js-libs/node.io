@@ -1,4 +1,4 @@
-var nodeio = require('../'),
+var nodeio = require('node.io'),
     processor = new nodeio.Processor(),
     assert = require('assert');
     
@@ -7,7 +7,7 @@ function createJob(options, methods) {
         methods = options;
         options = {};
     }
-    return new nodeio.Job(options, methods);
+    return nodeio.Job(options, methods);
 }
     
 module.exports = {
@@ -54,7 +54,7 @@ module.exports = {
             return 1;
         }
         
-        job.output_hook = function(data) {
+        job.output = function(data) {
             assert.equal(1, data);
         }
         
@@ -70,7 +70,7 @@ module.exports = {
             });
         }
         
-        job.output_hook = function(data) {
+        job.output = function(data) {
             assert.equal(1, data);
         }
         
@@ -80,18 +80,18 @@ module.exports = {
     'test job skip()': function() {
         var job = createJob();
         
-        assert.deepEqual(job.skip, job.finish);
-        
-        job.output_hook = function(last) {
-            assert.ok(true);
-        }
-        
         job.run = function() {
             this.skip();
-            //Same as this.finish()
+            this.emit(1);
+        }
+        
+        job.output = function(num) {
+            assert.isUndefined(num);
         }
         
         job.run();
+        
+        assert.ok(job.is_complete);
     },
     
     'test job validation': function() {
@@ -116,6 +116,6 @@ module.exports = {
         
         var job = createJob();        
         assert.equal(1, job.filter('00000001').ltrim(0));
-    },
+    },   
     
 }

@@ -4,36 +4,34 @@
 var Job = require('node.io').Job;
 
 //Take 30 lines at a time
-var options = {max:30, take:30};
+var options = {max:10, take:10};
 
 var word_count = {};
 
 var methods = {
     
     run: function(lines) {
-        var self = this, words = [];
-        lines.forEach(function(line) {
-            line.toLowerCase().replace(/[^a-z0-9\s]+/g, '').split(' ').forEach(function(word) {
-                words.push(word);
-            });
-        });
+        var self = this, words = [], line, i, l, j, k;
+        for (i = 0, l = lines.length; i < l; i++) {
+            line = lines[i].split(' ');
+            //.toLowerCase().replace(/[^a-z0-9\s]+/g, '')
+            for (j = 0, k = line.length; j < k; j++) {
+                words.push(line[j]);
+            }
+        }
         this.emit(words);
     },
     
     reduce: function(words) {
-        words.forEach(function(word) {
-            if (typeof word_count[word] === 'undefined') {
-                word_count[word] = 1;
-            } else {
-                word_count[word]++;
-            }
-        });
+        for (var i = 0, l = words.length; i < l; i++) {
+            word_count[words[i]] = typeof word_count[words[i]] === 'undefined' ? 1 : word_count[words[i]] + 1;
+        };
     },
     
     complete: function() {
         var out = [];
         for (var word in word_count) {
-            out.push(word + ',' + word_count[word]);
+            out.push(word_count[word] + ' ' + word);
         }
         //Now that we have the full list of words, output
         this.output(out);

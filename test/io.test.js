@@ -1,5 +1,5 @@
 var fs = require('fs'),
-    nodeio = require('../'),
+    nodeio = require('node.io'),
     processor = new nodeio.Processor(),
     JobClass = nodeio.JobClass,
     assert = require('assert');
@@ -253,7 +253,7 @@ module.exports = {
         
         setTimeout(function() {
             assert.equal('1\n2\n3\n', fs.readFileSync(output2, 'utf8'));
-        }, 500);
+        }, 2000);
         
     },
     
@@ -264,8 +264,36 @@ module.exports = {
         
         setTimeout(function() {
             assert.equal('1\r\n2\r\n3\r\n', fs.readFileSync(output3, 'utf8'));
-        }, 500);
+        }, 2000);
         
+    },
+    
+    'test writeValues': function() {
+        var job = createJob();
+        
+        assert.equal('foo,bar,foobar', job.writeValues(['foo','bar','foobar']));
+        assert.equal('foo,bar,foobar', job.writeValues(['foo','bar','foobar'], 'csv'));
+        assert.equal('foo\tbar\tfoobar', job.writeValues(['foo','bar','foobar'], 'tsv'));
+        assert.equal('foo,bar,"foo,bar"', job.writeValues(['foo','bar','foo,bar'], 'csv'));
+        assert.equal('foo,bar,"foo""bar"', job.writeValues(['foo','bar','foo"bar'], 'csv'));
+        assert.equal('foo.bar.foo,bar', job.writeValues(['foo','bar','foo,bar'], '.'));
+        assert.equal('foo.bar.|foo\\|bar|', job.writeValues(['foo','bar','foo|bar'], '.', '|', '\\'));       
+        
+    },
+    
+    'test parseValues': function() {
+        var job = createJob();
+        
+        assert.equal(JSON.stringify(['foo','bar','foobar']), JSON.stringify(job.parseValues('foo,bar,foobar')));
+        assert.equal(JSON.stringify(['foo','bar','foobar']), JSON.stringify(job.parseValues('foo,bar,foobar', 'csv')));
+        assert.equal(JSON.stringify(['foo','bar','foobar']), JSON.stringify(job.parseValues('foo\tbar\tfoobar', 'tsv')));
+        assert.equal(JSON.stringify(['foo','bar','foo"bar']), JSON.stringify(job.parseValues('foo,bar,"foo""bar"', 'csv')));
+        assert.equal(JSON.stringify(['foo','bar','foo"bar']), JSON.stringify(job.parseValues('foo,bar,"foo\"bar"', ',', '"', '\\')));
+        assert.equal(JSON.stringify(['foo','bar','foo,bar']), JSON.stringify(job.parseValues('foo,bar,"foo,bar"', 'csv')));
+        assert.equal(JSON.stringify(['foo','bar','foo,bar']), JSON.stringify(job.parseValues('foo.bar.foo,bar', '.')));
+        
+        //FIX ME PLZ
+        //assert.equal(JSON.stringify(['foo','bar','foo|bar']), JSON.stringify(job.parseValues('foo.bar.|foo\|bar|', '.', '|', '\\')));
     },
     
 }

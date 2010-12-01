@@ -1,4 +1,4 @@
-var nodeio = require('../'),
+var nodeio = require('node.io'),
     processor = new nodeio.Processor(),
     assert = require('assert');
     
@@ -31,7 +31,7 @@ module.exports = {
         var job = createJob({
             input: [0,1,2],
             output: function(output) {
-                output.forEach(function(num) {
+                output.forEach(function (num) {
                     out.push(num);
                 });
             }
@@ -58,12 +58,13 @@ module.exports = {
         var job = createJob({
             input: [0,1,2],
             run: function() {
+                var self = this;
                 process.nextTick(function() {
-                    job.emit(1);
+                    self.emit(1);
                 });
             },
             output: function(output) {
-                output.forEach(function(num) {
+                output.forEach(function (num) {
                     out.push(num);
                 });
             }
@@ -83,7 +84,7 @@ module.exports = {
                 return 1;
             },
             output: function(output) {
-                output.forEach(function(num) {
+                output.forEach(function (num) {
                     out.push(num);
                 });
             }
@@ -103,7 +104,7 @@ module.exports = {
                 this.skip();
             },
             output: function(output) {
-                output.forEach(function(num) {
+                output.forEach(function (num) {
                     out.push(num);
                 });
             }
@@ -135,7 +136,7 @@ module.exports = {
         var job = createJob({
             input: [0,1,2],
             reduce: function(num) {
-                this.emit(num[0]*2);
+                this.emit(num[0] * 2);
             },
             output: function(num) {
                 out.push(num);
@@ -266,13 +267,14 @@ module.exports = {
         var job = createJob({timeout: 0.1},{
             input: [0,1,2],
             run: function() {
+                var self = this;
                 setTimeout(function() {
-                    job.emit(1);
-                }, 200);
+                    self.emit(1);
+                }, 2000);
             },
             fail: function(num, status) {
                 assert.equal('timeout', status);
-                return 0;
+                this.emit(0);
             },
             output: function(output) {
                 output.forEach(function(num) {
@@ -434,8 +436,9 @@ module.exports = {
             run: function(num) {
                 setTimeout(function() {
                     job.emit(num);
-                }, 500);
-            }
+                }, 1000);
+            },
+            output: false
         });
         
         startJob(job, function(err) {

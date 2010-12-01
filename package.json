@@ -1,20 +1,20 @@
 { "name"          : "node.io",
   "description"   : "A distributed data scraping and processing framework for node.js",
-  "version"       : "0.1.1-19",
+  "version"       : "0.2.0-1",
   "homepage"      : "http://github.com/chriso/node.io",
   "keywords"      : ["data","mapreduce","map","reduce","scraping","html","parsing","parse","scrape","process","processing","data"],
   "author"        : "Chris O'Hara <cohara87@gmail.com>",
   "main"          : "./lib/node.io",
   "directories"   : { "lib" : "./lib/node.io" },
-  "bugs" :
-    { "mail" : "",
-      "web" : "http://github.com/chriso/node.io/issues"
+  "bugs":
+    { "mail": "",
+      "web": "http://github.com/chriso/node.io/issues"
     },
   "repository": {
     "type": "git",
     "url": "http://github.com/chriso/node.io.git"
   },
-  "engines" : { "node" : ">=0.2.4" },
+  "engines": { "node" : ">=0.2.5" },
   "dependencies": { 
     "soupselect": ">= 0.2.0",
     "validator": ">= 0.1.1",  
@@ -23,9 +23,9 @@
   },
   "scripts": { "test": "expresso test" },
   "bin": { "node.io": "./bin/node.io" },
-  "licenses" :
-    [ { "type" : "MIT" 
-      , "url" : "http://github.com/chriso/node.io/raw/master/LICENSE"
+  "licenses":
+    [ { "type": "MIT", 
+        "url": "http://github.com/chriso/node.io/raw/master/LICENSE"
       }
     ]
 }

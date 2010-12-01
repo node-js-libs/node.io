@@ -4,27 +4,27 @@ node.io is a data scraping and processing framework for [Node.js](http://nodejs.
 
 node.io can streamline the process of:
 
-- Parsing / filtering / sanitizing large amounts of data
+- Parsing, filtering or sanitizing large amounts of data
 - Scraping data from the web using familiar CSS selectors and traversal methods
 - Map Reduce
-- Transforming data from one format to another, e.g. from CSV => a database
+- Transferring data, e.g. CSV => a database
 - Distributing work across multiple processes, and multiple servers (soon)
-- Recursively traversing a directory and using each file as input 
+- Working with continuous data & streams
 
 ## Why node.io?
 
-- Create modular and extensible jobs for scraping and processing data
+- Create modular and extendable jobs for scraping and processing data
 - Jobs are written in Javascript or Coffeescript and run in Node.js - jobs are concise, asynchronous and _FAST_
 - Seamlessly speed up execution by distributing work among child processes and other servers (soon) 
-- Easily handle a variety of input / output situations - node.io does the heavy lifting
+- Easily handle a variety of input output situations - node.io does the heavy lifting
     * Reading / writing lines to and from files
-    * Traversing files in a directory    
     * Reading / writing rows to and from a database
-    * STDIN / STDOUT / Custom streams
-    * Piping data between multiple node.io jobs
-    * Continuous input / output
-    * Any combination of the above, or your write your own IO methods     
-- Includes a robust framework for scraping, selecting and traversing web data
+    * Traversing files in a directory
+    * STDIN / STDOUT / custom streams
+    * Piping data to other processes or node.io jobs
+    * Continuous IO
+    * Any combination of the above, or write your own IO methods     
+- Includes a robust framework for scraping, selecting and traversing data from the web
 - Support for a variety of proxies when scraping web data
 - Includes a data validation and sanitization framework
 - Provides support for retries, timeouts, dynamically adding input, etc.
@@ -52,22 +52,23 @@ Check [@nodeio](http://twitter.com/nodeio) or [http://node.io/](http://node.io/)
 ## Roadmap
 
 - Fix up the [http://node.io/](http://node.io/) site
-- `-d,--daemon` node.io switch
 - Nested requests inherit referrer / cookies / user-agent if to the same domain
+- `-d,--daemon` node.io switch
 - Add more DOM [selector](http://api.jquery.com/category/selectors/) / [traversal](http://api.jquery.com/category/traversing/) methods
     - ..or attempt a full port of jQuery that's compatible with [htmlparser](https://github.com/tautologistics/node-htmlparser) (I know a port already exists, but it uses the far less forgiving [JSDOM](https://github.com/tmpvar/jsdom))
-- Test proxy callbacks and write proxy documentation
+- Test various proxies and write the proxy documentation
 - Add distributed processing
 - Installation without NPM (install.sh)
-- Refactoring
-- More tests / better test coverage
+- More tests / better coverage
 - Speed improvements
+
+[history.md](https://github.com/chriso/node.io/blob/master/HISTORY.md) lists recent changes.
 
 ## Contributing
 
 If you find a bug, please report the issue [here](https://github.com/chriso/node.io/issues). 
 
-If you want to contribute / help with the Roadmap / add more tests, please [fork/pull](https://github.com/chriso/node.io/fork).
+If you want to contribute, please [fork/pull](https://github.com/chriso/node.io/fork).
 
 ## Credits
 
