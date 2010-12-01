@@ -25,22 +25,23 @@ int main() {
     while (!feof(stdin)) {
         fgets(input, read_buffer, stdin);
         
-        i = last_space = 0;
-        
-        for (l = strlen(input); i <= l; i++) { 
+        for (i = last_space = 0, l = strlen(input); i <= l; i++) { 
             if (input[i] == ' ' || input[i] == '\n' || input[i] == '\0') {
                 
                 /* Break up each line into words */
                 char* word = (char*) malloc(i - last_space + 1);
                 strncpy(word, input + last_space, i - last_space);
                 word[i-last_space] = '\0';
-                
+                                
                 /* Keep a tab on word occurrences */
                 error = hashmap_get(words, word, &container);
                 if (error == MAP_MISSING) {
                     container = malloc(sizeof(data_struct_t));
                     container->word = word;
                     container->count = 1;
+                } else if (error == MAP_FULL) {
+                    puts("Map full.");
+                    exit(1);
                 } else {
                     free(word);
                     container->count = container->count + 1;
