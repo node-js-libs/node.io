@@ -271,7 +271,7 @@ Working with a collection of elements
     
 Working with an element
 
-    <a href="#">Hello <b>World!</b></a>
+    <a href="hello.htm">Hello <b>World!</b></a>
 
     $('a').text                     //Outputs the text DIRECTLY inside the tag
         // => outputs 'Hello'
@@ -283,7 +283,7 @@ Working with an element
         // => outputs 'Hello <b>World!</b>'
         
     $('a').attrib.href
-        // => #
+        // => outputs 'hello.htm'
         
 Note: `text` and `fulltext` trim the result, replace `<br>` and `<br />` with `\n`, and automatically decode HTML entities. If you wish to access the raw text, use the following getters:
 
@@ -295,7 +295,7 @@ Note: `text` and `fulltext` trim the result, replace `<br>` and `<br />` with `\
 To execute a command, use the following methods. Callback takes the format of (err, stdout, stderr)
 
     this.exec(cmd, callback);
-    this.spawn(cmd, stdin, callback);       //Same as exec, but can write to the commands STDIN
+    this.spawn(cmd, stdin, callback);       //Same as exec, but can write to STDIN
     
 ## Data validation and sanitization
 
