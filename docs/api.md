@@ -265,21 +265,30 @@ Working with a collection of elements
     $('a').last()                   //Returns the last A tag
     $('a').each(callback)           //Calls `callback` with each A tag
     $('a').each(attrib, callback)   //Calls `callback` with an attribute of each A tag, e.g. $('a).each('href', function(href){});
+    $('a').has(selector)            //Removes elements that do not have a descendent that matches the selector
+    $('a').odd(callback)            //Calls `callback` with the 1st, 3rd, 5th, ... element
+    $('a').even(callback)           //Calls `callback` with the 2nd, 4th, 6th, ... element
     
 Working with an element
 
     <a href="#">Hello <b>World!</b></a>
 
-    $('a').text                     //Outputs the text inside the tag
+    $('a').text                     //Outputs the text DIRECTLY inside the tag
         // => outputs 'Hello'
         
     $('a').fulltext                 //Outputs the text inside the tag including the text inside of each nested tag
         // => outputs 'Hello World!'
 
+    $('a').innerHTML                
+        // => outputs 'Hello <b>World!</b>'
+        
     $('a').attrib.href
         // => #
-    
-**Note: more select / traversal methods are coming soon**
+        
+Note: `text` and `fulltext` trim the result, replace `<br>` and `<br />` with `\n`, and automatically decode HTML entities. If you wish to access the raw text, use the following getters:
+
+    $('a').rawtext
+    $('a').rawfulltext
  
 ## Executing commands
 
