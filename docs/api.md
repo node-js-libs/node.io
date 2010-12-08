@@ -263,7 +263,7 @@ _Documentation coming soon. For now, see [./lib/node.io/request.js](https://gith
 
 ## DOM selection / traversal
 
-`getHtml` and `postHtml` return a special object `$` that wraps [node-soupselect](https://github.com/harryf/node-soupselect) and provides methods to aid in traversing the returned DOM.
+`getHtml` and `postHtml` return a special object `$` that wraps [node-soupselect](https://github.com/harryf/node-soupselect) and aids in selecting and traversing DOM elements.
 
 `$(selector)` returns an element or collection of elements.
 
@@ -313,6 +313,12 @@ To execute a command, use the following methods. Callback takes the format of (e
 
     this.exec(cmd, callback);
     this.spawn(cmd, stdin, callback);       //Same as exec, but can write to STDIN
+    
+Example
+
+    this.exec('pwd', function (err, stdout) {
+        console.log(stdout); //Prints the current working directory
+    });
     
 ## Data validation and sanitization
 
