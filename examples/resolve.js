@@ -17,7 +17,7 @@
 //       $ cat domains.txt | node.io -s resolve > result.txt
 //       $ node.io -i domains.txt -o result.txt resolve
 
-var Job = require('../').Job, dns = require('dns');
+var Job = require('node.io').Job, dns = require('dns');
 
 var options = {
     max: 100,       //Run a maximum of 100 DNS requests concurrently

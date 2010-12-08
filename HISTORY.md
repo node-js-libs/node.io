@@ -1,4 +1,4 @@
-### v0.2.0-3
+### v0.2.0-4
     * Bug fixes
     * Added -d (--daemon) switch
     * Added helper methods for setting/adding request headers
