@@ -241,9 +241,13 @@ module.exports = {
         var job = createJob({
             input: [0,1,2],
             run: function() {
+                var self = this;
                 this.parseHtml('<p class="a"></p>', function(err, $) {
+                    if (err) return self.fail();
                     assert.equal('a', $('p').attribs['class']);
-                    assert.isUndefined($('#doesntexist'));
+                    assert.throws(function () {
+                        $('#doesntexist')
+                    });
                 });
             },
             fail: function() {

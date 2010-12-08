@@ -129,16 +129,20 @@ module.exports = {
                 assert.equal('function', typeof $('#x').children.first);
                 assert.equal('function', typeof $('#x').children.last);
                 assert.equal('child', $('#x').children.filter('.child').attribs['class']);
-                
-                job.fail = function() {
-                    assert.ok(true, 'Selector fail as expected');
-                }
-                
+                                
                 //All of these will fail
-                assert.isUndefined($('#doesntexist'));
-                assert.isUndefined($('.doesntexist'));
-                assert.isUndefined($('p.a.b.c.d'));
-                assert.isUndefined($('p.a').filter('.xyz'));
+                assert.throws(function () {
+                    $('#doesntexist');
+                });
+                assert.throws(function () {
+                    $('.doesntexist');
+                });
+                assert.throws(function () {
+                    $('p.a.b.c.d');
+                });
+                assert.throws(function () {
+                    $('p.a').filter('.xyz');
+                });
             });
         });
     },

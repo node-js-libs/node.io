@@ -228,17 +228,25 @@ Example
 
 **this.getHtml(url, _[headers]_, callback, _[parse]_)**
 
-The same as above, except callback takes `err, $, data, headers` where `$` is the dom selector / traversal object (see DOM selection / traversal below)
+The same as above, except callback takes `err, $, data, headers` where `$` is the DOM selector object (see DOM selection / traversal below)
     
-**this.post(url, body, _[headers]_, callback, _[parse]_)**
+Example
 
-***this.postHtml(url, body, _[headers]_, callback, _[parse]_)**
+    this.getHtml('http://www.google.com/', function(err, $, data, headers) {
+        $('a').each('href', function (href) {
+            //Print all links on the page
+            console.log(href);
+        });
+    });   
 
-Makes a POST request. If body is an object, it is encoded using the builtin querystring module. postHtml returns the `$` object.
+There are also methods to make post requests. If `body` is an object, it is encoded using the built-in querystring module
+    
+    this.post(url, body, [headers], callback, [parse])
+    this.postHtml(url, body, [headers], callback, [parse])
 
-**this.doRequest(method, url, body, _[headers]_, callback, _[parse]_)**
+To make a custom request, use the lower level doRequest() method
 
-Makes general a request with the specified options. 
+    this.doRequest(method, url, body, [headers], callback, [parse])
 
 ## Making proxied requests
 

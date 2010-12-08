@@ -55,10 +55,7 @@ Check [@nodeio](http://twitter.com/nodeio) or [http://node.io/](http://node.io/)
 ## Roadmap
 
 - Fix up the [http://node.io/](http://node.io/) site
-- Nested requests inherit referrer / cookies / user-agent if to the same domain
-- `-d,--daemon` node.io switch
 - Add more DOM [selector](http://api.jquery.com/category/selectors/) / [traversal](http://api.jquery.com/category/traversing/) methods
-    - ..or attempt a full port of jQuery that's compatible with [htmlparser](https://github.com/tautologistics/node-htmlparser) (I know a port already exists, but it uses the far less forgiving [JSDOM](https://github.com/tmpvar/jsdom))
 - Test various proxies and write the proxy documentation
 - Add distributed processing
 - Installation without NPM (install.sh)

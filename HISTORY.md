@@ -1,4 +1,9 @@
-###  v0.2.0-1
+### v0.2.0-2
+    * Added -d (--daemon) switch
+    * Added helper methods for setting/adding request headers
+    * Nested requests have cookies/referer automatically set
+
+### v0.2.0-1
     * Added new DOM element getters - innerHTML, rawtext and striptags
     * Added the ability to specify a custom $ context - $(select, [context])
     * Added odd() and even() traversal methods
@@ -9,7 +14,7 @@
     * Speed improvements
     * Added Makefile (test / test-cov)
 
-###  v0.1.1-17
+### v0.1.1-17
     * Fixed incorrect handling of large streams
     * Better support for request timeouts
     * Bug fixes    
