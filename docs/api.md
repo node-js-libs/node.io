@@ -239,6 +239,13 @@ Example
         });
     });   
 
+There are also helper methods for setting or adding headers. Call these methods before using get, getHtml, etc.
+
+    this.setHeader(key, value);
+    this.setUserAgent('Firefox ...');
+    this.setCookie('foo', 'bar);
+    this.addCookie('second', cookie');
+    
 There are also methods to make post requests. If `body` is an object, it is encoded using the built-in querystring module
     
     this.post(url, body, [headers], callback, [parse])
@@ -248,6 +255,8 @@ To make a custom request, use the lower level doRequest() method
 
     this.doRequest(method, url, body, [headers], callback, [parse])
 
+_Note: nested requests have the cookie and referer headers automatically set._
+    
 ## Making proxied requests
 
 _Documentation coming soon. For now, see [./lib/node.io/request.js](https://github.com/chriso/node.io/blob/master/lib/node.io/request.js)_
