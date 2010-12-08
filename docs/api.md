@@ -239,7 +239,7 @@ Example
         });
     });   
 
-There are also helper methods for setting or adding headers. Call these methods before using get, getHtml, etc.
+There are also helper methods for setting or adding headers. Call these methods before calling `get`, `getHtml`, etc.
 
     this.setHeader(key, value);
     this.setUserAgent('Firefox ...');
@@ -251,7 +251,7 @@ There are also methods to make post requests. If `body` is an object, it is enco
     this.post(url, body, [headers], callback, [parse])
     this.postHtml(url, body, [headers], callback, [parse])
 
-To make a custom request, use the lower level doRequest() method
+To make a custom request, use the lower level `doRequest` method
 
     this.doRequest(method, url, body, [headers], callback, [parse])
 

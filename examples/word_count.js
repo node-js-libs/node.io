@@ -35,6 +35,7 @@ var methods = {
         }
         //Now that we have the full list of words, output
         this.output(out);
+        return true;
     }
     
 };
