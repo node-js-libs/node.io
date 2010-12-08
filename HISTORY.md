@@ -1,4 +1,5 @@
-### v0.2.0-2
+### v0.2.0-3
+    * Bug fixes
     * Added -d (--daemon) switch
     * Added helper methods for setting/adding request headers
     * Nested requests have cookies/referer automatically set
