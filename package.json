@@ -6,15 +6,15 @@
   "author"        : "Chris O'Hara <cohara87@gmail.com>",
   "main"          : "./lib/node.io",
   "directories"   : { "lib" : "./lib/node.io" },
-  "bugs":
-    { "mail": "",
-      "web": "http://github.com/chriso/node.io/issues"
-    },
+  "bugs": { 
+    "mail": "cohara87@gmail.com",
+    "web": "http://github.com/chriso/node.io/issues"
+  },
   "repository": {
     "type": "git",
     "url": "http://github.com/chriso/node.io.git"
   },
-  "engines": { "node" : ">=0.2.5" },
+  "engines": { "node": ">=0.2.5" },
   "dependencies": { 
     "soupselect": ">= 0.2.0",
     "validator": ">= 0.1.1",  
@@ -23,10 +23,12 @@
     "daemon": ">= 0.1.0"
   },
   "scripts": { "test": "expresso test" },
-  "bin": { "node.io": "./bin/node.io" },
-  "licenses":
-    [ { "type": "MIT", 
-        "url": "http://github.com/chriso/node.io/raw/master/LICENSE"
-      }
-    ]
+  "bin": { 
+    "node.io": "./bin/node.io",
+    "node.io-web": "./bin/node.io-web"
+  },
+  "licenses": [{ 
+    "type": "MIT", 
+    "url": "http://github.com/chriso/node.io/raw/master/LICENSE"
+  }]
 }
