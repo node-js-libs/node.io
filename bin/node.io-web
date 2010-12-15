@@ -101,10 +101,51 @@ var start_job = function (params, res) {
     }
     
     //Remove the job from the require cache (basic hot-reloading)
-    require.cache[module_dir + '/' + params.job] = null;
+    //require.cache[module_dir + '/' + params.job] = null;
     
-    job = require(module_dir + '/' + params.job).job.extend({}, methods);
-    nodeio.start(job, {silent: true}, function (err) {
+    var proc_options = {}, job_options = {};
+    
+    if (params.debug) {
+        proc_options.debug = true;
+        nodeio.Processor.prototype.status = function (msg, type) {
+            switch (type) {
+            case 'debug':
+                msg = '<font color="blue">DEBUG</font>: ' + msg; 
+                break;
+                
+            case 'error': 
+            case 'fatal': 
+                msg = '<font color="red">ERROR</font>: ' + msg;
+                break;
+                
+            case 'ok': 
+                msg = '<font color="green">OK</font>: ' + msg;
+                break; 
+                
+            case 'bold': 
+                msg = '<strong>' + msg + '</strong>';
+                break; 
+            default: 
+                msg = '<font color="orange">INFO</font>: ' + msg; 
+                break;
+            }
+            res.write(msg + '<br />');
+        };
+    } else {
+        proc_options.silent = true;
+    }
+    
+    if (params.args) {
+        job_options.args = params.args.split(' ');
+        job_options.arg1 = job_options.args[0];
+    }
+    
+    if (params.timeout) {
+        job_options.global_timeout = params.timeout;
+    }
+    
+    job = require(module_dir + '/' + params.job).job.extend(job_options, methods);
+    nodeio.start(job, proc_options, function (err) {
         res.end();
     });
 };
