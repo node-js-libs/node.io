@@ -1,3 +1,7 @@
+### v0.2.1-1
+    * Better support for multiple jobs running in the same process
+    * ALPHA Web interface
+
 ### v0.2.0-4
     * Bug fixes
     * Added -d (--daemon) switch

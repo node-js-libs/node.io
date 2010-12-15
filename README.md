@@ -10,6 +10,7 @@ node.io can streamline the process of:
 - Transferring data, e.g. CSV => a database
 - Distributing work across multiple processes, and multiple servers (soon)
 - Working with continuous data & streams
+- Managing jobs through a web interface
 
 ## Why node.io?
 
@@ -27,6 +28,7 @@ node.io can streamline the process of:
 - Includes a robust framework for scraping, selecting and traversing data from the web + support for a variety of proxies
 - Includes a data validation and sanitization framework
 - Provides support for retries, timeouts, dynamically adding input, etc.
+- Comes with a web interface for managing jobs
 
 ## Installation
 
