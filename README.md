@@ -54,6 +54,12 @@ Better documentation will be available once I have time to write it.
 
 Check [@nodeio](http://twitter.com/nodeio) or [http://node.io/](http://node.io/) for updates.
 
+## Running a web interface
+
+To run jobs through a web interface, put your jobs in `~/.node_modules` and run
+
+    $ node.io-web
+
 ## Roadmap
 
 - Fix up the [http://node.io/](http://node.io/) site
