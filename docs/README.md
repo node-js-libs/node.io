@@ -358,10 +358,9 @@ The full API of methods and options is [available here](https://github.com/chris
 See [./examples](https://github.com/chriso/node.io/tree/master/examples/). Included examples are:
 
 - `duplicates.js` - remove all duplicates in a list, or only output duplicate lines
-- `validate.js` - filters a list with a variety of validation methods
 - `resolve.js` - more robust version of the example above
 - `word_count.js` - uses map reduce to count the occurrences of each word in a file
-- `reddit.js` - web scraping example - pulls the front page stories and scores from [reddit](http://reddit.com/)
+- `reddit_scrape.js` - web scraping example - pulls the front page stories and scores from [reddit](http://reddit.com/)
 - `google_rank.js` - returns a domain's rank for a given keyword
 - `google_pagerank.js` - find the Google pagerank of a URL
 - `google_spell.js` - outputs the result of Google Suggest
