@@ -5,7 +5,7 @@
 var Job = require('node.io').Job;
 
 //Timeout after 10s
-var options = {timeout:10};
+var options = {timeout: 10};
 
 var methods = {
 
@@ -17,14 +17,14 @@ var methods = {
         
         this.getHtml('http://www.reddit.com/', function(err, $) {
         
-            //Handle any http / parsing errors
+            //Handle any request / parsing errors
             if (err) self.exit(err);
             
             var titles = [], scores = [], output = [];
             
             //Select all titles on the page
             $('a.title').each(function(a) {
-                titles.push(a.text);
+                titles.push(a.rawtext); //See the API for an explanation of element getters
             });
             
             //Select all scores on the page
@@ -40,7 +40,7 @@ var methods = {
             //Output = [score] title
             for (var i = 0, len = scores.length; i < len; i++) {
                 //Ignore upcoming stories
-                if (scores[i] == '&bull;') continue;
+                if (scores[i] == '&bull;' || scores[i] == null) continue;
                 
                 //Check the data is ok
                 self.assert(scores[i]).isInt();
