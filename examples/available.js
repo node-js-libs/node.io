@@ -38,12 +38,10 @@ var methods = {
     
     run: function(domain) {
         var self = this, strict = this.options.args.length && this.options.args[0] === 'strict';
-                                
+                
         this.exec('whois "' + domain + '"', function(err, stdout) {
             if (err) {
-                
-                console.log(stdout);
-                
+                                
                 self.exit(err);
                 
             } else {
@@ -73,17 +71,16 @@ var methods = {
                 } else {
                     
                     //Look for a not found str
-                    not_found.forEach(function(nf) {
-                        if (stdout.indexOf(nf) >= 0) {
+                    for (var i = 0, l = not_found.length; i < l; i++) {
+                        if (stdout.indexOf(not_found[i]) >= 0) {
                             self.emit(domain);
                             return;
                         }
-                    });
+                    }
                     
                     if (stdout.match(/status:[\t\s]+(available|free)/i)) {
                         self.emit(domain);
                     }
-                    
                 }
             }
         });
