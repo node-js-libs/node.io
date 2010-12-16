@@ -1,6 +1,7 @@
-### v0.2.1-1
+### v0.2.1-3
     * Better support for multiple jobs running in the same process
-    * ALPHA Web interface
+    * Basic web interface
+    * .coffee extension is auto-detected
 
 ### v0.2.0-4
     * Bug fixes
