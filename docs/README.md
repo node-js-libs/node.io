@@ -222,12 +222,12 @@ _reddit.js_
                 
                 //Select all titles on the page
                 $('a.title').each(function(a) {
-                    titles.push(a.text);
+                    titles.push(a.text); 
                 });
                 
                 //Select all scores on the page
                 $('div.score.unvoted').each(function(div) {
-                    scores.push(div.text);
+                    scores.push(div.rawtext); //rawtext doesn't trim or decode entities
                 });
                 
                 //Mismatch? page probably didn't load properly
@@ -348,6 +348,18 @@ Any arguments after the job name on the command line are available in the job as
     run: function() {
         console.log(this.options.args); //['arg1','arg2','arg3']
     }
+
+## Running jobs from a web interface
+
+Moves your jobs to `~/.node_modules` and then run
+
+    $ node.io-web
+    
+Visit http://localhost:8080/ to access the web interface. 
+    
+The web interface can be daemonized, run on a custom port, or run jobs from a custom directory. For help, run
+
+    $ node.io-web --help
 
 ## API
 
