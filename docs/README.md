@@ -175,7 +175,7 @@ The same job can be written in CoffeeScript
 
 _resolve.coffee_
         
-    nodeio = require './node.io'
+    nodeio = require 'node.io'
     dns = require 'dns'
     
     options = {
@@ -187,14 +187,11 @@ _resolve.coffee_
     class Resolve extends nodeio.JobClass
         run: (domain) -> 
             dns.lookup domain, 4, (err, ip) =>
-                if err? 
-                    @retry()
-                else 
-                    @emit domain + ',' + ip
-        
+                if err? @retry() else @emit domain + ',' + ip
+    
         fail: (domain) -> @emit domain + ',failed'
     
-    @class = Resolve    
+    @class = Resolve
     @job = new Resolve(options)
 
 ## Example 2 - reddit.js
