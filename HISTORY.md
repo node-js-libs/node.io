@@ -1,7 +1,7 @@
 ### v0.2.1-5
-    * Web interface supports CoffeeScript jobs
+    * Web interface now supports CoffeeScript jobs
     * Support for multiple jobs in the same file (see ./examples/resolve.coffee)
-    * Added the -u (--unpack) switch for decrypting jobs made with Packnode	
+    * Added the -u (--unpack) switch for decrypting jobs made with [packnode](https://github.com/chriso/packnode)	
 
 ### v0.2.1-3
     * Better support for multiple jobs running in the same process
