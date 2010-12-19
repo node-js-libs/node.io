@@ -1,0 +1,11 @@
+.DS_Store?
+ehthumbs.db
+Icon?
+Thumbs.db
+.git*
+dev*
+docs/
+bench/
+examples/
+vendor/
+test/
