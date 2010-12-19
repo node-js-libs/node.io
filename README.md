@@ -11,24 +11,24 @@ node.io can streamline the process of:
 - Distributing work across multiple processes, and multiple servers (soon)
 - Working with continuous data & streams
 - Managing jobs through a web interface
+- Running encrypted jobs made with [packnode](https://github.com/chriso/packnode)
 
 ## Why node.io?
 
 - Create modular and extendable jobs for scraping and processing data
 - Jobs are written in Javascript or Coffeescript and run in Node.js - jobs are concise, asynchronous and _FAST_
-- Seamlessly speed up execution by distributing work among child processes and other servers (soon) 
+- Speed up execution by distributing work among child processes and other servers (soon)     
+- Includes a robust framework for scraping, selecting and traversing data from the web + support for a variety of proxies
+- Includes a data validation and sanitization framework
+- Provides support for retries, timeouts, dynamically adding input, etc.
+- Includes a basic web interface for running jobs 
 - Easily handle a variety of input output situations - node.io does the heavy lifting
     * Reading / writing lines to and from files
     * Reading / writing rows to and from a database
     * Traversing files in a directory
-    * STDIN / STDOUT / custom streams
+    * STDIN / STDOUT / streams / continuous IO
     * Piping data to other processes or node.io jobs
-    * Continuous IO
-    * Any combination of the above, or write your own IO methods     
-- Includes a robust framework for scraping, selecting and traversing data from the web + support for a variety of proxies
-- Includes a data validation and sanitization framework
-- Provides support for retries, timeouts, dynamically adding input, etc.
-- Comes with a web interface for managing jobs
+    * Any combination of the above, or write your own IO
 
 ## Installation
 
@@ -48,7 +48,7 @@ For usage details
 
 To get started, see the [documentation](https://github.com/chriso/node.io/blob/master/docs/README.md), [API](https://github.com/chriso/node.io/blob/master/docs/api.md), and [examples](https://github.com/chriso/node.io/tree/master/examples/).
 
-Better documentation will be available once I have time to write it.
+Better documentation will be available soon.
 
 *Note: node.io is a _BETA_ release. There will no doubt be some bugs and oddities.*
 
@@ -62,12 +62,12 @@ To run jobs through a web interface, put your jobs in `~/.node_modules` and run
 
 ## Roadmap
 
+- More tests & better coverage
+- Improve documentation and examples
+- Installation without NPM
 - Fix up the [http://node.io/](http://node.io/) site
 - Add more DOM [selector](http://api.jquery.com/category/selectors/) / [traversal](http://api.jquery.com/category/traversing/) methods
-- Test various proxies and write the proxy documentation
 - Add distributed processing
-- Installation without NPM (install.sh)
-- More tests / better coverage
 - Speed improvements
 
 [history.md](https://github.com/chriso/node.io/blob/master/HISTORY.md) lists recent changes.
