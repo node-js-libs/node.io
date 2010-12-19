@@ -7,5 +7,4 @@ dev*
 docs/
 bench/
 examples/
-vendor/
 test/
