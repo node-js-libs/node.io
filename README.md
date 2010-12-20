@@ -1,27 +1,12 @@
-# What is [node.io](http://node.io/)?
-
-node.io is a data scraping and processing framework for [Node.js](http://nodejs.org/) inspired by [Google's MapReduce](http://labs.google.com/papers/mapreduce.html).
-
-node.io can streamline the process of:
-
-- Parsing, filtering or sanitizing large amounts of data
-- Scraping data from the web using familiar CSS selectors and traversal methods
-- Map Reduce
-- Transferring data, e.g. CSV => a database
-- Distributing work across multiple processes, and multiple servers (soon)
-- Working with continuous data & streams
-- Managing jobs through a web interface
-- Running encrypted jobs made with [packnode](https://github.com/chriso/packnode)
+[node.io](http://node.io/) is a data scraping and processing framework for [Node.js](http://nodejs.org/)
 
 ## Why node.io?
 
 - Create modular and extendable jobs for scraping and processing data
 - Jobs are written in Javascript or Coffeescript and run in Node.js - jobs are concise, asynchronous and _FAST_
-- Speed up execution by distributing work among child processes and other servers (soon)     
-- Includes a robust framework for scraping, selecting and traversing data from the web + support for a variety of proxies
+- Includes a robust framework for scraping, selecting and traversing data from the web
+- Includes support for a variety of proxies
 - Includes a data validation and sanitization framework
-- Provides support for retries, timeouts, dynamically adding input, etc.
-- Includes a basic web interface for running jobs 
 - Easily handle a variety of input output situations - node.io does the heavy lifting
     * Reading / writing lines to and from files
     * Reading / writing rows to and from a database
@@ -29,36 +14,34 @@ node.io can streamline the process of:
     * STDIN / STDOUT / streams / continuous IO
     * Piping data to other processes or node.io jobs
     * Any combination of the above, or write your own IO
+- Provides support for retries, timeouts, dynamically adding input, etc.
+- Manage & run jobs through a web interface
+- Run encrypted jobs made with [packnode](https://github.com/chriso/packnode)
+- Speed up execution by distributing work across multiple processes and (soon) other servers 
 
 ## Installation
 
-To install node.io, use [npm](http://github.com/isaacs/npm):
+Note: if you do not have [Node.JS](http://nodejs.org/) or [npm](http://github.com/isaacs/npm) installed, [see this page](https://github.com/chriso/node.io/wiki/Installation).
+
+To install node.io, run
 
     $ npm install node.io
 
 To run tests
 
     $ make test
-
+    
 For usage details
 
     $ node.io --help
-
+    
 ## Getting started
 
 To get started, see the [documentation](https://github.com/chriso/node.io/blob/master/docs/README.md), [API](https://github.com/chriso/node.io/blob/master/docs/api.md), and [examples](https://github.com/chriso/node.io/tree/master/examples/).
 
-Better documentation will be available soon.
-
 *Note: node.io is a _BETA_ release. There will no doubt be some bugs and oddities.*
 
 Check [@nodeio](http://twitter.com/nodeio) or [http://node.io/](http://node.io/) for updates.
-
-## Running a web interface
-
-To run jobs through a web interface, put your jobs in `~/.node_modules` and run
-
-    $ node.io-web
 
 ## Roadmap
 
