@@ -1,23 +1,14 @@
-[node.io](http://node.io/) is a data scraping and processing framework for [Node.js](http://nodejs.org/)
+[node.io](http://node.io/) is a distributed data scraping and processing framework
 
-## Why node.io?
-
-- Create modular and extendable jobs for scraping and processing data
 - Jobs are written in Javascript or Coffeescript and run in Node.js - jobs are concise, asynchronous and _FAST_
 - Includes a robust framework for scraping, selecting and traversing data from the web
 - Includes support for a variety of proxies
 - Includes a data validation and sanitization framework
-- Easily handle a variety of input output situations - node.io does the heavy lifting
-    * Reading / writing lines to and from files
-    * Reading / writing rows to and from a database
-    * Traversing files in a directory
-    * STDIN / STDOUT / streams / continuous IO
-    * Piping data to other processes or node.io jobs
-    * Any combination of the above, or write your own IO
+- Easily handle a variety of input / output - files, databases, streams, stdin/stdout, etc.
+- Speed up execution by distributing work across multiple processes and (soon) other servers 
 - Provides support for retries, timeouts, dynamically adding input, etc.
 - Manage & run jobs through a web interface
 - Run encrypted jobs made with [packnode](https://github.com/chriso/packnode)
-- Speed up execution by distributing work across multiple processes and (soon) other servers 
 
 ## Installation
 
