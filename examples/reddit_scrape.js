@@ -1,6 +1,6 @@
 //This module pulls the front page stories and scores from reddit.com
 //There are API's for doing this - this is just as a quick demonstration of 
-//scraping and selecting web data -> `$ node.io reddit`
+//scraping and selecting web data -> `$ node.io reddit_scrape`
 
 var Job = require('node.io').Job;
 
@@ -24,12 +24,12 @@ var methods = {
             
             //Select all titles on the page
             $('a.title').each(function(a) {
-                titles.push(a.rawtext); //See the API for an explanation of element getters
+                titles.push(a.text); 
             });
             
             //Select all scores on the page
             $('div.score.unvoted').each(function(div) {
-                scores.push(div.text);
+                scores.push(div.rawtext); //See the API for an explanation of element getters
             });
             
             //Mismatch? page probably didn't load properly
@@ -37,17 +37,14 @@ var methods = {
                 self.exit('Title / score mismatch');
             }
             
-            //Output = [score] title
             for (var i = 0, len = scores.length; i < len; i++) {
                 //Ignore upcoming stories
-                if (scores[i] == '&bull;' || scores[i] == null) continue;
+                if (scores[i] == '&bull;') continue;
                 
                 //Check the data is ok
                 self.assert(scores[i]).isInt();
                 
-                //Decode entities in the title
-                titles[i] = self.filter(titles[i]).entityDecode();
-                
+                //Output = [score] title
                 output.push('['+scores[i]+'] '+titles[i]);
             }
             
