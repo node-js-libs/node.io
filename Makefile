@@ -1,6 +1,4 @@
-PREFIX ?= /usr/local
-
-test: $(BIN)
+test:
 	@expresso -I lib --growl $(TEST_FLAGS) test/*.test.js
 
 test-cov:
