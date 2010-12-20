@@ -103,11 +103,10 @@ module.exports = {
         job.assert(123).isInt();
         job.assert('abc').is(/^[a-z]+$/);
         
-        job.fail = function() {
-            assert.ok(true);
-        }
-        
-        job.assert('abc').isInt();
+        try {
+            job.assert('abc').isInt();
+            assert.ok(false, 'job.assert should have failed');
+        } catch (e) {}
     },
     
     'test job filtering / sanitization': function() {

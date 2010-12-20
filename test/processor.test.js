@@ -218,10 +218,12 @@ module.exports = {
         var job = createJob({
             input: [0,1,2],
             run: function() {
-                this.assert('abc').isInt();
-            },
-            fail: function() {
-                return 0;
+                try {
+                    this.assert('abc').isInt();
+                    return 1;
+                } catch (e) {
+                    return 0;
+                }
             },
             output: function(output) {
                 output.forEach(function(num) {
