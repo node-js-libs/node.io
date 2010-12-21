@@ -30,20 +30,22 @@ If you do not have npm or Node.JS v0.2.5+, [see this page](https://github.com/ch
     
 ## Getting started
 
-node.io comes bundled with several modules (including the pagerank example from above). See [this page](https://github.com/chriso/node.io/blob/master/builtin/README.md) for usage details.
-
 If you want to create your own scraping / processing jobs, head over to [the wiki](https://github.com/chriso/node.io/wiki) for documentation, examples and the API.
+
+node.io comes bundled with several modules (including the pagerank example from above). See [this page](https://github.com/chriso/node.io/blob/master/builtin/README.md) for usage details.
 
 ## Roadmap
 
-[history.md](https://github.com/chriso/node.io/blob/master/HISTORY.md) lists recent changes.
-
-- More tests & better coverage
 - Finish writing up the wiki
 - Fix up the [http://node.io/](http://node.io/) page
+- More tests & improve coverage
 - Add more DOM [selector](http://api.jquery.com/category/selectors/) / [traversal](http://api.jquery.com/category/traversing/) methods
 - Add distributed processing
+- Cookie jar for persistent cookies
+- Generic proxy manager
 - Speed improvements
+
+[history.md](https://github.com/chriso/node.io/blob/master/HISTORY.md) lists recent changes.
 
 If you want to contribute, please [fork/pull](https://github.com/chriso/node.io/fork).
 
