@@ -1,3 +1,6 @@
+### v0.2.1-8
+    * Added [built-in modules](https://github.com/chriso/node.io/tree/master/builtin). 
+
 ### v0.2.1-5
     * Web interface now supports CoffeeScript jobs
     * Support for multiple jobs in the same file (see ./examples/resolve.coffee)

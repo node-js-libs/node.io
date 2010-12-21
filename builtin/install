@@ -1,2 +1,4 @@
 mkdir -p ~/.node_modules
-cp -f *.coffee ~/.node_modules
+coffee -c *.coffee
+cp -f *.js ~/.node_modules
+rm -rf ./*.js
