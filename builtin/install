@@ -1,3 +1,2 @@
 mkdir -p ~/.node_modules
 cp -f *.coffee ~/.node_modules
-cp -f *.js ~/.node_modules

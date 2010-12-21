@@ -1,4 +1,4 @@
-## Built-in modules
+# Built-in modules
 
 Node.io comes with several built-in modules which can be accessed through the command line or web interface.
 
@@ -72,6 +72,12 @@ Example 2 - convert a TSV (tab separated file) to CSV
        
     $ node.io -s eval "input.split('\t').join(',')" < data.tsv > data.csv
 
+**word_count**
+
+This module uses map/reduce to count word occurrences in a file
+
+    $ node.io word_count < input.txt
+    
 **duplicates**
 
 This module can find or remove duplicates from a list
