@@ -16,7 +16,7 @@ This module provides DNS resolution utilities
 
 nodeio = require 'node.io'
 dns = require 'dns'
-options = {max: 100, timeout: 5, retries: 3}
+options = {max: 100, timeout: 5, retries: 1}
 
 # Outputs "domain,ip"
 class ResolveAll extends nodeio.JobClass
