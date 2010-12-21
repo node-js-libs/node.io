@@ -9,6 +9,17 @@
 
 Follow [@nodeio](http://twitter.com/nodeio) for updates.
 
+## Example
+
+Find the pagerank of a domain
+
+    $ echo "mastercard.com" | node.io pagerank
+       => mastercard.com,7
+    
+..or a list of domains
+
+    $ node.io pagerank < domains.txt
+
 ## Installation
 
 To install node.io, use [npm](http://github.com/isaacs/npm)
@@ -19,7 +30,9 @@ If you do not have npm or Node.JS v0.2.5+, [see this page](https://github.com/ch
     
 ## Getting started
 
-[Head over to the wiki for documentation, examples and the API](https://github.com/chriso/node.io/wiki).
+node.io comes bundled with several modules (including the pagerank example from above). See [this page](https://github.com/chriso/node.io/blob/master/builtin/README.md) for usage details.
+
+If you want to create your own scraping / processing jobs, head over to [the wiki](https://github.com/chriso/node.io/wiki) for documentation, examples and the API.
 
 ## Roadmap
 

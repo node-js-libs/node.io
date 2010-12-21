@@ -16,7 +16,7 @@ options = {
 class Pagerank extends nodeio.JobClass
     run: (input) ->
         url = input
-        if url.indexOf 'http://' is -1 then url = 'http://' + url
+        if url.indexOf('http://') is -1 then url = 'http://' + url
         
         # Generate the URL checksum
         ch = '6' + GoogleCH strord 'info:' + url
