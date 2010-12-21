@@ -19,7 +19,7 @@ class Validate extends nodeio.JobClass
         
     run: (line) ->
         invert = @options.args[0] is 'not'
-        filter = if invert then @options.args[0] else @options.args[1]
+        filter = if invert then @options.args[1] else @options.args[0]
         
         try 
             switch filter
