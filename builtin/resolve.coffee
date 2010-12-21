@@ -1,5 +1,5 @@
 usage = '''
-This module provides DNS resolution jobs
+This module provides DNS resolution utilities
 
    1. To resolve domains and return "domain,ip":
        $ node.io resolve < domains.txt
