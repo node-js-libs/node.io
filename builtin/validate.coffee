@@ -1,11 +1,11 @@
 usage = '''
-This module is a simple wrapper for the built in node-validator
+This module is a simple wrapper for node-validator
 Available filters are: int, url, ip, alpha, alphanumeric, email
 
    1. To filter out lines that do not match a filter:
        $ node.io validate [FILTER] < list.txt
 
-   2. To filter out lines that match a filter
+   2. To filter out lines that match a filter:
        $ node.io validate not [FILTER] < list.txt
 '''
 
@@ -13,9 +13,7 @@ nodeio = require 'node.io'
 
 class Validate extends nodeio.JobClass
     init: -> 
-        if @options.args.length is 0
-            @exit 'Please enter a filter, e.g. `node.io validate url`'
-        if @options.args[0] is 'help'
+        if @options.args.length is 0 or @options.args[0] is 'help'
             @status usage
             @exit()
         

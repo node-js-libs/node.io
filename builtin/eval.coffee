@@ -14,11 +14,11 @@ class EvalExp extends nodeio.JobClass
     init: -> 
         if @options.args.length is 0
             @exit 'Please enter an expression, e.g. `node.io eval "input.length"`'    
-        if (expression = @options.args[0]) is 'help'
+        if @options.args[0] is 'help'
             @exit 'node.io eval [EXPRESSION]'
         
     run: (input) ->
-        result = eval expression
+        result = eval @options.args[0]
         if result? then @emit result else @skip
 
 class UsageDetails extends nodeio.JobClass

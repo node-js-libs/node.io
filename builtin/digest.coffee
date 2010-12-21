@@ -12,15 +12,13 @@ crypto = require 'crypto'
 
 class Digest extends nodeio.JobClass
     init: ->
-        if @options.args.length is 0
+        if @options.args.length is 0 or @options.args[0] is 'help'
             @status usage
             @exit()
 
     run: (input) ->
-        switch hash = @options.args[0]
-            when 'help'
-                @status usage
-                @exit()
+        hash = @options.args[0]
+        switch hash
             when 'crc32'
                 @emit crc32 input
             else
