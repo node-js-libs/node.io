@@ -10,35 +10,24 @@
 - Manage & run jobs through a web interface
 - Run encrypted jobs made with [packnode](https://github.com/chriso/packnode)
 
-## Installation
+Check [@nodeio](http://twitter.com/nodeio).
 
-Note: if you do not have [Node.JS](http://nodejs.org/) or [npm](http://github.com/isaacs/npm) installed, [see this page](https://github.com/chriso/node.io/wiki/Installation).
+## Installation
 
 To install node.io, run
 
     $ npm install node.io
 
-To run tests
-
-    $ make test
-    
-For usage details
-
-    $ node.io --help
+If you do not have [Node.JS](http://nodejs.org/) or [npm](http://github.com/isaacs/npm) installed, [see this page](https://github.com/chriso/node.io/wiki/Installation).
     
 ## Getting started
 
-To get started, see the [documentation](https://github.com/chriso/node.io/blob/master/docs/README.md), [API](https://github.com/chriso/node.io/blob/master/docs/api.md), and [examples](https://github.com/chriso/node.io/tree/master/examples/).
-
-*Note: node.io is a _BETA_ release. There will no doubt be some bugs and oddities.*
-
-Check [@nodeio](http://twitter.com/nodeio) or [http://node.io/](http://node.io/) for updates.
+[Head over to the wiki(https://github.com/chriso/node.io/wiki) for documentation, examples and the API]
 
 ## Roadmap
 
 - More tests & better coverage
-- Improve documentation and examples
-- Installation without NPM
+- Finish writing up the wiki
 - Fix up the [http://node.io/](http://node.io/) site
 - Add more DOM [selector](http://api.jquery.com/category/selectors/) / [traversal](http://api.jquery.com/category/traversing/) methods
 - Add distributed processing
