@@ -29,7 +29,8 @@ class WordCount extends nodeio.JobClass
                 word_count[word]++
             else
                 word_count[word] = 1
-    
+        return null
+        
     complete: ->
         output = []
         for word, count in word_count
