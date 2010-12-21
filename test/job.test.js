@@ -12,21 +12,34 @@ function createJob(options, methods) {
     
 module.exports = {
     
+    'test job creation with no options': function() {
+    
+        var job = createJob({testmethod:function(){return 'a';}});
+        
+        assert.equal('function', typeof job.testmethod);
+        assert.equal('a', job.testmethod());
+    },
+    
     'test job extend': function() {
     
         var job = createJob({foo:'bar'}, {testmethod:function(){return 'a';}});
-                
+        
         assert.equal('bar', job.options.foo);
         assert.equal('function', typeof job.testmethod);
         assert.equal('a', job.testmethod());
-             
+        
         //Create a new job that extends the old one
         var new_job = job.extend({foo:'foo'}, {testmethod:false,testmethodb:function(){return 'b';}});
+                
         assert.equal('foo', new_job.options.foo);
         assert.equal(false, new_job.testmethod);
         assert.equal('function', typeof new_job.testmethodb);
         assert.equal('b', new_job.testmethodb());
-                
+        
+        //Create a new job that extends the old one (just methods)
+        var new_job_b = job.extend({testmethodb:function(){return 'd';}});
+        assert.equal('d', new_job_b.testmethodb());
+        
         //Test calling a parent method
         assert.equal('function', typeof new_job.__super__.testmethod);
         assert.equal('a', new_job.__super__.testmethod());
@@ -116,5 +129,4 @@ module.exports = {
         var job = createJob();        
         assert.equal(1, job.filter('00000001').ltrim(0));
     },   
-    
 }
