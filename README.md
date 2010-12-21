@@ -2,15 +2,12 @@
 
 - Jobs are written in Javascript or Coffeescript and run in Node.js - jobs are concise, asynchronous and _FAST_
 - Includes a robust framework for scraping, selecting and traversing data from the web
-- Includes support for a variety of proxies
 - Includes a data validation and sanitization framework
 - Easily handle a variety of input / output - files, databases, streams, stdin/stdout, etc.
-- Speed up execution by distributing work across multiple processes and (soon) other servers 
-- Provides support for retries, timeouts, dynamically adding input, etc.
+- Speed up execution by distributing work across multiple processes and (soon) other servers
 - Manage & run jobs through a web interface
-- Run encrypted jobs made with [packnode](https://github.com/chriso/packnode)
 
-Check [@nodeio](http://twitter.com/nodeio).
+Follow [@nodeio](http://twitter.com/nodeio) for updates.
 
 ## Installation
 
@@ -22,13 +19,13 @@ If you do not have [Node.JS](http://nodejs.org/) or [npm](http://github.com/isaa
     
 ## Getting started
 
-[Head over to the wiki(https://github.com/chriso/node.io/wiki) for documentation, examples and the API]
+[Head over to the wiki for documentation, examples and the API](https://github.com/chriso/node.io/wiki)
 
 ## Roadmap
 
 - More tests & better coverage
 - Finish writing up the wiki
-- Fix up the [http://node.io/](http://node.io/) site
+- Fix up the [http://node.io/](http://node.io/) page
 - Add more DOM [selector](http://api.jquery.com/category/selectors/) / [traversal](http://api.jquery.com/category/traversing/) methods
 - Add distributed processing
 - Speed improvements
