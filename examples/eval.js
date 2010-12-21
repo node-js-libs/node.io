@@ -1,4 +1,4 @@
-// This versatile module runs an expression for each line of input
+// This module evaluates an expression on each line of input and emits the result (unless the result is null)
 //
 //   1. To convert a TSV (tab separated file) to CSV
 //       $ cat data.tsv | node.io -s eval "input.split('\t').join(',')" > data.csv
@@ -15,7 +15,7 @@ var methods = {
             this.exit('Please enter an expression , e.g. `node.io eval "input.length"`');
             return;
         }
-                    
+        
         var result = (function(input, expression) {
             return eval(expression);
         })(input, this.options.args[0]);

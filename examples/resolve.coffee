@@ -9,14 +9,14 @@ class ResolveAll extends nodeio.JobClass
             if err? then @retry() else @emit domain + ',' + ip
     fail: (domain) -> @emit domain + ',failed'
 
-# Outputs domains that have a DNS record
+# Outputs domains that have a record
 class HasRecord extends nodeio.JobClass
     run: (domain) -> 
         dns.lookup domain, 4, (err, ip) =>
             if err? then @retry() else @emit domain
     fail: (domain) -> @skip()
 
-# Outputs domains that do not have a DNS record
+# Outputs domains that do not have a record
 class Available extends nodeio.JobClass
     run: (domain) -> 
         dns.lookup domain, 4, (err, ip) =>
