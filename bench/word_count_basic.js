@@ -2,7 +2,7 @@ var last_line = '', words = {}, line, i, l, j, k;
 
 function count_words(lines) {
     for (i = 0, l = lines.length; i < l; i++) {
-        line = lines[i].split(' ');
+        line = lines[i].split(' '); //.toLowerCase().replace(/[^a-z0-9\s]+/g, '')
         for (j = 0, k = line.length; j < k; j++) {
             words[line[j]] = typeof words[line[j]] === 'undefined' ? 1 : words[line[j]] + 1;
         }
