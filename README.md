@@ -1,6 +1,6 @@
-[node.io](http://node.io/) is a distributed data scraping and processing framework
+**[node.io](http://node.io/) is a distributed data scraping and processing framework**
 
-- Jobs are written in Javascript or Coffeescript and run in Node.js - jobs are concise, asynchronous and _FAST_
+- Jobs are written in Javascript or [Coffeescript](http://jashkenas.github.com/coffee-script/) and run in [Node.JS](http://nodejs.org/) - jobs are concise, asynchronous and _FAST_
 - Includes a robust framework for scraping, selecting and traversing data from the web
 - Includes a data validation and sanitization framework
 - Easily handle a variety of input / output - files, databases, streams, stdin/stdout, etc.
@@ -11,17 +11,19 @@ Follow [@nodeio](http://twitter.com/nodeio) for updates.
 
 ## Installation
 
-To install node.io, run
+To install node.io, use [npm](http://github.com/isaacs/npm)
 
     $ npm install node.io
 
-If you do not have [Node.JS](http://nodejs.org/) or [npm](http://github.com/isaacs/npm) installed, [see this page](https://github.com/chriso/node.io/wiki/Installation).
+If you do not have npm or Node.JS v0.2.5+, [see this page](https://github.com/chriso/node.io/wiki/Installation).
     
 ## Getting started
 
-[Head over to the wiki for documentation, examples and the API](https://github.com/chriso/node.io/wiki)
+[Head over to the wiki for documentation, examples and the API](https://github.com/chriso/node.io/wiki).
 
 ## Roadmap
+
+[history.md](https://github.com/chriso/node.io/blob/master/HISTORY.md) lists recent changes.
 
 - More tests & better coverage
 - Finish writing up the wiki
@@ -30,13 +32,9 @@ If you do not have [Node.JS](http://nodejs.org/) or [npm](http://github.com/isaa
 - Add distributed processing
 - Speed improvements
 
-[history.md](https://github.com/chriso/node.io/blob/master/HISTORY.md) lists recent changes.
-
-## Contributing
+If you want to contribute, please [fork/pull](https://github.com/chriso/node.io/fork).
 
 If you find a bug, please report the issue [here](https://github.com/chriso/node.io/issues). 
-
-If you want to contribute, please [fork/pull](https://github.com/chriso/node.io/fork).
 
 ## Credits
 
