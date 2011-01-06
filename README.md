@@ -9,7 +9,25 @@
 
 Follow [@nodeio](http://twitter.com/nodeio) for updates.
 
-## Example
+## Scrape example
+
+Let's pull the front page storied from reddit using the high-level scrape() method.
+
+    require('node.io').scrape(function() {
+        var self = this;
+        this.getHtml('http://www.reddit.com/', function(err, $) {
+            if (err) {
+                self.exit(err);
+            } else {
+                $('a.title').each(function(title) {  
+                    console.log(title.text);
+                });
+                self.skip();
+            }
+        });
+    });
+    
+## Built-in module example
 
 Find the pagerank of a domain
 
