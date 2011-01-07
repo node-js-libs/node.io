@@ -27,6 +27,8 @@ Let's pull the front page storied from reddit using the high-level scrape() meth
         });
     });
     
+If you want to incorporate timeouts, retries, custom IO, batch-type jobs, etc. head over the [the wiki](https://github.com/chriso/node.io/wiki) for documentation.
+
 ## Built-in module example
 
 Find the pagerank of a domain
