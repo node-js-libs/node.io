@@ -1,3 +1,7 @@
+### v0.2.1-14
+    * Bug fixes
+    * Status messages are written to stderr
+
 ### v0.2.1-8
     * Added [built-in modules](https://github.com/chriso/node.io/tree/master/builtin). 
 
