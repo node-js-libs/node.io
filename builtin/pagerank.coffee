@@ -41,7 +41,7 @@ class UsageDetails extends nodeio.JobClass
 }
 
 `
-// BEING CODE FOR GENERATING GOOGLE PAGERANK CHECKSUMS
+// BEGIN CODE FOR GENERATING GOOGLE PAGERANK CHECKSUMS
 //----------------------------------------------------------------------------------------------
 function zF(a,b) {
     var z = parseInt(80000000,16);
