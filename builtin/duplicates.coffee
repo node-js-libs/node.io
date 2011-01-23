@@ -18,7 +18,7 @@ class RemoveDuplicates extends nodeio.JobClass
         for line in lines
             if not line in seen_lines 
                 @emit line
-                seel_lines.push line
+                seen_lines.push line
 
 class FindDuplicates extends nodeio.JobClass
     reduce: (lines) ->
