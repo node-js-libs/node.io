@@ -1,3 +1,7 @@
+### v0.2.1-20
+    * Bug fixes
+    * Works with node >= v0.3.6
+
 ### v0.2.1-14
     * Bug fixes
     * Status messages are written to stderr
