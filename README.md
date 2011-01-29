@@ -7,7 +7,7 @@
 - Speed up execution by distributing work across multiple processes and (soon) other servers
 - Manage & run jobs through a web interface
 
-Follow [@nodeio](http://twitter.com/nodeio) for updates.
+Follow [@nodeio](http://twitter.com/nodeio) or visit [http://node.io/](http://node.io/) for updates.
 
 ## Scrape example
 
@@ -27,7 +27,7 @@ Let's pull the front page storied from reddit using the high-level scrape() meth
         });
     });
     
-If you want to incorporate timeouts, retries, custom IO, batch-type jobs, etc. head over the [the wiki](https://github.com/chriso/node.io/wiki) for documentation.
+If you want to incorporate timeouts, retries, batch-type jobs, etc. head over the [the wiki](https://github.com/chriso/node.io/wiki) for documentation.
 
 ## Built-in module example
 
@@ -46,7 +46,7 @@ To install node.io, use [npm](http://github.com/isaacs/npm)
 
     $ npm install node.io
 
-If you do not have npm or Node.JS v0.2.5+, [see this page](https://github.com/chriso/node.io/wiki/Installation).
+If you do not have npm or Node.JS, [see this page](https://github.com/chriso/node.io/wiki/Installation).
     
 ## Getting started
 
