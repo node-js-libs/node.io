@@ -20,7 +20,8 @@
     "validator": ">= 0.1.1",  
     "expresso": ">= 0.7.0",
     "coffee-script": ">= 0.9.5",
-    "daemon": ">= 0.1.0"
+    "daemon": ">= 0.1.0",
+    "jquery": ">= 1.4.4"
   },
   "scripts": { 
     "test": "make test",
