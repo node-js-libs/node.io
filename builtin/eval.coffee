@@ -13,21 +13,14 @@ nodeio = require 'node.io'
 class EvalExp extends nodeio.JobClass
     init: -> 
         if @options.args.length is 0
-            @exit 'Please enter an expression, e.g. `node.io eval "input.length"`'    
+            @exit 'Please enter an expression, e.g. `node.io eval "input.length"`'
         if @options.args[0] is 'help'
-            @exit 'node.io eval [EXPRESSION]'
-        
+            @status usage
+            @exit
+
     run: (input) ->
         result = eval @options.args[0]
         if result? then @emit result else @skip
 
-class UsageDetails extends nodeio.JobClass
-    input: -> 
-        @status usage
-        @exit()
-
 @class = EvalExp
-@job = {
-    eval: new EvalExp()
-    help: new UsageDetails()
-}
+@job = new EvalExp()
