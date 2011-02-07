@@ -1,6 +1,6 @@
 { "name"          : "node.io",
   "description"   : "A distributed data scraping and processing framework for node.js",
-  "version"       : "0.2.1-20",
+  "version"       : "0.2.2-1",
   "homepage"      : "http://github.com/chriso/node.io",
   "keywords"      : ["data","mapreduce","map","reduce","scraping","html","parsing","parse","scrape","process","processing","data"],
   "author"        : "Chris O'Hara <cohara87@gmail.com>",
@@ -27,6 +27,7 @@
     "postinstall" : "cd builtin && ./install"
   },
   "bin": { 
+    "io": "./bin/io",
     "node.io": "./bin/node.io",
     "node.io-web": "./bin/node.io-web"
   },
