@@ -1,3 +1,7 @@
+### v0.2.2-1
+    * Added JSDOM as an optional parser (for jQuery access)
+    * Added head() to make HEAD requests
+
 ### v0.2.1-20
     * Bug fixes
     * Works with node >= v0.3.6
