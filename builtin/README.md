@@ -48,6 +48,22 @@ Example 4 - return unique IPs
     
     $ node.io resolve ips < domains.txt
     
+### statuscode
+
+Makes a HEAD request to each URL of input and returns the status code
+
+Example 1 - return the status code (url,status)
+
+    $ cat urls.txt | node.io -s statuscode
+
+Example 2 - find URLs that 404
+
+    $ cat urls.txt | node.io -s statuscode 404
+
+Example 3 - find URLs that redirect
+
+    $ cat urls.txt | node.io -s statuscode 3
+
 ### validate
 
 This module is a simple wrapper for [node-validator](https://github.com/chriso/node-validator). Available filters are: [int, url, ip, alpha, alphanumeric, email]
