@@ -1,7 +1,8 @@
-### v0.2.2-1
+### v0.2.2-3
     * Added JSDOM as an optional parser (for jQuery access)
     * Added head() to make HEAD requests
     * Added "io" as a command line alias
+    * Added a new builtin - statuscode
 
 ### v0.2.1-20
     * Bug fixes
