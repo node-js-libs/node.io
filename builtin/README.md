@@ -64,6 +64,18 @@ Example 3 - find URLs that redirect
 
     $ cat urls.txt | node.io -s statuscode 3
 
+### query
+
+The query module can be used to quickly select data from a URL. Usage: `$ node.io query url [selector] [attribute]`
+
+Example 1 - pull front page stories from reddit
+
+    $ node.io query "http://www.reddit.com" a.title
+
+Example 2 - pull the href attribute from these links
+
+    $ node.io query "http://www.reddit.com" a.title href
+
 ### validate
 
 This module is a simple wrapper for [node-validator](https://github.com/chriso/node-validator). Available filters are: [int, url, ip, alpha, alphanumeric, email]
