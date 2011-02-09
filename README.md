@@ -1,7 +1,7 @@
 **[node.io](http://node.io/) is a distributed data scraping and processing framework**
 
 - Jobs are written in Javascript or [Coffeescript](http://jashkenas.github.com/coffee-script/) and run in [Node.JS](http://nodejs.org/) - jobs are concise, asynchronous and _FAST_
-- Includes a robust framework for scraping, selecting and traversing data from the web
+- Includes a robust framework for scraping, selecting and traversing data from the web (choose between jQuery or SoupSelect)
 - Includes a data validation and sanitization framework
 - Easily handle a variety of input / output - files, databases, streams, stdin/stdout, etc.
 - Speed up execution by distributing work across multiple processes and (soon) other servers
@@ -29,16 +29,26 @@ Let's pull the front page storied from reddit using the high-level scrape() meth
     
 If you want to incorporate timeouts, retries, batch-type jobs, etc. head over the [the wiki](https://github.com/chriso/node.io/wiki) for documentation.
 
-## Built-in module example
+## Built-in modules
+
+node.io comes with some [built-in scraping modules](https://github.com/chriso/node.io/tree/master/builtin).
 
 Find the pagerank of a domain
 
     $ echo "mastercard.com" | node.io pagerank
        => mastercard.com,7
-    
-..or a list of domains
 
-    $ node.io pagerank < domains.txt
+..or a list of URLs
+
+    $ node.io pagerank < urls.txt
+
+Quickly check the http code for each URL in a list
+
+    $ node.io statuscode < urls.txt
+
+Grab the front page stories from [reddit](http://www.reddit.com)
+
+    $ node.io query "http://www.reddit.com/" a.title
 
 ## Installation
 
@@ -57,12 +67,10 @@ node.io comes bundled with several modules (including the pagerank example from 
 ## Roadmap
 
 - Finish writing up the wiki
-- Fix up the [http://node.io/](http://node.io/) page
 - More tests & improve coverage
-- Add more DOM [selector](http://api.jquery.com/category/selectors/) / [traversal](http://api.jquery.com/category/traversing/) methods
 - Add distributed processing
+- Fix up the [http://node.io/](http://node.io/) page
 - Cookie jar for persistent cookies
-- Generic proxy manager
 - Speed improvements
 
 [history.md](https://github.com/chriso/node.io/blob/master/HISTORY.md) lists recent changes.
