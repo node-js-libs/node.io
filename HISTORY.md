@@ -1,3 +1,8 @@
+### v0.2.2-4
+    * Bug fixes
+    * Improved debug information for requests
+    * Added a new builtin - query
+
 ### v0.2.2-3
     * Added JSDOM as an optional parser (for jQuery access)
     * Added head() to make HEAD requests
