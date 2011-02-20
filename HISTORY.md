@@ -1,3 +1,8 @@
+### v0.2.3-1
+    * Fixed relative Location header bug
+    * Moved soupselect to ./vendor as its package.json is broken
+    * Added more information to --debug
+
 ### v0.2.2-4
     * Bug fixes
     * Improved debug information for requests
