@@ -1,3 +1,8 @@
+### v0.2.3-2
+    * Removed daemon and expresso as a required dependencies
+    * Added --spoof for spoofing user agents
+    * Added built-in modules for recursively scraping urls
+
 ### v0.2.3-1
     * Fixed relative Location header bug
     * Moved soupselect to ./vendor as its package.json is broken
