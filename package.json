@@ -1,12 +1,12 @@
 { "name"          : "node.io",
-  "description"   : "A distributed data scraping and processing framework for node.js",
-  "version"       : "0.2.3-2",
+  "description"   : "A distributed data scraping and processing framework",
+  "version"       : "0.2.4",
   "homepage"      : "http://github.com/chriso/node.io",
   "keywords"      : ["data","mapreduce","map","reduce","scraping","html","parsing","parse","scrape","process","processing","data"],
   "author"        : "Chris O'Hara <cohara87@gmail.com>",
   "main"          : "./lib/node.io",
   "directories"   : { "lib" : "./lib/node.io" },
-  "bugs": { 
+  "bugs": {
     "mail": "cohara87@gmail.com",
     "web": "http://github.com/chriso/node.io/issues"
   },
@@ -14,24 +14,24 @@
     "type": "git",
     "url": "http://github.com/chriso/node.io.git"
   },
-  "engines": { "node": ">=0.2.5" },
-  "dependencies": { 
+  "engines": { "node": ">=0.4.0" },
+  "dependencies": {
     "validator": ">= 0.1.1",
     "coffee-script": ">= 0.9.5",
     "htmlparser": ">= 1.7.3",
     "jquery": ">= 1.4.4"
   },
-  "scripts": { 
+  "scripts": {
     "test": "make test",
     "postinstall" : "cd builtin && ./install"
   },
-  "bin": { 
+  "bin": {
     "io": "./bin/io",
     "node.io": "./bin/node.io",
     "node.io-web": "./bin/node.io-web"
   },
-  "licenses": [{ 
-    "type": "MIT", 
+  "licenses": [{
+    "type": "MIT",
     "url": "http://github.com/chriso/node.io/raw/master/LICENSE"
   }]
 }
