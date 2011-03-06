@@ -12,16 +12,16 @@ Available filters are: int, url, ip, alpha, alphanumeric, email
 nodeio = require 'node.io'
 
 class Validate extends nodeio.JobClass
-    init: -> 
+    init: ->
         if @options.args.length is 0 or @options.args[0] is 'help'
             @status usage
             @exit()
-        
+
     run: (line) ->
         invert = @options.args[0] is 'not'
         filter = if invert then @options.args[1] else @options.args[0]
-        
-        try 
+
+        try
             switch filter
                 when 'url' then @assert(line).isUrl()
                 when 'email' then @assert(line).isEmail()
@@ -33,7 +33,7 @@ class Validate extends nodeio.JobClass
                     @status usage
                     @exit()
             if invert then @skip() else @emit line
-            
+
         catch error
             if invert then @emit line else @skip()
 

@@ -8,7 +8,7 @@ function count_words(lines) {
         }
     }
 }
-    
+
 var stream = process.openStdin()
 
 stream.setEncoding('utf8');

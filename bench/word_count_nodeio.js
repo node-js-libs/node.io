@@ -1,7 +1,7 @@
 var Job = require('node.io').Job;
 
 var options = {max: 10, take: 10}, word_count = {}, methods = {
-    
+
     run: function(lines) {
         var self = this, words = [], line, i, l, j, k;
         for (i = 0, l = lines.length; i < l; i++) {
@@ -12,13 +12,13 @@ var options = {max: 10, take: 10}, word_count = {}, methods = {
         }
         this.emit(words);
     },
-    
+
     reduce: function(words) {
         for (var i = 0, l = words.length; i < l; i++) {
             word_count[words[i]] = typeof word_count[words[i]] === 'undefined' ? 1 : word_count[words[i]] + 1;
         }
     },
-    
+
     complete: function() {
         var out = [];
         for (var word in word_count) {
@@ -28,7 +28,7 @@ var options = {max: 10, take: 10}, word_count = {}, methods = {
         this.output(out);
         return true;
     }
-    
+
 };
 
 exports.job = new Job(options, methods);

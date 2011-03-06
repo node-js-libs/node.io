@@ -12,10 +12,10 @@ var options = {
 }
 
 var methods = {
-    
+
     run: function(file) {
         var self = this, len = file.length;
-        
+
         if (file.substr(len-7, len-1) === '.coffee') {
             //Only compile .coffee files
             this.exec('coffee -c "' + file + '"', function(err) {
@@ -30,6 +30,6 @@ var methods = {
         }
     }
 }
-    
+
 //Export the job
 exports.job = new Job(options, methods);

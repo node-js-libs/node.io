@@ -11,7 +11,7 @@ This module evaluates an expression on each line of input and emits the result (
 nodeio = require 'node.io'
 
 class EvalExp extends nodeio.JobClass
-    init: -> 
+    init: ->
         if @options.args.length is 0
             @exit 'Please enter an expression, e.g. `node.io eval "input.length"`'
         if @options.args[0] is 'help'

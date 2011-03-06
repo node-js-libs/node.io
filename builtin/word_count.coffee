@@ -22,7 +22,7 @@ class WordCount extends nodeio.JobClass
             for word in line
                 words.push word
         @emit words
-                  
+
     reduce: (words) ->
         for word in words
             if word_count[word]?
@@ -30,7 +30,7 @@ class WordCount extends nodeio.JobClass
             else
                 word_count[word] = 1
         return null
-        
+
     complete: ->
         output = []
         for word, count in word_count
@@ -39,7 +39,7 @@ class WordCount extends nodeio.JobClass
         return true
 
 class UsageDetails extends nodeio.JobClass
-    input: -> 
+    input: ->
         @status usage
         @exit()
 

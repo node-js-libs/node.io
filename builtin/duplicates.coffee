@@ -16,7 +16,7 @@ emitted_lines = []
 class RemoveDuplicates extends nodeio.JobClass
     reduce: (lines) ->
         for line in lines
-            if not line in seen_lines 
+            if not line in seen_lines
                 @emit line
                 seen_lines.push line
 
@@ -27,11 +27,11 @@ class FindDuplicates extends nodeio.JobClass
                 if not line in emitted_lines
                     @emit line
                     emitted_lines.push line
-                else 
+                else
                     seen_lines.push line
 
 class UsageDetails extends nodeio.JobClass
-    input: -> 
+    input: ->
         @status usage
         @exit()
 

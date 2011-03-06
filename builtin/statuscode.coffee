@@ -14,7 +14,7 @@ Make a HEAD request to each URL of input and return the status code
 nodeio = require 'node.io'
 
 class StatusCode extends nodeio.JobClass
-    init: -> 
+    init: ->
         if @options.args.length and @options.args[0] is 'help'
             @status usage
             @exit
