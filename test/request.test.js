@@ -341,4 +341,46 @@ module.exports = {
             close(server);
         }, timeout);
     },
+
+    'test get() is in same scope as job': function() {
+
+        var job = createJob();
+
+        var server = http.createServer(function (req, res) {
+            res.end();
+        });
+
+        server.listen(++port);
+
+        job.foo = 'bar';
+
+        job.get('http://127.0.0.1:'+port+'/', function(err, data, headers) {
+            assert.equal('bar', this.foo);
+        });
+
+        setTimeout(function() {
+            close(server);
+        }, timeout);
+    },
+
+    'test getHtml() is in same scope as job': function() {
+
+        var job = createJob();
+
+        var server = http.createServer(function (req, res) {
+            res.end();
+        });
+
+        server.listen(++port);
+
+        job.foo = 'bar';
+
+        job.getHtml('http://127.0.0.1:'+port+'/', function(err, $) {
+            assert.equal('bar', this.foo);
+        });
+
+        setTimeout(function() {
+            close(server);
+        }, timeout);
+    },
 }
