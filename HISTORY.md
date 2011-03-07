@@ -1,11 +1,11 @@
 ### v0.2.4
     * Moved to the new node v0.4 request API with full HTTPS support
+    * Added the auto_retry option to improve code readability
+    * Callbacks are now called in the same scope as job methods
 
-### v0.2.3-2
+### v0.2.3
     * Removed daemon and expresso as a required dependencies
     * Added --spoof for spoofing user agents
-
-### v0.2.3-1
     * Fixed relative Location header bug
     * Moved soupselect to ./vendor as its package.json is broken
     * Added more information to --debug
