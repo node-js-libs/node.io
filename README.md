@@ -14,19 +14,16 @@ Follow [@nodeio](http://twitter.com/nodeio) or visit [http://node.io/](http://no
 Let's pull the front page storied from reddit using the high-level scrape() method.
 
     require('node.io').scrape(function() {
-        var self = this;
         this.getHtml('http://www.reddit.com/', function(err, $) {
-            if (err) {
-                self.exit(err);
-            } else {
-                $('a.title').each(function(title) {  
-                    console.log(title.text);
-                });
-                self.skip();
-            }
+            if (err) throw err;
+            var stories = [];
+            $('a.title').each(function(title) {
+                stories.push(title.text);
+            });
+            this.emit(stories);
         });
     });
-    
+
 If you want to incorporate timeouts, retries, batch-type jobs, etc. head over the [the wiki](https://github.com/chriso/node.io/wiki) for documentation.
 
 ## Built-in modules
