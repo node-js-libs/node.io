@@ -11,11 +11,10 @@ Follow [@nodeio](http://twitter.com/nodeio) or visit [http://node.io/](http://no
 
 ## Scrape example
 
-Let's pull the front page storied from reddit using the high-level scrape() method.
+Let's pull the front page stories from reddit
 
     require('node.io').scrape(function() {
         this.getHtml('http://www.reddit.com/', function(err, $) {
-            if (err) throw err;
             var stories = [];
             $('a.title').each(function(title) {
                 stories.push(title.text);
@@ -54,7 +53,7 @@ To install node.io, use [npm](http://github.com/isaacs/npm)
     $ npm install node.io
 
 If you do not have npm or Node.JS, [see this page](https://github.com/chriso/node.io/wiki/Installation).
-    
+
 ## Getting started
 
 If you want to create your own scraping / processing jobs, head over to [the wiki](https://github.com/chriso/node.io/wiki) for documentation, examples and the API.
