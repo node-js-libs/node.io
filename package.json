@@ -21,10 +21,6 @@
     "htmlparser": ">= 1.7.3",
     "jquery": ">= 1.4.4"
   },
-  "scripts": {
-    "test": "make test",
-    "postinstall" : "cd builtin && ./install"
-  },
   "bin": {
     "io": "./bin/io",
     "node.io": "./bin/node.io",

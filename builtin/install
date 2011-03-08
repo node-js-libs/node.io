@@ -1,4 +1,0 @@
-mkdir -p ~/.node_libraries
-coffee -c *.coffee
-cp -f *.js ~/.node_libraries
-
