@@ -1,3 +1,8 @@
+### v0.2.5
+    * Moved validator, jQuery and htmlparser to ./vendor as submodules
+    * Npm is no longer required to install node.io
+    * Built-in modules are stored relative to the install dir
+
 ### v0.2.4
     * Moved to the new node v0.4 request API with full HTTPS support
     * Added the auto_retry option to improve code readability
