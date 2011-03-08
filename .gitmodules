@@ -1,12 +1,9 @@
-[submodule "vendor/jquery"]
-	path = vendor/jquery
-	url = https://github.com/coolaj86/node-jquery.git
 [submodule "vendor/htmlparser"]
 	path = vendor/htmlparser
 	url = https://github.com/tautologistics/node-htmlparser.git
-[submodule "vendor/jsdom"]
-	path = vendor/jsdom
-	url = https://github.com/tmpvar/jsdom.git
 [submodule "vendor/validator"]
 	path = vendor/validator
 	url = https://chriso@github.com/chriso/node-validator.git
+[submodule "vendor/soupselect"]
+	path = vendor/soupselect
+	url = https://github.com/harryf/node-soupselect.git
