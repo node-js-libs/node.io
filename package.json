@@ -16,9 +16,7 @@
   },
   "engines": { "node": ">=0.4.0" },
   "dependencies": {
-    "validator": ">= 0.1.1",
     "coffee-script": ">= 0.9.5",
-    "htmlparser": ">= 1.7.3",
     "jquery": ">= 1.4.4"
   },
   "bin": {
