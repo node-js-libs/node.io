@@ -1,12 +1,15 @@
 ### v0.2.5
+    * Added the -m (--max) switch for overridding max concurrent requests
+    * Speed improvements when parsing HTML using getHtml and postHtml
     * Moved validator, jQuery and htmlparser to ./vendor as submodules
-    * Npm is no longer required to install node.io
+    * npm is no longer required to install node.io
     * Built-in modules are stored relative to the install dir
+    * Added url recursion and a helper for resolving and filtering links on a page
 
 ### v0.2.4
     * Moved to the new node v0.4 request API with full HTTPS support
     * Added the auto_retry option to improve code readability
-    * Callbacks are now called in the same scope as job methods
+    * Callbacks are now called in the same scope as job methods (no more self = this)
 
 ### v0.2.3
     * Removed daemon and expresso as a required dependencies
@@ -35,12 +38,12 @@
     * Status messages are written to stderr
 
 ### v0.2.1-8
-    * Added [built-in modules](https://github.com/chriso/node.io/tree/master/builtin). 
+    * Added [built-in modules](https://github.com/chriso/node.io/tree/master/builtin).
 
 ### v0.2.1-5
     * Web interface now supports CoffeeScript jobs
     * Support for multiple jobs in the same file (see ./examples/resolve.coffee)
-    * Added the -u (--unpack) switch for decrypting jobs made with [packnode](https://github.com/chriso/packnode)	
+    * Added the -u (--unpack) switch for decrypting jobs made with [packnode](https://github.com/chriso/packnode)
 
 ### v0.2.1-3
     * Better support for multiple jobs running in the same process
@@ -67,12 +70,12 @@
 ### v0.1.1-17
     * Fixed incorrect handling of large streams
     * Better support for request timeouts
-    * Bug fixes    
+    * Bug fixes
 
 ### v0.1.1-6
     * Added a -g (--debug) switch
     * Minor bug fixes
-    * Added HTTP code handler - auto support for redirects, etc.    
+    * Added HTTP code handler - auto support for redirects, etc.
 
 ### v0.1.1-1
     * Fixed an inheritance bug when not exclusively using CoffeeScript
