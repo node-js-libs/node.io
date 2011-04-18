@@ -1,6 +1,3 @@
-[submodule "vendor/htmlparser"]
-	path = vendor/htmlparser
-	url = https://github.com/tautologistics/node-htmlparser.git
 [submodule "vendor/validator"]
 	path = vendor/validator
 	url = https://chriso@github.com/chriso/node-validator.git
