@@ -50,7 +50,7 @@ Grab the front page stories from [reddit](http://www.reddit.com)
 
 To install node.io, use [npm](http://github.com/isaacs/npm)
 
-    $ npm install node.io
+    $ npm install -g node.io
 
 If you do not have npm or Node.JS, [see this page](https://github.com/chriso/node.io/wiki/Installation).
 
