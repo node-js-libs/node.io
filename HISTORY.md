@@ -1,3 +1,13 @@
+### v0.3.0
+    * Fixed -f, --fork
+
+### v0.2.6 - v0.2.9
+    * Various fixes to CSV reading and writing
+    * Added an option to control whether JSDOM processes external resources
+    * When using JSDOM, don't run the callback until the window is loaded
+    * Ability to specify request encoding
+    * Added URL recursion
+
 ### v0.2.5
     * Added the -m (--max) switch for overridding max concurrent requests
     * Speed improvements when parsing HTML using getHtml and postHtml
