@@ -15,10 +15,10 @@
     retries: 3
   };
   Pagerank = (function() {
+    __extends(Pagerank, nodeio.JobClass);
     function Pagerank() {
       Pagerank.__super__.constructor.apply(this, arguments);
     }
-    __extends(Pagerank, nodeio.JobClass);
     Pagerank.prototype.run = function(input) {
       var ch, url;
       url = input;
@@ -41,10 +41,10 @@
     return Pagerank;
   })();
   UsageDetails = (function() {
+    __extends(UsageDetails, nodeio.JobClass);
     function UsageDetails() {
       UsageDetails.__super__.constructor.apply(this, arguments);
     }
-    __extends(UsageDetails, nodeio.JobClass);
     UsageDetails.prototype.input = function() {
       this.status(usage);
       return this.exit();
@@ -56,7 +56,7 @@
     pagerank: new Pagerank(options),
     help: new UsageDetails()
   };
-
+  
 // BEGIN CODE FOR GENERATING GOOGLE PAGERANK CHECKSUMS
 //----------------------------------------------------------------------------------------------
 function zF(a,b) {

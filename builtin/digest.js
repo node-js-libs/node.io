@@ -12,10 +12,10 @@
   nodeio = require('node.io');
   crypto = require('crypto');
   Digest = (function() {
+    __extends(Digest, nodeio.JobClass);
     function Digest() {
       Digest.__super__.constructor.apply(this, arguments);
     }
-    __extends(Digest, nodeio.JobClass);
     Digest.prototype.init = function() {
       if (this.options.args.length === 0 || this.options.args[0] === 'help') {
         this.status(usage);
@@ -36,7 +36,7 @@
   })();
   this["class"] = Digest;
   this.job = new Digest();
-
+  
 function crc32 (str) {
     var crc32tab = [
         0x00000000, 0x77073096, 0xee0e612c, 0x990951ba,

@@ -11,10 +11,10 @@
   usage = 'Make a HEAD request to each URL of input and return the status code\n\n   1. To return the status code (url,status)\n       $ cat urls.txt | node.io -s statuscode\n\n   2. To find domains that 404\n       $ cat urls.txt | node.io -s statuscode 404\n\n   3. To find domains that redirect\n       $ cat urls.txt | node.io -s statuscode 3';
   nodeio = require('node.io');
   StatusCode = (function() {
+    __extends(StatusCode, nodeio.JobClass);
     function StatusCode() {
       StatusCode.__super__.constructor.apply(this, arguments);
     }
-    __extends(StatusCode, nodeio.JobClass);
     StatusCode.prototype.init = function() {
       if (this.options.args.length && this.options.args[0] === 'help') {
         this.status(usage);

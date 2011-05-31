@@ -33,7 +33,7 @@ class WordCount extends nodeio.JobClass
 
     complete: ->
         output = []
-        for word, count in word_count
+        for word, count of word_count
             output.push count + ' ' + word
         @output output
         return true

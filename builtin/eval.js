@@ -11,10 +11,10 @@
   usage = 'This module evaluates an expression on each line of input and emits the result (unless the result is null)\n\n   1. To convert a TSV (tab separated file) to CSV\n       $ cat data.tsv | node.io -s eval "input.split(\'\t\').join(\',\')" > data.csv\n\n   2. To remove empty lines from text.txt\n       $ cat text.txt | node.io -s eval "input.length ? input : null" > modified.txt';
   nodeio = require('node.io');
   EvalExp = (function() {
+    __extends(EvalExp, nodeio.JobClass);
     function EvalExp() {
       EvalExp.__super__.constructor.apply(this, arguments);
     }
-    __extends(EvalExp, nodeio.JobClass);
     EvalExp.prototype.init = function() {
       if (this.options.args.length === 0) {
         this.exit('Please enter an expression, e.g. `node.io eval "input.length"`');

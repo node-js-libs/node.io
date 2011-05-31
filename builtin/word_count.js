@@ -16,10 +16,10 @@
   };
   word_count = {};
   WordCount = (function() {
+    __extends(WordCount, nodeio.JobClass);
     function WordCount() {
       WordCount.__super__.constructor.apply(this, arguments);
     }
-    __extends(WordCount, nodeio.JobClass);
     WordCount.prototype.run = function(lines) {
       var line, word, words, _i, _j, _len, _len2;
       words = [];
@@ -46,10 +46,10 @@
       return null;
     };
     WordCount.prototype.complete = function() {
-      var count, output, word, _len;
+      var count, output, word;
       output = [];
-      for (count = 0, _len = word_count.length; count < _len; count++) {
-        word = word_count[count];
+      for (word in word_count) {
+        count = word_count[word];
         output.push(count + ' ' + word);
       }
       this.output(output);
@@ -58,10 +58,10 @@
     return WordCount;
   })();
   UsageDetails = (function() {
+    __extends(UsageDetails, nodeio.JobClass);
     function UsageDetails() {
       UsageDetails.__super__.constructor.apply(this, arguments);
     }
-    __extends(UsageDetails, nodeio.JobClass);
     UsageDetails.prototype.input = function() {
       this.status(usage);
       return this.exit();

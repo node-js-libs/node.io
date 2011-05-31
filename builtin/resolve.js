@@ -22,10 +22,10 @@
     retries: 1
   };
   ResolveAll = (function() {
+    __extends(ResolveAll, nodeio.JobClass);
     function ResolveAll() {
       ResolveAll.__super__.constructor.apply(this, arguments);
     }
-    __extends(ResolveAll, nodeio.JobClass);
     ResolveAll.prototype.run = function(domain) {
       return dns.lookup(domain, 4, __bind(function(err, ip) {
         if (err != null) {
@@ -41,10 +41,10 @@
     return ResolveAll;
   })();
   HasRecord = (function() {
+    __extends(HasRecord, nodeio.JobClass);
     function HasRecord() {
       HasRecord.__super__.constructor.apply(this, arguments);
     }
-    __extends(HasRecord, nodeio.JobClass);
     HasRecord.prototype.run = function(domain) {
       return dns.lookup(domain, 4, __bind(function(err, ip) {
         if (err != null) {
@@ -60,10 +60,10 @@
     return HasRecord;
   })();
   Available = (function() {
+    __extends(Available, nodeio.JobClass);
     function Available() {
       Available.__super__.constructor.apply(this, arguments);
     }
-    __extends(Available, nodeio.JobClass);
     Available.prototype.run = function(domain) {
       return dns.lookup(domain, 4, __bind(function(err, ip) {
         if (err != null) {
@@ -80,10 +80,10 @@
   })();
   unique_ips = [];
   UniqueIPs = (function() {
+    __extends(UniqueIPs, nodeio.JobClass);
     function UniqueIPs() {
       UniqueIPs.__super__.constructor.apply(this, arguments);
     }
-    __extends(UniqueIPs, nodeio.JobClass);
     UniqueIPs.prototype.run = function(domain) {
       return dns.lookup(domain, 4, __bind(function(err, ip) {
         if (err != null) {
@@ -104,10 +104,10 @@
     return UniqueIPs;
   })();
   UsageDetails = (function() {
+    __extends(UsageDetails, nodeio.JobClass);
     function UsageDetails() {
       UsageDetails.__super__.constructor.apply(this, arguments);
     }
-    __extends(UsageDetails, nodeio.JobClass);
     UsageDetails.prototype.input = function() {
       this.status(usage);
       return this.exit();

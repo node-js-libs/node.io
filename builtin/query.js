@@ -11,10 +11,10 @@
   usage = 'The query module can be used to select data from a URL.\nUsage: `$ node.io query url [selector] [attribute]`\n\n   1. To pull front page stories from reddit:\n       $ node.io query "http://www.reddit.com" a.title\n\n   2. To pull the href attribute from these links:\n       $ node.io query "http://www.reddit.com" a.title href';
   nodeio = require('node.io');
   Query = (function() {
+    __extends(Query, nodeio.JobClass);
     function Query() {
       Query.__super__.constructor.apply(this, arguments);
     }
-    __extends(Query, nodeio.JobClass);
     Query.prototype.init = function() {
       if (this.options.args.length === 0 || this.options.args[0] === 'help') {
         this.status(usage);

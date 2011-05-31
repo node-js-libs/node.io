@@ -11,10 +11,10 @@
   usage = 'This module is a simple wrapper for node-validator\nAvailable filters are: int, url, ip, alpha, alphanumeric, email\n\n   1. To filter out lines that do not match a filter:\n       $ node.io validate [FILTER] < list.txt\n\n   2. To filter out lines that match a filter:\n       $ node.io validate not [FILTER] < list.txt';
   nodeio = require('node.io');
   Validate = (function() {
+    __extends(Validate, nodeio.JobClass);
     function Validate() {
       Validate.__super__.constructor.apply(this, arguments);
     }
-    __extends(Validate, nodeio.JobClass);
     Validate.prototype.init = function() {
       if (this.options.args.length === 0 || this.options.args[0] === 'help') {
         this.status(usage);
