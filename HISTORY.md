@@ -1,3 +1,7 @@
+### v0.3.3
+    * Fix when a 30x redirect is to another host
+    * Better HttpProxy support
+
 ### v0.3.0
     * Fixed -f, --fork
 
