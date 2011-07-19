@@ -1,3 +1,8 @@
+### v0.3.5
+    * Further proxy fixes
+    * Fixed an bug when specifying a custom jQuery context
+    * Added JSDOM as a required package
+
 ### v0.3.3
     * Fix when a 30x redirect is to another host
     * Better HttpProxy support
