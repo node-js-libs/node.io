@@ -1,2 +1,5 @@
 #!/usr/bin/env node
-require('node.io').web(process.argv.slice(2));
+var path = require('path')
+  , fs = require('fs')
+  , lib = path.join(path.dirname(fs.realpathSync(__filename)), '../');
+require(lib).web(process.argv.slice(2));
