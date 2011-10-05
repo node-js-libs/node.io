@@ -1,3 +1,10 @@
+### v0.3.9
+    * Expose JSDOM window so it can be closed manually to prevent leaks
+    * Added the expand_single_selected option (see issue #34)
+
+### v0.3.6-0.3.8
+    * Bug fixes
+
 ### v0.3.5
     * Further proxy fixes
     * Fixed an bug when specifying a custom jQuery context
