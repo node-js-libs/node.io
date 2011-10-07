@@ -1,3 +1,7 @@
+### v0.4.0
+    * Ported the entire request process to use mikeal/request
+    * Full HTTP proxy support
+
 ### v0.3.9
     * Expose JSDOM window so it can be closed manually to prevent leaks
     * Added the expand_single_selected option (see issue #34)
