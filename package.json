@@ -8,7 +8,7 @@
   "directories"   : { "lib" : "./lib/node.io" },
   "bugs": {
     "mail": "cohara87@gmail.com",
-    "web": "http://github.com/chriso/node.io/issues"
+    "url": "http://github.com/chriso/node.io/issues"
   },
   "repository": {
     "type": "git",
