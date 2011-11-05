@@ -1,3 +1,6 @@
+### v0.4.1
+    * node v0.6 support
+
 ### v0.4.0
     * Ported the entire request process to use mikeal/request
     * Full HTTP proxy support
