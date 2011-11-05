@@ -1,5 +1,5 @@
 var fs = require('fs'),
-    nodeio = require('node.io'),
+    nodeio = require('../lib/node.io'),
     processor = new nodeio.Processor(),
     JobClass = nodeio.JobClass,
     assert = require('assert');

@@ -1,5 +1,5 @@
 var fs = require('fs'),
-    JobClass = require('node.io/job').JobClass,
+    JobClass = require('../lib/node.io/job').JobClass,
     job = new JobClass(),
     assert = require('assert');
 

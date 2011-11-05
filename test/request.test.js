@@ -1,4 +1,4 @@
-var nodeio = require('node.io'),
+var nodeio = require('../lib/node.io'),
     http = require('http'),
     assert = require('assert');
 
