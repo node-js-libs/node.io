@@ -1,3 +1,6 @@
+### v0.4.2
+    * Bug fix for nested getHtml
+
 ### v0.4.1
     * node v0.6 support
 
