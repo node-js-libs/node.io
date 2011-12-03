@@ -30,7 +30,7 @@
       if (result != null) {
         return this.emit(result);
       } else {
-        return this.skip;
+        return this.skip(result);
       }
     };
     return EvalExp;
