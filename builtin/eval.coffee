@@ -20,7 +20,7 @@ class EvalExp extends nodeio.JobClass
 
     run: (input) ->
         result = eval @options.args[0]
-        if result? then @emit result else @skip
+        if result? then @emit result else @skip()
 
 @class = EvalExp
 @job = new EvalExp()

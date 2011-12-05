@@ -1,6 +1,7 @@
-### v0.4.3
+### v0.4.4
     * Bug fix for nested getHtml
     * Bug fix for write permissions
+    * Bug fix for the eval builtin
 
 ### v0.4.1
     * node v0.6 support
