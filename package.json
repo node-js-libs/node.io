@@ -1,6 +1,6 @@
 { "name"          : "node.io",
   "description"   : "A distributed data scraping and processing framework",
-  "version"       : "0.4.5",
+  "version"       : "0.4.6",
   "homepage"      : "http://github.com/chriso/node.io",
   "keywords"      : ["data","mapreduce","map","reduce","scraping","html","parsing","parse","scrape","process","processing","data"],
   "author"        : "Chris O'Hara <cohara87@gmail.com>",
