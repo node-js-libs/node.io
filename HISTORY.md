@@ -1,4 +1,5 @@
-### v0.4.4
+### v0.4.7
+    * Break out of .each early with return false
     * Bug fix for nested getHtml
     * Bug fix for write permissions
     * Bug fix for the eval builtin
