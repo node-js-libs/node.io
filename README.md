@@ -31,20 +31,20 @@ node.io comes with some [built-in scraping modules](https://github.com/chriso/no
 
 Find the pagerank of a domain
 
-    $ echo "mastercard.com" | node.io pagerank
+    $ echo "mastercard.com" | io pagerank
        => mastercard.com,7
 
 ..or a list of URLs
 
-    $ node.io pagerank < urls.txt
+    $ io pagerank < urls.txt
 
 Quickly check the http code for each URL in a list
 
-    $ node.io statuscode < urls.txt
+    $ io statuscode < urls.txt
 
 Grab the front page stories from [reddit](http://www.reddit.com)
 
-    $ node.io query "http://www.reddit.com/" a.title
+    $ io query "http://www.reddit.com/" a.title
 
 ## Installation
 
