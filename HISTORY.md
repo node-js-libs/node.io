@@ -1,3 +1,6 @@
+### v0.4.8
+    * Fix the pagerank builtin
+
 ### v0.4.7
     * Break out of .each early with return false
     * Bug fix for nested getHtml

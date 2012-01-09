@@ -26,7 +26,7 @@
         url = 'http://' + url;
       }
       ch = '6' + GoogleCH(strord('info:' + url));
-      return this.get('http://www.google.com/search?client=navclient-auto&ch=' + ch + '&features=Rank&q=info:' + encodeURIComponent(url), __bind(function(err, data) {
+      return this.get('http://toolbarqueries.google.com/tbr?client=navclient-auto&ch=' + ch + '&features=Rank&q=info:' + encodeURIComponent(url), __bind(function(err, data) {
         var match;
         if (err != null) {
           return this.retry();
