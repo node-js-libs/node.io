@@ -21,7 +21,7 @@ class Pagerank extends nodeio.JobClass
         # Generate the URL checksum
         ch = '6' + GoogleCH strord 'info:' + url
 
-        @get 'http://www.google.com/search?client=navclient-auto&ch='+ch+'&features=Rank&q=info:'+encodeURIComponent(url), (err, data) =>
+        @get 'http://toolbarqueries.google.com/tbr?client=navclient-auto&ch='+ch+'&features=Rank&q=info:'+encodeURIComponent(url), (err, data) =>
             if err? then return @retry()
 
             if match = data.match /Rank_1:1:(10|[0-9])/
