@@ -23,7 +23,7 @@ Let's pull the front page stories from reddit
         });
     });
 
-If you want to incorporate timeouts, retries, batch-type jobs, etc. head over the [the wiki](https://github.com/chriso/node.io/wiki) for documentation.
+If you want to incorporate timeouts, retries, batch-type jobs, etc. head over to [the wiki](https://github.com/chriso/node.io/wiki) for documentation.
 
 ## Built-in modules
 
