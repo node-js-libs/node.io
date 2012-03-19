@@ -1,61 +1,71 @@
 (function() {
-  var Pagerank, UsageDetails, nodeio, options, usage;
-  var __hasProp = Object.prototype.hasOwnProperty, __extends = function(child, parent) {
-    for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; }
-    function ctor() { this.constructor = child; }
-    ctor.prototype = parent.prototype;
-    child.prototype = new ctor;
-    child.__super__ = parent.prototype;
-    return child;
-  }, __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
+  var Pagerank, UsageDetails, nodeio, options, usage,
+    __hasProp = Object.prototype.hasOwnProperty,
+    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype; return child; };
+
   usage = 'This module checks a URL\'s Google pagerank (rate limits apply)\n\n   1. To find the pagerank of a URL:\n       $ echo "mastercard.com" | node.io -s pagerank\n          => mastercard.com,7';
+
   nodeio = require('node.io');
+
   options = {
     timeout: 10,
     retries: 3
   };
-  Pagerank = (function() {
-    __extends(Pagerank, nodeio.JobClass);
+
+  Pagerank = (function(_super) {
+
+    __extends(Pagerank, _super);
+
     function Pagerank() {
       Pagerank.__super__.constructor.apply(this, arguments);
     }
+
     Pagerank.prototype.run = function(input) {
-      var ch, url;
+      var ch, url,
+        _this = this;
       url = input;
-      if (url.indexOf('http://') === -1) {
-        url = 'http://' + url;
-      }
+      if (url.indexOf('http://') === -1) url = 'http://' + url;
       ch = '6' + GoogleCH(strord('info:' + url));
-      return this.get('http://toolbarqueries.google.com/tbr?client=navclient-auto&ch=' + ch + '&features=Rank&q=info:' + encodeURIComponent(url), __bind(function(err, data) {
+      return this.get('http://toolbarqueries.google.com/tbr?client=navclient-auto&ch=' + ch + '&features=Rank&q=info:' + encodeURIComponent(url), function(err, data) {
         var match;
-        if (err != null) {
-          return this.retry();
-        }
+        if (err != null) return _this.retry();
+        data = data || '';
         if (match = data.match(/Rank_1:1:(10|[0-9])/)) {
-          return this.emit(input + ',' + match[1]);
+          return _this.emit(input + ',' + match[1]);
         } else {
-          return this.emit(input + ',');
+          return _this.emit(input + ',');
         }
-      }, this));
+      });
     };
+
     return Pagerank;
-  })();
-  UsageDetails = (function() {
-    __extends(UsageDetails, nodeio.JobClass);
+
+  })(nodeio.JobClass);
+
+  UsageDetails = (function(_super) {
+
+    __extends(UsageDetails, _super);
+
     function UsageDetails() {
       UsageDetails.__super__.constructor.apply(this, arguments);
     }
+
     UsageDetails.prototype.input = function() {
       this.status(usage);
       return this.exit();
     };
+
     return UsageDetails;
-  })();
+
+  })(nodeio.JobClass);
+
   this["class"] = Pagerank;
+
   this.job = {
     pagerank: new Pagerank(options),
     help: new UsageDetails()
   };
+
   
 // BEGIN CODE FOR GENERATING GOOGLE PAGERANK CHECKSUMS
 //----------------------------------------------------------------------------------------------
@@ -124,4 +134,5 @@ function strord(string) {
 }
 //----------------------------------------------------------------------------------------------
 ;
+
 }).call(this);

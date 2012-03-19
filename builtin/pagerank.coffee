@@ -24,6 +24,8 @@ class Pagerank extends nodeio.JobClass
         @get 'http://toolbarqueries.google.com/tbr?client=navclient-auto&ch='+ch+'&features=Rank&q=info:'+encodeURIComponent(url), (err, data) =>
             if err? then return @retry()
 
+            data = data or ''
+
             if match = data.match /Rank_1:1:(10|[0-9])/
                 @emit input + ',' + match[1]
             else
