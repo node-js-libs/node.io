@@ -21,7 +21,7 @@
     "coffee-script": ">= 0.9.5",
     "jquery": ">= 1.4.4",
     "jsdom": ">= 0.2.0",
-    "request": ">= 2.1.1"
+    "request": "2.9.202"
   },
   "devDependencies": { "expresso": "*" },
   "bin": {
