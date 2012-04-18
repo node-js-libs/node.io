@@ -1,5 +1,9 @@
+### v0.4.9
+    * Disabled streaming parsing as mikeal/request no longer supports options.onResponse
+
 ### v0.4.8
     * Fix the pagerank builtin
+    * Fix for nested parseHtml calls
 
 ### v0.4.7
     * Break out of .each early with return false
