@@ -342,6 +342,30 @@ module.exports = {
         }, timeout);
     },
 
+
+    'test POST request with too many redirects': function() {
+
+        var job = createJob({followAllRedirects : true});
+
+        var server = http.createServer(function (req, res) {
+            res.writeHead(302, {'Content-Type': 'text/plain', 'Location': '/'});
+            res.end();
+        });
+
+        server.listen(++port);
+
+        job.post('http://127.0.0.1:'+port+'/', {foo:'bar'}, function(err, data, headers) {
+            assert.equal('redirects', err);
+            assert.equal(null, data);
+            close(server);
+        });
+
+        setTimeout(function() {
+            close(server);
+        }, timeout);
+    },
+
+
     'test get() is in same scope as job': function() {
 
         var job = createJob();
