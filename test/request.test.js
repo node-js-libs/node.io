@@ -345,7 +345,7 @@ module.exports = {
 
     'test POST request with too many redirects': function() {
 
-        var job = createJob({followAllRedirects : true});
+        var job = createJob();
 
         var server = http.createServer(function (req, res) {
             res.writeHead(302, {'Content-Type': 'text/plain', 'Location': '/'});
