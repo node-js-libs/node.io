@@ -1,4 +1,5 @@
 var nodeio = require('../lib/node.io'),
+    utils = require('../lib/node.io/utils'),
     processor = new nodeio.Processor(),
     assert = require('assert');
 
@@ -59,7 +60,7 @@ module.exports = {
             input: [0,1,2],
             run: function() {
                 var self = this;
-                process.nextTick(function() {
+                utils.tick(function() {
                     self.emit(1);
                 });
             },

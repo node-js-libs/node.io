@@ -1,5 +1,6 @@
 var fs = require('fs'),
     nodeio = require('../lib/node.io'),
+    utils = require('../lib/node.io/utils'),
     processor = new nodeio.Processor(),
     JobClass = nodeio.JobClass,
     assert = require('assert');
@@ -131,9 +132,11 @@ module.exports = {
         });
 
         job.write(output, [1,2,[3,4,5]], function() {
-            assert.equal(2, i++);
-            assert.equal('test\n{"foo":"bar","bar":"foo"}\n1\n2\n[3,4,5]\n', fs.readFileSync(output, 'utf8'));
-            assert.equal(43, job.getBytesWritten());
+            utils.tick(function () {
+                assert.equal(2, i++);
+                assert.equal('test\n{"foo":"bar","bar":"foo"}\n1\n2\n[3,4,5]\n', fs.readFileSync(output, 'utf8'));
+                assert.equal(43, job.getBytesWritten());
+            });
         });
     },
 
