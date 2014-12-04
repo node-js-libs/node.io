@@ -28,6 +28,4 @@ async.eachLimit(reddits, concurrency, function (reddit, next) {
 });
 ```
 
-The **node.io** domain name is now for sale. [Contact me](mailto:cohara87@gmail.com) if you'd like to make an offer.
-
 Happy scraping.
