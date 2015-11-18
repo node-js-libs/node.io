@@ -4,7 +4,7 @@ I wrote node.io in 2010 when node.js was still in its infancy and the npm reposi
 
 Since it's now quite trivial to write your own scraper I've decided to stop maintaining the library.
 
-Here's an example using [request](https://github.com/mikeal/request), [cheerio](https://github.com/MatthewMueller/cheerio) and [async](https://github.com/caolan/async).
+Here's an example using [request](https://github.com/request/request), [cheerio](https://github.com/cheeriojs/cheerio) and [async](https://github.com/caolan/async).
 
 ```javascript
 var request = require('request')
